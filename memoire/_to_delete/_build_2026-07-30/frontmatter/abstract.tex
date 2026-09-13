@@ -1,0 +1,16 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\draftnote{Provisional abstract. Replace candidate findings after the independent benchmark review and end-to-end generation experiment. Final length: 250--300 words with no unexplained acronyms.}
+
+Large language models can answer regulatory questions fluently while citing an incorrect article, retrieving only part of the governing rule, or presenting an unsupported conclusion. These failures are consequential in aviation, where an answer must be traceable to authoritative and versioned legal evidence. This project studies citation-grounded question answering over European Union aviation regulations. It reframes an initial comparison of few-shot prompting, retrieval-augmented generation, and parameter-efficient fine-tuning into a failure-analysis question: where does retrieval-grounded question answering break down, and which observable condition justifies escalation to a more complex intervention or human review?
+
+The study audits the historical corpus and benchmark before attributing errors to a model. It introduces a hierarchy-aware parent--child corpus, exact legal identifiers, parent-grouped development and test partitions, lexical and dense retrieval, reciprocal-rank fusion, and local cross-encoder reranking. Candidate experiments show that a larger embedding model provides a modest improvement, while lexical and dense retrieval remain complementary. Reranking then moves relevant evidence into a compact generation context without changing the broader candidate pool. The remaining errors include question ambiguity, incomplete acceptable-evidence labels, and genuine retrieval failure; they cannot be treated as one homogeneous RAG ceiling.
+
+This staged design separates corpus, retrieval, ranking, context, generation, and verification failures, preventing improvements in one component from being mistaken for end-to-end reliability.
+
+The final phase evaluates evidence-constrained generation, canonical citation resolution, claim verification, selective abstention, latency, and cost on an independently reviewed benchmark. The intended contribution is a reproducible escalation policy that applies the least complex intervention supported by the observed failure signal.
+
+\medskip
+\noindent\textbf{\color{aivancityNavy}Keywords:}
+\textit{\color{aivancityGray}retrieval-augmented generation, legal question answering, aviation regulation, hybrid retrieval, reranking, grounded generation, abstention.}
+

@@ -1,0 +1,1047 @@
+\chapter{Results and Analysis}
+\label{chap:results}
+
+\begin{infobox}
+\small\textbf{Validity status.}
+All retrieval, baseline and benchmark figures in this chapter are computed against
+the \emph{frozen, independently reviewed} benchmark of 98 records described in
+Section~\ref{sec:frozen-benchmark}. Generation results (Section~\ref{sec:generation}) are reported on
+\textbf{both partitions}: the held-out run was made once, after every component
+it evaluates had been frozen, and nothing was revised in response to it.
+Escalation calibration (Section~\ref{sec:escalation}) remains
+\textbf{development-only}, because the one component it would fit --- the
+retrieval-uncertainty threshold --- is deliberately left uncalibrated. Every
+figure is reproduced from a stored experiment manifest, metrics file or validation
+record; where a quantity exists only in a written report, the text says so.
+\end{infobox}
+
+\section{Overview}
+
+This chapter reports what the system does and where it fails.
+It proceeds from the data outwards: the corpus and the benchmark
+(Section~\ref{sec:frozen-benchmark}), retrieval
+(Section~\ref{sec:retrieval-results}), the historical three-system baseline
+re-scored under a corrected evaluator (Section~\ref{sec:baselines}),
+evidence-constrained generation and its verification
+(Section~\ref{sec:generation}), and the calibration of the escalation policy
+(Section~\ref{sec:escalation}). Section~\ref{sec:invisible} isolates two
+properties of the benchmark that no internal metric of the pipeline can detect,
+and Section~\ref{sec:threats} states the threats to validity.
+
+Table~\ref{tab:results-summary} collects the chapter's principal results with a pointer to where each is established.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Principal results of this chapter, with the section or table in which
+  each is reported. Held-out figures come from a single run made after every
+  component they evaluate had been frozen.}
+  \label{tab:results-summary}
+  \small
+  \begin{tabularx}{\textwidth}{@{}Xrl@{}}
+    \toprule
+    \textbf{Quantity} & \textbf{Value} & \textbf{Reported in} \\
+    \midrule
+    \multicolumn{3}{@{}l}{\textit{Corpus and benchmark}} \\
+    Legal parents / retrieval children & 109 / 1{,}535 & \S\ref{sec:frozen-benchmark} \\
+    Frozen benchmark after independent review & 98 records & Table~\ref{tab:freeze} \\
+    \quad development / held-out partition & 42 / 56 & Table~\ref{tab:freeze} \\
+    \quad legal parents shared between partitions & 0 & Table~\ref{tab:freeze} \\
+    Reviewer agreement, Fleiss' $\kappa$, three categories & 0.250 & Table~\ref{tab:agreement} \\
+    \addlinespace
+    \multicolumn{3}{@{}l}{\textit{Retrieval, held-out ($n = 56$)}} \\
+    Hybrid with cross-encoder, recall @1 / @5 / @20 & 71.4 / 89.3 / 96.4\% & Table~\ref{tab:retrieval-test} \\
+    Depth-20 recall gained by reranking & none & \S\ref{sec:retrieval-results} \\
+    Mean evidence recall at depth 5 & 81.1\% & \S\ref{sec:retrieval-results} \\
+    \addlinespace
+    \multicolumn{3}{@{}l}{\textit{Historical baselines re-scored ($n = 98$; LoRA at 73)}} \\
+    Best system (RAG, $k = 5$), parent-level citation & 0.625 & Table~\ref{tab:baselines} \\
+    The same system, exact citation & 0.443 & Table~\ref{tab:baselines} \\
+    The same system on the 25 records the draft excluded & 0.360 & Table~\ref{tab:baseline-decomposition} \\
+    Few-shot $k = 10$, original scorer then exact & 0.286 / 0.159 & Table~\ref{tab:baselines} \\
+    \addlinespace
+    \multicolumn{3}{@{}l}{\textit{Evidence-constrained generation, 140 answers}} \\
+    Quote verification passed, dev / held-out & 95.2 / 87.5\% & Table~\ref{tab:prompt-ablation} \\
+    Answers containing an elided quote, dev / held-out & 0.0 / 7.1\% & Table~\ref{tab:prompt-ablation} \\
+    Evidence selection correct, dev / held-out & 78.6 / 83.9\% & Table~\ref{tab:prompt-ablation} \\
+    Schema contract satisfied, dev / held-out & 100 / 98.2\% & Table~\ref{tab:prompt-ablation} \\
+    Abstentions & 0 of 140 & \S\ref{sec:no-abstention} \\
+    Enriched context: evidence selection, input tokens & 81.0\% / $+$79\% & Table~\ref{tab:context-variants} \\
+    \addlinespace
+    \multicolumn{3}{@{}l}{\textit{Escalation}} \\
+    Development error base rate & 21.4\% (9 of 42) & \S\ref{sec:escalation} \\
+    Best candidate rule, precision [95\% CI] & 0.42 [0.23, 0.64] & Table~\ref{tab:escalation} \\
+    Questions required to demonstrate it & $\approx 178$ & Table~\ref{tab:power} \\
+    Answers failing in both modes & 0 & Figure~\ref{fig:failure-modes} \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Three results are stated in advance because they shape what follows; none of
+them is a performance number.
+
+\begin{enumerate}
+  \item Four aviation professionals shown the same benchmark records agreed on
+    the overall verdict for fewer than half of them
+    (Section~\ref{sec:review-results}). A single gold label was never as certain
+    as a single number implied.
+  \item The system's two failure modes --- selecting the wrong provision, and
+    misreporting what the selected provision says --- did not co-occur even once
+    on the development set (Section~\ref{sec:escalation}). They are independent,
+    and detecting one tells the system nothing about the other.
+  \item Given a schema field, an explicit instruction, and no cost for using it,
+    the generator declined to abstain on every one of 140 opportunities across
+    both partitions, including
+    on answers that were demonstrably ungrounded
+    (Section~\ref{sec:no-abstention}). Abstention cannot be delegated to the
+    generator's own judgement.
+\end{enumerate}
+
+\section{The Corpus and the Frozen Benchmark}
+\label{sec:frozen-benchmark}
+
+\subsection{Structural corpus}
+
+The parent--child corpus contains 109 legal parents and 1{,}535 retrieval
+children, drawn from Regulation (EU) No 376/2014 together with its implementing
+and delegated instruments and the associated Guidance
+Material~\cite{eu2014reg376,easa2022easyaccess376}. The build is deterministic:
+rebuilding from the same source export reproduces the corpus byte for byte, and
+the structural validation records zero issues. Short units are preserved rather
+than merged, because a two-line definition is a meaningful legal object and blind
+minimum-length merging would reintroduce the boundary confounding that the corpus
+exists to remove.
+
+\subsection{The multi-reviewer validity gate}
+\label{sec:review-results}
+
+The benchmark was AI-assisted in construction and AI-audited for evidence
+linkage. That is not a validity claim, and no amount of internal consistency
+makes it one. A bounded independent review was therefore run: 33 records --- every
+audit exception plus a deterministic stratified sample of unchanged records ---
+were put to practising aviation professionals through a bilingual form, under an
+aggregation rule fixed before any response arrived.
+
+Four reviewers responded. Table~\ref{tab:reviewers} describes them.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Independent review panel. Reviewers are pseudonymised; the mapping to identities is held separately and is not part of this work.}
+  \label{tab:reviewers}
+  \begin{tabular}{llll}
+    \toprule
+    \textbf{Reviewer} & \textbf{Records rated} & \textbf{Experience} & \textbf{Familiarity with 376/2014} \\
+    \midrule
+    R1 & 22 & over 10 years & knows the regulation \\
+    R2 & 12 & over 10 years & works with it directly \\
+    R3 & 29 & 2--5 years & works with it directly \\
+    R4 & 33 & over 10 years & works with it directly \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+All 33 records received at least one rating and 31 received at least two.
+Agreement on the overall verdict is reported in Table~\ref{tab:agreement}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Inter-rater agreement on the overall verdict, computed over the 31 records with at least two raters.}
+  \label{tab:agreement}
+  \begin{tabular}{lr}
+    \toprule
+    \textbf{Quantity} & \textbf{Value} \\
+    \midrule
+    Records with $\geq 2$ raters & 31 \\
+    Exact agreement on the verdict & 13/31 = 41.9\% \\
+    Fleiss' $\kappa$, three categories & 0.250 \\
+    Fleiss' $\kappa$, accept versus needs-change & 0.332 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Both $\kappa$ values fall in the \enquote{fair} band of the Landis and Koch
+scale~\cite{landis1977measurement}, computed with the variable-rater
+generalisation of Fleiss' statistic~\cite{fleiss1971measuring,gwet2014interrater} because coverage
+per record is uneven. The second value collapses the three verdict categories
+into a binary accept-versus-change distinction. That collapse was decided
+\emph{after} seeing the data and is therefore reported as a post-hoc
+transformation, not as the headline.
+
+The 41.9\% figure could be read as a failure of the review. That is not the
+reading the data supports. Reviewer severity differed substantially --- individual acceptance rates
+ranged from 33\% to 69\%, and two reviewers never once voted to exclude a record.
+The disagreement is concentrated on precisely the records that the internal audit
+had already flagged as difficult. The reading that follows is the less comfortable one:
+\textbf{if four professionals who work with this regulation cannot agree whether
+an answer is supported by a provision, then a single gold label for those records
+was never as certain as a single accuracy figure suggested}. This is the
+empirical foundation for the abstention argument developed in
+Section~\ref{sec:escalation}, and it is an argument this work can make only
+because the review was run.
+
+\subsection{What the review changed}
+
+Fourteen records were cleared by the panel under the pre-registered rule. The
+remaining 19 were adjudicated by the author, each with a recorded one-line
+justification, and reported separately from the panel-cleared set. The freeze
+outcome is given in Table~\ref{tab:freeze}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Benchmark freeze outcome.}
+  \label{tab:freeze}
+  \begin{tabular}{lr}
+    \toprule
+    \textbf{Quantity} & \textbf{Value} \\
+    \midrule
+    Records entering review & 33 \\
+    \quad accepted & 19 \\
+    \quad corrected & 12 \\
+    \quad excluded & 2 \\
+    \midrule
+    Benchmark before freeze & 99 \\
+    Benchmark after freeze & \textbf{98} \\
+    Development / held-out partition & 42 / 56 \\
+    Distinct legal parents & 60 \\
+    Parents appearing in both partitions & \textbf{0} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Two records were excluded. \texttt{QA\_0003} was already marked invalid by the
+audit and the panel confirmed it. \texttt{QA\_0063} --- one of the three residual
+retrieval failures identified before the review --- was accepted by no reviewer at
+all, splitting two-to-two between \enquote{correct} and \enquote{exclude}. The
+prior hypothesis that this record was defective rather than a system failure was
+therefore confirmed from outside the system.
+
+The two other residuals moved in the opposite direction. \texttt{QA\_0080} and
+\texttt{QA\_0176} were both \emph{accepted} by the panel, which means the
+retrieval misses on those records are genuine system failures and cannot be
+explained away as incomplete gold labels. An earlier internal analysis had argued
+that \texttt{QA\_0080} had equivalent evidence elsewhere in the annex; the panel
+disagreed, and the panel's verdict stands.
+
+One methodological point deserves emphasis because it was nearly missed. The
+freeze script originally recomputed the parent-grouped partition from the
+retained records. Because that procedure fills groups greedily toward a target
+proportion, removing a single record reordered the groups and moved \textbf{12
+records across the development/held-out boundary}. Every earlier selection
+decision --- the embedding model, the fusion configuration, the reranker --- had
+been made on the previous development set, so records used for selection would
+have landed in the held-out partition. The partition is therefore \emph{inherited}
+rather than recomputed: no record changed side, and every earlier selection
+remains valid. The observed development fraction is consequently 42/98 = 0.429
+rather than the nominal 0.400, and it is reported as observed.
+
+\section{Retrieval}
+\label{sec:retrieval-results}
+
+All figures in this section are computed against the frozen reviewed labels on
+the inherited partition. Selection decisions were made on development data;
+held-out figures are reported after the fact and were not used to choose anything.
+
+\subsection{Dense embedding comparison}
+
+Both embedding models index identical children and identical questions.
+Table~\ref{tab:dense-dev} reports the development criterion on which the
+selection was made.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Development recall for the dense embedding comparison, reviewed labels. Proportion of questions retrieving at least one acceptable evidence child.}
+  \label{tab:dense-dev}
+  \begin{tabular}{lrrr}
+    \toprule
+    \textbf{Dense model} & \textbf{@5} & \textbf{@10} & \textbf{nDCG@10} \\
+    \midrule
+    \texttt{text-embedding-3-small} & 66.7\% & \textbf{78.6\%} & 0.504 \\
+    \texttt{text-embedding-3-large} & \textbf{71.4\%} & 76.2\% & \textbf{0.536} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The larger model was selected. On reviewed development labels it leads on five of
+the six criteria examined --- recall and nDCG at depth 5, evidence recall at
+depths 5 and 10, and nDCG at depth 10 --- but it \emph{loses} recall at depth 10,
+78.6\% against 76.2\%. Under the pre-review labels it led at both depths.
+
+This reversal is reported rather than smoothed over, and the selection is not
+re-made. Re-choosing the embedding model after seeing reviewed labels would make
+the choice depend on the same data that grounds the reported results. The
+operating point of the deployed configuration is depth 5 followed by reranking,
+where the larger model still leads. The honest summary is that the two embedding
+models are closer than the original margin suggested, and that a selection
+justified on a single cutoff would have been fragile.
+
+\subsection{Lexical, hybrid and reranked retrieval}
+
+Table~\ref{tab:retrieval-test} reports held-out performance for all five
+configurations, and Figure~\ref{fig:reviewed-retrieval} shows the same data.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Held-out retrieval on the frozen reviewed benchmark ($n = 56$). Proportion of questions retrieving at least one acceptable evidence child.}
+  \label{tab:retrieval-test}
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    \textbf{Method} & \textbf{@1} & \textbf{@3} & \textbf{@5} & \textbf{@10} & \textbf{@20} \\
+    \midrule
+    Dense \texttt{3-small} & 51.8\% & 60.7\% & 67.9\% & 80.4\% & 91.1\% \\
+    Dense \texttt{3-large} & 46.4\% & 64.3\% & 76.8\% & 83.9\% & 89.3\% \\
+    BM25 & 53.6\% & 71.4\% & 75.0\% & 85.7\% & 85.7\% \\
+    Hybrid RRF & 55.4\% & 78.6\% & 83.9\% & 91.1\% & \textbf{96.4\%} \\
+    Hybrid + cross-encoder & \textbf{71.4\%} & \textbf{89.3\%} & \textbf{89.3\%} & \textbf{94.6\%} & \textbf{96.4\%} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{reviewed_retrieval_comparison.png}
+  \caption[Held-out retrieval on the frozen benchmark]{Held-out retrieval on the frozen, independently reviewed benchmark. Left: recall by cutoff for all five configurations. Right: reranking changes the order of the candidate pool without changing its ceiling. Source: stored experiment metrics files.}
+  \label{fig:reviewed-retrieval}
+\end{figure}
+
+Three observations follow.
+
+\textbf{The channels are complementary.} BM25 is strong at exactly the places
+dense retrieval is weak --- article numbers, defined terms, structured
+cross-references --- and dense retrieval recovers paraphrased questions that share
+no vocabulary with the provision. Equal-weight reciprocal-rank
+fusion~\cite{cormack2009rrf} improves on both at every depth. It was chosen
+because an untuned fusion function has no parameters that could leak information
+from the held-out partition. This is a deliberate trade of performance for
+methodological safety, and it should be stated as such: convex combination of
+normalised scores is known to outperform reciprocal-rank fusion when its weights
+are tuned~\cite{bruch2024fusion}, and tuning them here would have required
+fitting on data that also grounds the reported result.
+
+\textbf{Reranking reorders; it does not enlarge.} The cross-encoder raises top-1
+recall from 55.4\% to 71.4\% and depth-5 recall from 83.9\% to 89.3\%, while
+depth-20 recall is identical at 96.4\%. This is the expected signature of a
+reranking stage~\cite{nogueira2019reranking}: the candidate pool is fixed by
+fusion, and the reranker only decides what reaches a small generation budget. Any
+evidence absent from the top 20 is unrecoverable downstream, which is why the
+escalation policy in Section~\ref{sec:escalation} treats pool exhaustion as a
+distinct condition from mis-ordering.
+
+\textbf{Evidence recall trails child recall.} Under the mean-evidence-recall
+measure --- the proportion of a record's required evidence set that is retrieved,
+rather than whether any of it is --- the reranked configuration reaches 81.1\% at
+depth 5 and 85.6\% at depth 10 on held-out data. The gap between this and the
+89.3\% single-child figure is entirely accounted for by records whose gold
+evidence spans several children of one legal parent.
+
+\subsection{Effect of the review on measured performance}
+
+Because the partition was inherited, the pre-review and post-review runs are
+directly comparable: same records, same split, one record fewer in the held-out
+set. Table~\ref{tab:before-after} gives the comparison for the deployed
+configuration.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Held-out recall for hybrid retrieval with cross-encoder reranking, before and after independent review.}
+  \label{tab:before-after}
+  \begin{tabular}{lrrrr}
+    \toprule
+    \textbf{Labels} & \textbf{@1} & \textbf{@5} & \textbf{@10} & \textbf{@20} \\
+    \midrule
+    AI-assisted, pre-review ($n = 57$) & 66.7\% & 87.7\% & 93.0\% & 94.7\% \\
+    Frozen, reviewed ($n = 56$) & \textbf{71.4\%} & \textbf{89.3\%} & \textbf{94.6\%} & \textbf{96.4\%} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Every system improved, by one to five points. This direction matters for the
+interpretation of the review: the corrections mostly repaired labels that had been
+marking correct retrievals as misses, rather than exposing failures the earlier
+labels had concealed. The review could have been presented as having uncovered hidden weakness. It
+did not, and the direction is reported as observed.
+
+\subsection{Rejected alternatives}
+
+Two simpler interventions were tested on development data and rejected.
+Parent-mass boosting, which adds accumulated scores from sibling children of the
+same legal parent, consistently reduced recall: long or repetitive guidance
+sections accumulate score without any guarantee that the specific provision is
+relevant. Unequal fusion weights likewise failed to improve the top-20 candidate
+objective; a BM25-heavy setting recovered one development question at depth 5
+while reducing deeper recall.
+
+Both are retained in the record as negative ablations. They establish that the
+gain from the cross-encoder comes from direct query--passage interaction rather
+than from hierarchy awareness in general, and that structural knowledge of the
+corpus is not automatically useful just because the corpus is structured.
+
+\section{The Three-System Baseline, Re-scored}
+\label{sec:baselines}
+
+The earlier comparison of few-shot prompting, retrieval-augmented generation and
+a LoRA-adapted 3B model~\cite{hu2022lora} is a historical baseline rather than a
+contribution of this work. It is re-scored here because its original evaluation
+used a citation measure that does not survive inspection.
+
+\subsection{What the original measure counted}
+
+The original scorer returned a full match whenever the gold citation string
+occurred anywhere in the prediction, and half credit for naming the correct
+article number alone; a record counted as correct at half credit or above,
+combined with a lexical content threshold. Both rules are unsound. Substring
+containment means a gold citation of \enquote{Article 4} matches inside a
+prediction that says \enquote{Article 4(6)}, and \enquote{Section 1} matches
+inside \enquote{section 1.2}. More seriously, half credit for the article number
+passes the correctness threshold, so a prediction citing Article 16(1) where the
+provision is Article 16(6) was recorded as correct. In citation-grounded legal
+question answering that is not a near miss; it is the wrong provision, and it is
+the specific failure the system exists to prevent.
+
+The replacement resolves citations against the corpus rather than comparing
+strings. Two quantities are reported. \emph{Parent-level} correctness holds when
+the prediction names a citation that resolves, against the parent corpus, to the
+provision the gold citation denotes; only identifiers that exist in the corpus can
+be credited, so an invented reference resolves to nothing. \emph{Exact}
+correctness additionally requires every atomic unit of the gold citation,
+including the sub-paragraph, to be named. Where a gold citation does not state
+which regulation it means, every regulation containing that provision counts as a
+candidate: the benchmark's own label does not make the distinction, and a system
+is not penalised for reproducing an ambiguity it inherited.
+
+\subsection{Scope}
+
+Of the 98 frozen records, 25 carry a question the stored predictions never saw
+--- 8 reworded during the independent review and 17 reworded earlier by the AI
+audit. Scoring a stored answer against a question that was never put to the model
+measures nothing. An earlier draft of this chapter therefore reported the
+comparison over the 73 records where a stored prediction was still a valid
+answer, and warned that the exclusion was not neutral: the audit rewrote the
+questions it judged vague or compound, so the surviving 73 were plausibly the
+better-posed subset.
+
+That warning is now a measurement rather than a caveat. The few-shot and
+retrieval-augmented predictions were regenerated against the frozen wording over
+all 98 records, with the historical system prompts reproduced verbatim, the same
+exemplar-sampling procedure at seed 42, temperature 0, the same $k$ values and
+the same legacy flat chunk index. Two things differ from the original run and are
+recorded rather than hidden: the model is pinned to
+\texttt{gpt-4o-mini-2024-07-18} instead of the floating \texttt{gpt-4o-mini}
+alias, so the comparison cannot change model underneath itself; and retrieval
+uses NumPy cosine similarity over L2-normalised vectors in place of
+\texttt{faiss.IndexFlatIP}, which computes the same quantity with ties broken by
+chunk order (decision D049). The comparison below therefore covers \textbf{all 98
+records}, of which 88 have a gold citation that resolves to a provision at all.
+
+The LoRA system is the exception and is reported at $n = 73$. Re-running it needs
+the base model weights and a local GPU rather than an API call, and it was not
+re-run before submission; its stored predictions still answer the pre-freeze
+wording, so the scorer drops the same 25 records for it. Every table below carries
+its denominator, and the asymmetry is stated wherever the systems are compared.
+
+\subsection{Results}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Historical baselines re-scored on the frozen benchmark. Few-shot and
+  RAG were regenerated against the frozen question wording and cover all 98
+  records, with citation measures over the 88 whose gold citation resolves to a
+  provision. LoRA retains its stored predictions and is therefore scored on the 73
+  records whose wording did not change, 63 of them resolvable. The loose measure
+  is the original scorer, reproduced verbatim and reported for continuity only.}
+  \label{tab:baselines}
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    \textbf{System} & \textbf{$n$} & \textbf{Loose (original)} & \textbf{Parent-level} & \textbf{Exact} & \textbf{ROUGE-L} \\
+    \midrule
+    Few-shot, $k=1$ & 98 & 0.235 & 0.318 & 0.193 & 0.246 \\
+    Few-shot, $k=5$ & 98 & 0.286 & 0.330 & 0.159 & 0.239 \\
+    Few-shot, $k=10$ & 98 & 0.286 & 0.318 & 0.159 & 0.246 \\
+    LoRA 3B & 73 & 0.178 & 0.238 & 0.111 & 0.277 \\
+    RAG, $k=1$ & 98 & 0.429 & 0.409 & 0.330 & 0.338 \\
+    RAG, $k=3$ & 98 & 0.592 & 0.568 & 0.420 & 0.410 \\
+    RAG, $k=5$ & 98 & \textbf{0.633} & \textbf{0.625} & \textbf{0.443} & \textbf{0.432} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Where the change from the earlier draft's figures comes from, at
+  parent level. \emph{Stored, 73} is the draft's comparison. \emph{Regenerated,
+  73} holds the record set fixed and changes only the predictions, so it measures
+  run-to-run variation. \emph{All 98} holds the provenance of the predictions
+  fixed and adds the 25 records the draft excluded. Denominators are 63 and 88
+  resolvable records.}
+  \label{tab:baseline-decomposition}
+  \small
+  \begin{tabular}{lrrr}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Same 73 records}} & \\
+    \cmidrule(lr){2-3}
+    \textbf{System} & \textbf{Stored} & \textbf{Regenerated} & \textbf{All 98} \\
+    \midrule
+    Few-shot, $k=1$ & 0.270 & 0.238 & 0.318 \\
+    Few-shot, $k=5$ & 0.254 & 0.302 & 0.330 \\
+    Few-shot, $k=10$ & 0.302 & 0.270 & 0.318 \\
+    RAG, $k=1$ & 0.492 & 0.492 & 0.409 \\
+    RAG, $k=3$ & 0.667 & 0.683 & 0.568 \\
+    RAG, $k=5$ & \textbf{0.730} & \textbf{0.730} & \textbf{0.625} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{The ranking is unchanged.} Retrieval-augmented generation beats few-shot
+prompting, which beats the LoRA-adapted model, under every measure. The conclusion
+of the earlier comparison survives both the corrected evaluator and the extension
+to the full benchmark, and it is stated first.
+
+\textbf{The re-run reproduces the stored predictions where it should.}
+Table~\ref{tab:baseline-decomposition} separates the two things that changed.
+Holding the record set at 73 and regenerating the predictions leaves RAG
+essentially where it was: $k=1$ is identical on every measure, and $k=3$ and
+$k=5$ differ by at most one record. Few-shot moves further, by up to two records,
+which is expected rather than troubling --- its exemplars are drawn at random and
+the draw sequence changes when the record set does. The middle column is a
+run-to-run control, and it is tight for the system the argument rests on.
+
+\textbf{The excluded records were harder for RAG, and the draft's figures were
+inflated by their absence.} On the 25 records the earlier draft dropped, RAG at
+$k=5$ reaches 0.360 [0.202, 0.555] at parent level against 0.730 [0.610, 0.824]
+on the 73 it kept. The intervals do not overlap. Adding those records costs the
+best system ten points at parent level and eight at exact. The scope note in the
+draft predicted exactly this, and the prediction is now confirmed rather than
+hedged.
+
+\textbf{They were not harder for few-shot, which points at retrieval as the
+mechanism.} On the same 25 records, few-shot at $k=10$ moves the other way:
+exact-citation 0.360 [0.202, 0.555] against 0.079 [0.034, 0.173] on the 73. The
+questions the audit rewrote for vagueness are ones a retriever handles worse and
+a model answering from parametric knowledge handles better, which is what one
+would expect if the difference is mediated by retrieval --- few-shot does not
+retrieve at all. On that subset the ordering of the two systems reverses, though
+25 records cannot establish that the reversal is real, and it is reported as a
+direction rather than a result.
+
+\textbf{The loose measure still overstates most severely where the dominant
+failure is a plausible-looking wrong citation.} Few-shot at $k=10$ falls from
+0.286 under the original scorer to 0.159 exact, because its characteristic error
+is to name a real article with the wrong sub-paragraph, which is what the
+half-credit rule rewarded. Fourteen of its records counted correct under the
+original scorer cite the wrong sub-paragraph of the right article: Article 18(5)
+where the provision is Article 18(2), Article 16(1) where it is Article 16(6).
+
+\textbf{The most informative quantity is the gap within the RAG column.} At
+$k=5$, retrieval-augmented generation reaches 0.625 [0.521, 0.719] at parent level
+but 0.443 [0.344, 0.547] exact. Those 18 points are sixteen answers that retrieved
+the correct article, read fluently, and cited the wrong paragraph of it. The gap
+was 22 points on the draft's 73 records and it is 18 on the full benchmark: the
+correction narrows it without touching the finding. No metric based on substring
+citation matching can see that gap, and no lexical content measure detects it
+either. It is the empirical motivation for the verification layer.
+
+ROUGE-L~\cite{lin2004rouge} is reported because the original evaluation used it
+and continuity matters. It is a lexical proxy. It is not evidence of semantic
+support, and no threshold on it is described in this work as correctness.
+
+\section{Evidence-Constrained Generation}
+\label{sec:generation}
+
+Generation was run on the development partition ($n = 42$) and then once on the
+held-out partition ($n = 56$), using \texttt{gpt-4o-mini-2024-07-18} at
+temperature 0. The held-out run was made only after the prompt, the verification
+rule, the retrieval stack and the benchmark were all fixed, and no component was
+revised after seeing its result. Both partitions are reported together
+throughout; where they disagree, they are shown disagreeing. The generator is held
+fixed at the model used for the historical few-shot and RAG baselines, so that
+the comparison between this pipeline and those baselines isolates the scaffolding
+--- retrieval quality, the evidence constraint and the output contract --- rather
+than model capability. A more capable generator would also suppress the failures
+this chapter exists to study.
+
+\subsection{A schema-conformant answer is not a contract-valid answer}
+\label{sec:contract-vs-schema}
+
+Across 140 generated answers there were zero parse failures and zero refusals.
+The request uses the API's strict structured-output mode~\cite{openai2024structured}, derived from the
+project's own schema, and every response is then re-validated locally against
+that schema. On the development partition nothing failed. On the held-out partition, one answer did, and that case bears directly on the
+argument of this chapter.
+
+For \texttt{QA\_0017} the model attached a claim to a source identifier it was
+never given:
+
+\begin{center}
+\small
+\begin{tabular}{ll}
+  supplied & \texttt{EU\_376\_2014\_ART\_5\_\_C0001} \\
+  emitted  & \texttt{EU\_376\_2014\_ART\_5\_\_C001} \\
+\end{tabular}
+\end{center}
+
+\noindent The reference is fabricated, and it differs from a real one by a single
+omitted character.
+
+The API's strict mode had already accepted this response, and correctly so.
+Strict structured output guarantees the \emph{shape} of a reply: that the field
+exists and contains a string. It cannot guarantee that the string is one the
+application supplied, because that is not a property of the schema --- it is a
+property of the request. The distinction is invisible in normal operation and
+becomes visible exactly when a model produces a plausible near-miss, which is
+also precisely the case a human reviewer skimming the answer would not catch.
+The deterministic allowed-source check caught it immediately.
+
+Two consequences follow. Structural conformance is otherwise not a confound:
+139 of 140 answers were well formed, so the failures reported below are failures
+of grounding rather than of format. And provider-side structured output does not
+remove the need for application-side validation of the values it carries; the
+architecture keeps local re-validation after every generation call regardless of
+what the provider guarantees.
+
+\subsection{What counts as a verbatim quote}
+
+The contract requires every claim to carry a source identifier and a verbatim
+supporting quote, and forbids the model from writing display citations at all ---
+those are resolved by the application from the identifier. Verification of the
+quote is deterministic, but the definition of \enquote{verbatim} is a design
+decision that moves the reported grounding rate by twenty-one points, so it is
+stated explicitly.
+
+Of 132 quote spans in the first run, 90 were byte-exact. \textbf{Zero} were
+repaired by normalising unicode or typographic quotation marks --- so typography
+is not what breaks these quotes. Thirty-one contained exactly the same words in
+the same order and differed only in punctuation, almost all being the model ending
+a quote early and closing it with a full stop where the source continued with a
+comma. Eleven failed genuinely.
+
+A quote is therefore accepted when its word sequence appears \emph{contiguously}
+in the cited source after punctuation and typographic normalisation. Punctuation
+is ignored because the corpus is a PDF extraction that carries its own artefacts
+--- \texttt{safetyrelated} appears unhyphenated in the source text --- so requiring
+byte-identical punctuation partly measures the extractor. Contiguity is \emph{not} relaxed, and it is the condition that does the
+discriminating: it is what rejects a quote assembled from fragments. The byte-level result is reported alongside
+throughout as a second figure.
+
+\subsection{One prompt rule, measured}
+
+The first prompt asked for a \enquote{verbatim supporting quote} without saying
+what that excluded. It produced elided quotes --- quotes with material omitted
+behind an ellipsis --- in 7 of 42 answers. In every case the omission removed
+part of a legal test. On \texttt{QA\_0012}, the model quoted a provision on
+unmanned aircraft as
+\enquote{\ldots not required\ldots{} unless the occurrence\ldots{} resulted in a
+fatal or serious injury to a person}, deleting both the cross-reference
+identifying which aircraft the rule covers and an entire alternative limb of the
+exception. The resulting answer is fluent, cites the correct article, and states
+the exception more narrowly than the law does.
+
+A second prompt version changes exactly one rule: quote one unbroken run of
+consecutive words, never use an ellipsis, never join two passages, and if the
+required span is long then quote less or provide several separate supports.
+Nothing else differs. Table~\ref{tab:prompt-ablation} reports the effect.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Effect of a single prompt rule forbidding elided quotes, and how it transfers to unseen questions.}
+  \label{tab:prompt-ablation}
+  \small
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lrrr}
+    \toprule
+    & \multicolumn{2}{c}{\textbf{Development} ($n=42$)} & \textbf{Held-out} ($n=56$) \\
+    \cmidrule(lr){2-3}\cmidrule(lr){4-4}
+    \textbf{Quantity} & \textbf{v1} & \textbf{v2} & \textbf{v2} \\
+    \midrule
+    Quote verification passed & 76.2\% & \textbf{95.2\%} & 87.5\% \\
+    \quad under the byte-level rule & 54.8\% & 73.8\% & 64.3\% \\
+    Answers containing an elided quote & 16.7\% & \textbf{0.0\%} & \textbf{7.1\%} \\
+    Evidence selection correct & 81.0\% & 78.6\% & \textbf{83.9\%} \\
+    Schema contract satisfied & 100\% & 100\% & 98.2\% \\
+    Model abstained & 0 & 0 & 0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Nine development records were repaired for the cost of one sentence of prompt.
+The claim count fell from 124 to 114 while the number of quote spans held steady
+at 132 and 133, which suggests the constraint suppresses claims the model could
+not ground rather than degrading the answers.
+
+\textbf{The rule did not transfer as cleanly as development suggested.} On
+development it eliminated elision entirely --- 7 answers to 0. On held-out
+questions it did not: 4 of 56 answers still contain an elided quote. The development zero was optimistic, and the statement the data supports is
+that the rule substantially reduced the failure without removing it. Grounding fell from 95.2\%
+to 87.5\%; the Wilson intervals overlap ([0.842, 0.987] against [0.764, 0.938]),
+so that particular drop is not distinguishable from sampling variation at this
+size, but the reappearance of elisions is a qualitative recurrence rather than a
+question of interval width.
+
+The simplest intervention that addresses the failure was tried first and
+measured rather than assumed, and measuring it on unseen data is what showed
+that a fix validated on development can look complete and not be. That is an argument for keeping the
+verifier in place permanently rather than trusting the instruction that was meant
+to make it unnecessary.
+
+\subsection{The failure the fix displaced}
+
+The second prompt removed every \emph{marked} elision. It introduced one
+\emph{unmarked} one.
+
+On \texttt{QA\_0294}, instructed not to write an ellipsis, the model did not
+quote a shorter continuous span. It joined two fragments with no marker at all,
+producing \enquote{who have the role to verify compliance with applicable design
+data\ldots} from a source reading \enquote{\ldots who are directly involved in the
+production of aeronautical items, have the role to verify compliance with
+applicable design data\ldots}. The omitted clause is the one that limits the
+provision to persons directly involved in production.
+
+The consequence is methodological. A syntactic check for ellipsis characters
+would have passed this answer; only verifying that the word sequence actually
+appears contiguously in the source rejects it. \textbf{A prompt constraint
+displaced the failure mode into a less visible form rather than removing it.}
+This is the argument for verification over instruction, and it is the argument
+this project makes generally: a rule stated to a generator is a request, whereas
+a rule checked against the evidence is a guarantee.
+
+The one other surviving failure is plainer. On \texttt{QA\_0047} the model
+asserted that \enquote{Member States and EASA are not allowed to record personal
+details in their databases}, attributing it to a source that says only that
+organisations must keep occurrence details confidential. The same structural check
+rejects it for the same reason.
+
+\subsection{The enriched context variant}
+\label{sec:enriched-context}
+
+Chapter~\ref{chap:method} specifies two context variants and everything reported
+so far uses the compact one: the five reranked children under a 1{,}200-word
+budget. The enriched variant keeps the same five anchors and adds their sibling
+units at radius one. It is evaluated here on the development partition only. A
+second post-freeze run on the held-out partition would retire the single-run discipline established at the start of this section, and an ablation is not worth that (decision D050).
+
+\begin{table}[htbp]
+  \centering
+  \caption{Compact against enriched context on the development partition ($n = 42$). Prompt, schema, model, temperature and question set are identical; only the context construction differs.}
+  \label{tab:context-variants}
+  \small
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lrr}
+    \toprule
+    \textbf{Quantity} & \textbf{Compact} & \textbf{Enriched} \\
+    \midrule
+    Quote verification passed & 40 (95.2\%) & 40 (95.2\%) \\
+    \quad under the byte-level rule & 31 (73.8\%) & 32 (76.2\%) \\
+    Answers containing an elided quote & \textbf{0} & 1 \\
+    Evidence selection correct & 33 (78.6\%) & 34 (81.0\%) \\
+    Schema contract satisfied & 42 (100\%) & 42 (100\%) \\
+    Model abstained & 0 & 0 \\
+    \midrule
+    Claims made & 114 & 126 \\
+    Quote spans & 133 & 140 \\
+    Distinct sources cited per answer (mean) & 2.60 & 2.98 \\
+    \midrule
+    Prompt tokens & 70{,}089 & \textbf{125{,}205} \\
+    Completion tokens & 13{,}747 & 14{,}673 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The enriched context costs 79\% more input tokens and returns one record on
+evidence selection --- 34 of 42 against 33, or 0.810 [0.667, 0.900] against 0.786
+[0.641, 0.883] --- and one on byte-exact quoting. It also reintroduces an elided
+quote where the compact run had none. At this sample size those movements are
+each a single answer, and the Wilson intervals overlap almost entirely; the only
+difference measured with any confidence is the cost.
+
+One pattern is worth naming because it is not a matter of interval width. The
+enriched run makes more claims (126 against 114), cites more distinct sources per
+answer (2.98 against 2.60) and produces more quote spans (140 against 133). More
+evidence in the window produced more assertions rather than better-grounded ones:
+the grounding rate is identical at 95.2\% and the elided quote reappeared. This is
+consistent with the reason the budget exists at all --- evidence is used
+unreliably as the window grows~\cite{liu2024lostmiddle} --- but it is one
+development run and is offered as an observation, not a finding.
+
+The variant is therefore specified, executed and reported, and it is not adopted.
+The compact context remains the configuration on which the held-out result stands.
+
+\subsection{The generator never abstains}
+\label{sec:no-abstention}
+
+Across all three runs --- 140 answers, on both partitions --- the model
+abstained \textbf{zero} times.
+
+This is not an oversight in the design. The output schema provides four
+abstention reasons; the prompt instructs the model to use them when the evidence
+is insufficient, ambiguous, conflicting or outside the corpus; strict structured
+output guarantees that returning one is well-formed and costs nothing. It did not do so on the record where it fabricated a prohibition, nor on the
+record where it spliced away a limiting clause, nor on the record where it
+invented a source identifier one character away from a real one, nor on any of
+the eighteen records across both partitions where it attached its claims to the
+wrong provision.
+
+The literature on selective prediction assumes a model can be induced to express
+when it should not answer, whether through calibration of its own
+confidence~\cite{kadavath2022know,jiang2021calibration} or through selective
+answering mechanisms~\cite{kamath2020selective,geifman2017selective}. On this
+task, with this model, the explicit and freely available channel for doing so was
+never used. \textbf{Abstention therefore cannot be delegated to the generator's
+judgement; it must be driven by external verification.} That converts the
+abstention component of the architecture from a design preference into a measured
+necessity.
+
+\section{Escalation Calibration}
+\label{sec:escalation}
+
+The escalation policy asks which \emph{runtime-observable} condition justifies
+declining to answer. A signal qualifies only if it can be computed when the
+question arrives, without gold labels: retrieval scores, the verifier's output
+and the shape of the generated answer all qualify; whether the answer selected
+the correct provision does not, since that is the outcome being predicted.
+
+\subsection{The sample cannot support a threshold}
+
+On the development partition, 9 of 42 answers selected the wrong provision --- a
+base error rate of 21.4\%. Table~\ref{tab:escalation} reports the candidate rules
+with Wilson intervals~\cite{wilson1927probable} on precision.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Candidate escalation rules on the development partition ($n = 42$, 9 error events). Precision intervals are Wilson 95\%.}
+  \label{tab:escalation}
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lrrr}
+    \toprule
+    \textbf{Escalate when} & \textbf{Escalated} & \textbf{Precision} & \textbf{Recall} \\
+    \midrule
+    Reranker moved top-1 by $\geq 2$ ranks & 19 & 0.42 [0.23, 0.64] & \textbf{0.89} \\
+    Only one claim was made & 5 & 0.60 [0.23, 0.88] & 0.33 \\
+    Reranker moved top-1 by $\geq 5$ ranks & 7 & 0.43 [0.16, 0.75] & 0.33 \\
+    Rerank margin $\leq 0.5$ & 14 & 0.36 [0.16, 0.61] & 0.56 \\
+    Rerank margin $\leq 1.0$ & 18 & 0.33 [0.16, 0.56] & 0.67 \\
+    Model cited $\leq 2$ distinct sources & 21 & 0.29 [0.14, 0.50] & 0.67 \\
+    Quote verification failed & 2 & \textbf{0.00} [0.00, 0.66] & \textbf{0.00} \\
+    Model abstained & 0 & --- & 0.00 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Two rules have a lower confidence bound fractionally above the 0.214 base rate,
+both at 0.23. That is a two-point margin estimated from nine error events, and one
+of the two rests on five escalations in total. Neither is a basis for a threshold.
+
+\textbf{No escalation threshold is fitted in this work.} A threshold chosen from nine events would not be distinguishable from noise at
+this sample size. The policy is specified; its
+retrieval-uncertainty thresholds are left explicitly open.
+
+\subsection{How much data would be required}
+
+Table~\ref{tab:power} gives the two-proportion sample size, at
+$\alpha = 0.05$ and 80\% power, needed to distinguish a given escalation
+precision from the observed base rate.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Sample size required to demonstrate a given escalation precision against the observed 21.4\% base error rate.}
+  \label{tab:power}
+  \begin{tabular}{lrr}
+    \toprule
+    \textbf{Target precision} & \textbf{Escalated decisions} & \textbf{Questions} \\
+    \midrule
+    0.35 & 172 & $\approx$ 383 \\
+    0.42 (best observed) & \textbf{80} & \textbf{$\approx$ 178} \\
+    0.50 & 43 & $\approx$ 96 \\
+    0.60 & 25 & $\approx$ 56 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Question counts assume the 45\% escalation rate observed for the most promising
+rule. Against a frozen benchmark of 98 records, demonstrating the effect actually
+observed would require roughly 1.8 times the current benchmark. This is a quantified limitation with a stated remedy, reported in place of a
+threshold fitted to nine events.
+
+\subsection{The two failure modes are independent}
+
+The result that does hold at this sample size is structural rather than
+numerical, and it is shown in Figure~\ref{fig:failure-modes}.
+
+\begin{figure}[htbp]
+  \centering
+  \input{figures/fig_failure_modes}
+  \caption[The two failure modes do not co-occur]{The two failure modes on the
+  development partition, one cell per answered question ($n = 42$). Nine answers
+  selected the wrong provision and two carried a quote that does not appear in
+  the source it cites; eleven answers failed in one way or the other, and none
+  failed in both. Cells are grouped by outcome, so position in the grid carries
+  no meaning.}
+  \label{fig:failure-modes}
+\end{figure}
+
+The two sets do not intersect. Quote verification has precision 0.00 and recall
+0.00 for predicting evidence-selection errors, and the two answers it rejected had
+entirely correct evidence.
+
+The finding is architectural rather than a shortfall in performance. The system fails in two
+independent ways. \emph{Evidence selection} --- attaching a claim to the wrong
+provision --- is not observable at runtime and must be predicted from retrieval
+signals, which the preceding subsection shows cannot yet be done reliably.
+\emph{Quote fidelity} --- misreporting what the selected provision says --- is
+deterministically checkable at runtime with no gold labels at all. A verifier
+checking only quotes would have passed all nine evidence errors; a check on
+evidence selection alone would have passed both quote failures. Both layers are
+required, and the requirement is measured rather than asserted.
+
+\subsection{The policy as specified}
+
+The escalation policy that these results support is stated as follows.
+
+\begin{enumerate}
+  \item Retrieve a broad candidate pool through lexical and dense fusion.
+  \item Rerank when evidence may be present but poorly ordered.
+  \item Add adjacent children when a selected provision lacks local continuity.
+  \item \textbf{Block the answer when quote verification fails.} This requires no
+    calibration: a quote either appears contiguously in the cited source or it
+    does not, so the check has no false positives by construction. It fires on 2
+    of 42 development answers.
+  \item Request clarification when several legitimate provisions compete.
+  \item \textbf{Escalate on retrieval uncertainty --- threshold uncalibrated.}
+    Reranker-versus-fusion disagreement is the most promising observed signal and
+    is named as the candidate, with its threshold left open pending the sample
+    size in Table~\ref{tab:power}.
+  \item Refer to a human when evidence remains absent, ambiguous or conflicting.
+\end{enumerate}
+
+Model self-abstention is excluded as a signal entirely, for the reason given in
+Section~\ref{sec:no-abstention}.
+
+\begin{figure}[htbp]
+  \centering
+  \resizebox{\textwidth}{!}{\input{figures/fig_escalation}}
+  \caption[The escalation policy and the status of each transition]{The
+  escalation policy, with the trigger for each transition and what the results
+  of this chapter establish about it. One transition needs no calibration, since
+  a quote either appears contiguously in the cited source or it does not. One is
+  left deliberately open: reranker-versus-fusion disagreement is the most
+  promising observed signal, but nine error events cannot fix its threshold
+  (Table~\ref{tab:power}). The generator's own abstention flag is excluded as a
+  signal altogether.}
+  \label{fig:escalation-policy}
+\end{figure}
+
+Escalation precision and recall are reported together throughout, never
+separately. A rule escalating 45\% of questions to catch 89\% of errors may well
+be correct for aviation regulation, where a wrong citation is expensive and a
+human referral is cheap --- but that is a judgement about the relative cost of the
+two outcomes, not something the data decides. Wherever an escalation rate appears,
+the assumed cost ratio is stated with it.
+
+\section{Two Properties No Internal Metric Detects}
+\label{sec:invisible}
+
+\subsection{Citation labels a reader cannot resolve}
+
+Six records drew the same reaction from reviewers, in different words each time:
+\emph{\enquote{GM 3.1 = ?}}, \emph{\enquote{qu'entends-tu par
+\enquote{section 2.2}?}}. A practitioner who works with this regulation daily
+could not resolve the canonical citation strings.
+
+That observation was then measured rather than left anecdotal. Every gold citation
+in the frozen benchmark was resolved against the corpus, with the result in
+Table~\ref{tab:legibility}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Resolution of the benchmark's own gold citation labels against the corpus ($n = 98$).}
+  \label{tab:legibility}
+  \begin{tabular}{lr}
+    \toprule
+    \textbf{The gold citation\ldots} & \textbf{Records} \\
+    \midrule
+    identifies the parent holding its own evidence & 48 \\
+    names an Article while the evidence sits in a Guidance Material section & 28 \\
+    omits which of the four regulations it means & 12 \\
+    cannot be parsed into any provision at all & 10 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Twenty-two of 98 records carry a citation label that cannot be resolved to
+a single provision from the string alone} --- roughly four times what the six
+free-text comments suggested. A bare \enquote{Article 2} exists in all four
+regulations in the corpus; \enquote{GM to Reg.\ (EU) No 376/2014 [04]} identifies
+nothing at all.
+
+Every one of these citations resolves correctly \emph{inside} the pipeline,
+because the pipeline carries the parent identifier alongside the display string.
+The defect is invisible to every internal metric by construction, and visible
+immediately to an outside reader holding only what the user is actually shown.
+This is the clearest available demonstration that internal consistency is not
+correctness, and it was found by asking practitioners rather than by measuring.
+
+The 28 guidance-material records are a separate and legitimate phenomenon: the
+citation points to the binding provision while the evidence sits in the guidance
+discussing it. It is not an error, but it means that \enquote{cited correctly} and
+\enquote{retrieved the evidence} are different questions on nearly a third of the
+benchmark, and results must not silently conflate them.
+
+\subsection{The benchmark cannot demonstrate an agent's benefit}
+
+Every one of the 98 frozen records has its gold evidence inside a single legal
+parent. Zero records require evidence from two or more.
+
+This is decisive for the question of agentic, multi-step retrieval. Whatever an
+agent's merits in general, a benchmark in which no question requires combining
+provisions from different parts of the instrument cannot exhibit them: the
+measurement has no room to show a difference. Building an agent and reporting a
+null result on this benchmark would be uninformative, and reporting a positive one
+would be evidence of something other than the agent's retrieval behaviour.
+
+A cross-reference evaluation subset is therefore a prerequisite for that line of
+work, not an optional refinement --- a conclusion reached from a property of the
+data rather than from a position on agent architectures.
+
+\section{Threats to Validity}
+\label{sec:threats}
+
+\textbf{Benchmark provenance.} The benchmark is synthetic in origin and may
+reflect the style of the model that generated it~\cite{sainz2023contamination}.
+The independent review mitigates but does not eliminate this: 33 of 98 records
+were reviewed, and the remaining 65 retain AI-assisted evidence linkage.
+
+\textbf{Agreement is fair, not strong.} Fleiss' $\kappa$ of 0.250 means the
+reviewed labels themselves carry disagreement. This is reported as a finding
+rather than a nuisance, but it bounds how precisely any accuracy figure computed
+against those labels can be interpreted.
+
+\textbf{Small samples.} The escalation analysis rests on 9 error events on 42
+development records, and every precision figure in Section~\ref{sec:escalation} is
+indicative rather than estimated. Generation is reported on both partitions, but
+56 held-out records still give wide intervals: the 87.5\% grounding rate carries a
+95\% interval of [0.764, 0.938].
+
+\textbf{Selection after observation.} The second prompt version was chosen after
+seeing the first version's failures on development data. That is the legitimate
+use of a development partition, and the held-out run was that prompt's first and
+only exposure to unseen questions. It is reported exactly as observed, including
+where it is worse than development; no prompt, threshold or model was revised
+afterwards.
+
+\textbf{Baseline scope.} The few-shot and RAG comparison now covers all 98
+records; LoRA remains at 73, since its stored predictions answer the pre-freeze
+wording and it was not re-run. Comparisons involving LoRA are therefore made on a
+subset that is measurably easier for retrieval-augmented systems, which flatters
+RAG against it rather than the reverse. The LoRA system was measured at one variant, on a
+3B model, against hosted models of larger and undisclosed size; it is not a
+controlled comparison of adaptation methods and is not presented as one.
+
+\textbf{Lexical proxies.} ROUGE-L appears only for continuity with the earlier
+evaluation. Structural verification establishes that a claim points at supplied
+evidence and reproduces its wording; it does not establish that the evidence
+supports the claim. Semantic support remains unmeasured in this
+work~\cite{rashkin2023attribution,liu2023verifiability}.
+
+\textbf{Fusion configuration.} Equal-weight reciprocal-rank fusion is known to be
+suboptimal relative to tuned convex combination~\cite{bruch2024fusion}. It was
+chosen because an untuned function cannot leak from the held-out partition. The
+reported retrieval figures are therefore a conservative estimate of what this
+architecture can achieve.

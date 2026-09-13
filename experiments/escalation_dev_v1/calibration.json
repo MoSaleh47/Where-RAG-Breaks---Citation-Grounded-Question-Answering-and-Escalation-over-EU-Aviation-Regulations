@@ -1,0 +1,202 @@
+{
+  "any_rule_beats_base_rate_at_95": true,
+  "base_error_rate": 0.2143,
+  "conclusion": "No escalation threshold is fitted. With this many error events every candidate rule's precision interval contains or nearly contains the base error rate, so any threshold chosen here would be indistinguishable from noise. The policy is specified and its retrieval-uncertainty thresholds are left open; see D040. Quote-verification gating needs no calibration and is applied unconditionally; see D042.",
+  "error_events": 9,
+  "failure_mode_overlap": {
+    "both": 0,
+    "either": 11,
+    "note": "Zero overlap means quote verification carries no information about evidence selection, and vice versa. Both layers are required.",
+    "quote_not_grounded": 2,
+    "wrong_evidence_selected": 9
+  },
+  "record_count": 42,
+  "required_sample_sizes": {
+    "precision_0.35": {
+      "escalated_decisions": 172,
+      "questions_at_observed_escalation_rate": 383
+    },
+    "precision_0.42": {
+      "escalated_decisions": 80,
+      "questions_at_observed_escalation_rate": 178
+    },
+    "precision_0.50": {
+      "escalated_decisions": 43,
+      "questions_at_observed_escalation_rate": 96
+    },
+    "precision_0.60": {
+      "escalated_decisions": 25,
+      "questions_at_observed_escalation_rate": 56
+    }
+  },
+  "rules": [
+    {
+      "beats_base_rate_at_95": true,
+      "errors_caught": 8,
+      "escalated": 19,
+      "escalation_rate": 0.4524,
+      "precision": 0.4211,
+      "precision_ci95": [
+        0.2314,
+        0.6372
+      ],
+      "recall": 0.8889,
+      "rule": "reranker moved top-1 by >= 2 ranks"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 3,
+      "escalated": 12,
+      "escalation_rate": 0.2857,
+      "precision": 0.25,
+      "precision_ci95": [
+        0.0889,
+        0.5323
+      ],
+      "recall": 0.3333,
+      "rule": "reranker moved top-1 by >= 3 ranks"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 3,
+      "escalated": 7,
+      "escalation_rate": 0.1667,
+      "precision": 0.4286,
+      "precision_ci95": [
+        0.1582,
+        0.7495
+      ],
+      "recall": 0.3333,
+      "rule": "reranker moved top-1 by >= 5 ranks"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 5,
+      "escalated": 14,
+      "escalation_rate": 0.3333,
+      "precision": 0.3571,
+      "precision_ci95": [
+        0.1634,
+        0.6124
+      ],
+      "recall": 0.5556,
+      "rule": "rerank margin <= 0.5"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 6,
+      "escalated": 18,
+      "escalation_rate": 0.4286,
+      "precision": 0.3333,
+      "precision_ci95": [
+        0.1628,
+        0.5625
+      ],
+      "recall": 0.6667,
+      "rule": "rerank margin <= 1.0"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 7,
+      "escalated": 28,
+      "escalation_rate": 0.6667,
+      "precision": 0.25,
+      "precision_ci95": [
+        0.1268,
+        0.4336
+      ],
+      "recall": 0.7778,
+      "rule": "rerank margin <= 1.5"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 3,
+      "escalated": 9,
+      "escalation_rate": 0.2143,
+      "precision": 0.3333,
+      "precision_ci95": [
+        0.1206,
+        0.6458
+      ],
+      "recall": 0.3333,
+      "rule": "cited <= 1 distinct source"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 6,
+      "escalated": 21,
+      "escalation_rate": 0.5,
+      "precision": 0.2857,
+      "precision_ci95": [
+        0.1381,
+        0.4996
+      ],
+      "recall": 0.6667,
+      "rule": "cited <= 2 distinct sources"
+    },
+    {
+      "beats_base_rate_at_95": true,
+      "errors_caught": 3,
+      "escalated": 5,
+      "escalation_rate": 0.119,
+      "precision": 0.6,
+      "precision_ci95": [
+        0.2307,
+        0.8824
+      ],
+      "recall": 0.3333,
+      "rule": "only one claim made"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 0,
+      "escalated": 2,
+      "escalation_rate": 0.0476,
+      "precision": 0.0,
+      "precision_ci95": [
+        0.0,
+        0.6576
+      ],
+      "recall": 0.0,
+      "rule": "quote verification failed"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 1,
+      "escalated": 11,
+      "escalation_rate": 0.2619,
+      "precision": 0.0909,
+      "precision_ci95": [
+        0.0162,
+        0.3774
+      ],
+      "recall": 0.1111,
+      "rule": "byte-strict quote check failed"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 0,
+      "escalated": 0,
+      "escalation_rate": 0.0,
+      "precision": null,
+      "precision_ci95": null,
+      "recall": 0.0,
+      "rule": "model abstained"
+    },
+    {
+      "beats_base_rate_at_95": false,
+      "errors_caught": 8,
+      "escalated": 21,
+      "escalation_rate": 0.5,
+      "precision": 0.381,
+      "precision_ci95": [
+        0.2075,
+        0.5912
+      ],
+      "recall": 0.8889,
+      "rule": "moved >= 2 ranks OR quote failed"
+    }
+  ],
+  "split": "development",
+  "status": "development_only_uncalibrated"
+}

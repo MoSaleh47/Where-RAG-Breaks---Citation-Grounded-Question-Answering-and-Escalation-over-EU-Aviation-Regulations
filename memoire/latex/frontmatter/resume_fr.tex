@@ -1,0 +1,44 @@
+\chapter*{R\'{e}sum\'{e} (French Summary)}
+\addcontentsline{toc}{chapter}{R\'{e}sum\'{e} (French Summary)}
+
+Les grands mod\`{e}les de langage r\'{e}pondent aux questions r\'{e}glementaires
+de mani\`{e}re convaincante tout en citant la mauvaise disposition, en amputant
+une r\`{e}gle de son exception ou en avan\c{c}ant une conclusion non
+\'{e}tay\'{e}e. En a\'{e}ronautique, une r\'{e}ponse doit \^{e}tre
+rattach\'{e}e \`{a} une source juridique officielle, versionn\'{e}e et
+pr\'{e}cis\'{e}ment cit\'{e}e. Ce projet \'{e}tudie la question-r\'{e}ponse
+fond\'{e}e sur les preuves appliqu\'{e}e au r\`{e}glement~(UE)
+n\textsuperscript{o}~376/2014, et transforme une comparaison de syst\`{e}mes en
+analyse des modes de d\'{e}faillance~: o\`{u} le syst\`{e}me \'{e}choue-t-il,
+et quelle condition observable \`{a} l'ex\'{e}cution justifie une escalade
+plut\^{o}t qu'une r\'{e}ponse~?
+
+L'instrument de mesure a \'{e}t\'{e} valid\'{e} avant d'\^{e}tre cru. Quatre
+professionnels de l'a\'{e}ronautique ont examin\'{e} ind\'{e}pendamment un
+\'{e}chantillon born\'{e} du benchmark~; ils ne s'accordent sur le verdict que
+pour moins de la moiti\'{e} des enregistrements ($\kappa$ de Fleiss = 0,250). Ce
+d\'{e}saccord est rapport\'{e} comme un r\'{e}sultat. Le benchmark revu, 98
+questions li\'{e}es \`{a} leurs preuves, a \'{e}t\'{e} gel\'{e} selon une
+r\`{e}gle pr\'{e}enregistr\'{e}e.
+
+La recherche d'information n'est pas le point de rupture~: la recherche hybride
+avec reranker cross-encoder place une preuve acceptable dans les cinq
+premiers r\'{e}sultats pour 89,3~\% des questions du jeu de test. La
+d\'{e}faillance porte sur la pr\'{e}cision des citations~: r\'{e}\'{e}valu\'{e}e
+avec un \'{e}valuateur qui r\'{e}sout les r\'{e}f\'{e}rences contre le corpus, la
+base RAG identifie le bon article pour 62,5~\% des questions mais ne reproduit la
+citation compl\`{e}te, sous-paragraphe inclus, que pour 44,3~\%.
+
+Deux r\'{e}sultats d\'{e}terminent l'architecture. Les erreurs de
+v\'{e}rification des citations et de s\'{e}lection des preuves ne
+co\"{i}ncident jamais~: les deux contr\^{o}les sont n\'{e}cessaires. Et sur 140
+r\'{e}ponses g\'{e}n\'{e}r\'{e}es, le mod\`{e}le n'a jamais utilis\'{e} le canal
+d'abstention explicite et sans co\^{u}t qui lui \'{e}tait offert, y compris pour
+une r\'{e}ponse citant un identifiant invent\'{e}. L'abstention doit \^{e}tre
+impos\'{e}e de l'ext\'{e}rieur, sur des \'{e}l\'{e}ments v\'{e}rifiables. La
+politique d'escalade est sp\'{e}cifi\'{e}e en cons\'{e}quence, son seuil
+laiss\'{e} explicitement non calibr\'{e}.
+
+\medskip
+\noindent\textbf{\color{aivancityNavy}Mots-cl\'{e}s~:}
+\textit{\color{aivancityGray}RAG, question-r\'{e}ponse juridique, r\'{e}glementation a\'{e}ronautique, recherche hybride, reranking, v\'{e}rification des citations, abstention, pr\'{e}diction s\'{e}lective.}

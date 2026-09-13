@@ -1,0 +1,23 @@
+{
+  "inputs": {
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "qa_parent_map_sha256": "71E74FE14942C7E9A2123F6812CE4516906B6479804B5A58E7DB3910904DD6AD",
+    "qa_sha256": "7AC64199747BB9AAFB222ADF4D91D04235DF439F0EF99CA17AF5DF30C7990E90"
+  },
+  "output_sha256": "5B93A8AB049993E9D45FF2E4C9C7C87B9CC5F961AA4DE9A543D5127A5F66AAC0",
+  "parent_mapping_status_counts": {
+    "accepted_manual": 4,
+    "auto_mapped": 291,
+    "excluded_invalid_source": 4,
+    "rewrite_required": 1
+  },
+  "qa_count": 300,
+  "review_priority_counts": {
+    "excluded": 4,
+    "high": 129,
+    "low": 63,
+    "medium": 103,
+    "rewrite": 1
+  },
+  "status": "candidate_queue_only_human_review_required"
+}

@@ -1,0 +1,26 @@
+{
+  "completed_at_utc": "2026-07-23T09:35:13.506182+00:00",
+  "experiment_id": "E5_candidate_context_assembly",
+  "inputs": {
+    "audited_qa_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "parents_sha256": "4E481936003E209DA32718998C15099C04652FEF5B260C7546A37495C43AC9E0",
+    "reranked_sha256": "BCE83E30662E845A8CED297E00E39C2F9126505D95D271282FBD06032004F851"
+  },
+  "outputs": {
+    "contexts_sha256": "7CFF9F2AECF70546D66209C6E5897EFB5253DE1AEA8AD7565137831EE594143D",
+    "summary_sha256": "8198EBCB7F1CD04823E5394A405334CC92207685FDF9733D8CC2DD0D97784A73"
+  },
+  "parameters": {
+    "max_per_parent": null,
+    "max_words": 1600,
+    "neighbor_radius": 1,
+    "top_k": 5
+  },
+  "query_count": 99,
+  "software": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_contexts_no_generation_performed"
+}

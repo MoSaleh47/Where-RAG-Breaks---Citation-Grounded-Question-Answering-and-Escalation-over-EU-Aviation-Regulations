@@ -1,0 +1,49 @@
+====================================================================
+MULTI-REVIEWER BENCHMARK REVIEW - AGGREGATION REPORT
+====================================================================
+Aggregation rule : strict majority, min 2 reviewers
+Reviewers        : 4
+  - R1                           22 records | Plus de 10 ans / Over 10 years | Je le connais / I know it
+  - R2                           12 records | Plus de 10 ans / Over 10 years | Je travaille directement avec / I work with it directly
+  - R3                           29 records | 2-5 ans / 2-5 years | Je travaille directement avec / I work with it directly
+  - R4                           33 records | Plus de 10 ans / Over 10 years | Je travaille directement avec / I work with it directly
+
+Records total            : 33
+Records with >=1 rating  : 33
+Records with >=2 ratings : 31
+Auto-decided by panel    : 14
+Need your adjudication   : 19
+
+--- inter-rater agreement (on the overall decision) ---
+Exact agreement    : 13/31 = 41.9%
+Fleiss' kappa      : 0.250  (fair)  [3 categories]
+Fleiss' kappa      : 0.332  (fair)  [accept vs needs-change, POST-HOC collapse -- label it as such]
+
+--- records still needing you ---
+  QA_0003: reviewers disagree
+  QA_0040: reviewers disagree
+  QA_0062: panel wants a correction - you must supply the corrected fields
+  QA_0063: reviewers disagree
+  QA_0071: reviewers disagree
+  QA_0081: reviewers disagree
+  QA_0083: reviewers disagree
+  QA_0097: reviewers disagree
+  QA_0163: panel wants a correction - you must supply the corrected fields
+  QA_0183: panel wants a correction - you must supply the corrected fields
+  QA_0213: panel wants a correction - you must supply the corrected fields
+  QA_0235: reviewers disagree
+  QA_0272: reviewers disagree
+  QA_0279: reviewers disagree
+  QA_0287: reviewers disagree
+  QA_0289: reviewers disagree
+  QA_0292: reviewers disagree
+  QA_0293: only 1 reviewer(s), need 2
+  QA_0294: only 1 reviewer(s), need 2
+
+Wrote review_kit/out_final/review_aggregate.csv
+Wrote review_kit/out_final/review_queue_filled.csv
+
+NEXT: fill the blank reviewer_decision rows in review_queue_filled.csv,
+      copy it over data/evaluation/independent_review_v1/review_queue.csv,
+      then run scripts/freeze_reviewed_benchmark.py
+====================================================================

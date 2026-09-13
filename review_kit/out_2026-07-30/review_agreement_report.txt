@@ -1,0 +1,59 @@
+====================================================================
+MULTI-REVIEWER BENCHMARK REVIEW - AGGREGATION REPORT
+====================================================================
+Aggregation rule : strict majority, min 2 reviewers
+Reviewers        : 2
+  - R1                           22 records | Plus de 10 ans / Over 10 years | Je le connais / I know it
+  - R2                           12 records | Plus de 10 ans / Over 10 years | Je travaille directement avec / I work with it directly
+
+Records total            : 33
+Records with >=1 rating  : 27
+Records with >=2 ratings : 7
+Auto-decided by panel    : 2
+Need your adjudication   : 31
+
+--- inter-rater agreement (on the overall decision) ---
+Exact agreement    : 4/7 = 57.1%
+Cohen's kappa      : 0.323  (fair)
+Fleiss' kappa      : 0.311  (fair)
+
+--- records still needing you ---
+  QA_0003: reviewers disagree
+  QA_0011: reviewers disagree
+  QA_0040: only 1 reviewer(s), need 2
+  QA_0058: only 1 reviewer(s), need 2
+  QA_0062: panel wants a correction - you must supply the corrected fields
+  QA_0071: reviewers disagree
+  QA_0080: only 1 reviewer(s), need 2
+  QA_0081: only 1 reviewer(s), need 2
+  QA_0083: reviewers disagree
+  QA_0097: only 1 reviewer(s), need 2
+  QA_0163: only 1 reviewer(s), need 2
+  QA_0176: only 1 reviewer(s), need 2
+  QA_0183: only 1 reviewer(s), need 2
+  QA_0193: only 0 reviewer(s), need 2
+  QA_0213: only 1 reviewer(s), need 2
+  QA_0229: only 1 reviewer(s), need 2
+  QA_0235: only 0 reviewer(s), need 2
+  QA_0248: only 1 reviewer(s), need 2
+  QA_0258: only 1 reviewer(s), need 2
+  QA_0263: only 1 reviewer(s), need 2
+  QA_0265: only 1 reviewer(s), need 2
+  QA_0272: only 1 reviewer(s), need 2
+  QA_0277: only 1 reviewer(s), need 2
+  QA_0278: only 1 reviewer(s), need 2
+  QA_0279: only 1 reviewer(s), need 2
+  QA_0287: only 1 reviewer(s), need 2
+  QA_0289: only 0 reviewer(s), need 2
+  QA_0290: only 0 reviewer(s), need 2
+  QA_0292: only 1 reviewer(s), need 2
+  QA_0293: only 0 reviewer(s), need 2
+  QA_0294: only 0 reviewer(s), need 2
+
+Wrote review_kit/out_2026-07-30/review_aggregate.csv
+Wrote review_kit/out_2026-07-30/review_queue_filled.csv
+
+NEXT: fill the blank reviewer_decision rows in review_queue_filled.csv,
+      copy it over data/evaluation/independent_review_v1/review_queue.csv,
+      then run scripts/freeze_reviewed_benchmark.py
+====================================================================

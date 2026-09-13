@@ -1,0 +1,79 @@
+%% Figure: the escalation policy as a ladder of levels, with the trigger for
+%% each transition and the evidential status of that trigger.
+%% Requires: tikz with libraries arrows.Meta, positioning, fit, calc.
+\begin{tikzpicture}[
+  font=\footnotesize,
+  every node/.append style={execute at begin node={%
+    \hyphenpenalty=10000\exhyphenpenalty=10000\relax}},
+  level box/.style={
+    draw=aivancityNavy, line width=0.6pt, rounded corners=2pt,
+    fill=white, align=left, inner sep=4pt, text width=6.1cm, minimum height=0.85cm
+  },
+  superseded/.style={
+    draw=aivancityGray, line width=0.6pt, dashed, rounded corners=2pt,
+    fill=white, align=left, inner sep=4pt, text width=6.1cm,
+    text=aivancityGray, minimum height=0.85cm
+  },
+  trigger/.style={align=left, text width=5.3cm, font=\footnotesize, anchor=west},
+  status/.style={align=right, text width=2.5cm, font=\footnotesize\bfseries, anchor=east},
+  down/.style={-{Latex[length=4.5pt,width=4.5pt]}, draw=aivancityNavy, line width=0.8pt},
+  downopen/.style={-{Latex[length=4.5pt,width=4.5pt]}, draw=draftRed, line width=0.8pt, dashed},
+  downfirm/.style={-{Latex[length=4.5pt,width=4.5pt]}, draw=aivancityGold, line width=1.1pt},
+]
+
+\def\dy{1.90}
+
+%% ------------------------------------------------------------- the ladder ---
+\node[superseded]  (l0) at (0, 0*\dy) {\textbf{0}\quad Dense retrieval only};
+\node[level box]   (l1) at (0,-1*\dy) {\textbf{1}\quad Hierarchy-aware retrieval};
+\node[level box]   (l2) at (0,-2*\dy) {\textbf{2}\quad Hybrid candidates, rank fusion};
+\node[level box]   (l3) at (0,-3*\dy) {\textbf{3}\quad Cross-encoder reranking};
+\node[level box]   (l4) at (0,-4*\dy) {\textbf{4}\quad Evidence-constrained generation};
+\node[level box]   (l5) at (0,-5*\dy) {\textbf{5}\quad Clarification or targeted revision};
+\node[level box]   (l6) at (0,-6*\dy) {\textbf{6}\quad Abstention and human referral};
+
+\draw[down]     (l0) -- (l1);
+\draw[down]     (l1) -- (l2);
+\draw[downopen] (l2) -- (l3);
+\draw[down]     (l3) -- (l4);
+\draw[downfirm] (l4) -- (l5);
+\draw[down]     (l5) -- (l6);
+
+%% ------------------------------------------------- triggers, right column ---
+\node[trigger] at (3.35,-0.5*\dy)
+  {superseded once the corpus carries its hierarchy};
+\node[trigger] at (3.35,-1.5*\dy)
+  {low fused score, or the lexical and dense channels disagree};
+\node[trigger, text=draftRed] at (3.35,-2.5*\dy)
+  {small margin between the top candidates\\
+   \emph{threshold left uncalibrated}};
+\node[trigger] at (3.35,-3.5*\dy)
+  {applied to every question that is answered at all};
+\node[trigger] at (3.35,-4.5*\dy)
+  {quote verification fails, or several provisions compete legitimately};
+\node[trigger] at (3.35,-5.5*\dy)
+  {sources conflict, no supporting evidence, ambiguity unresolved};
+
+%% ------------------------------------------------- status, left column ------
+\node[status, text=aivancityGray] at (-3.35,-0.5*\dy) {baseline};
+\node[status, text=aivancityNavy] at (-3.35,-1.5*\dy) {runtime signal};
+\node[status, text=draftRed]      at (-3.35,-2.5*\dy) {open};
+\node[status, text=aivancityNavy] at (-3.35,-3.5*\dy) {unconditional};
+\node[status, text=aivancityGold] at (-3.35,-4.5*\dy) {deterministic};
+\node[status, text=aivancityNavy] at (-3.35,-5.5*\dy) {runtime signal};
+
+%% ------------------------------------------------------- excluded signal ---
+\node[draw=aivancityGray, dashed, line width=0.6pt, rounded corners=2pt,
+      fill=white, align=left, inner sep=5pt, text width=13.0cm,
+      font=\footnotesize, text=aivancityGray] (excl) at (0,-6.95*\dy)
+  {\textbf{Excluded as a trigger:} the generator's own abstention flag, which was never raised on any
+   of the 140 opportunities across both partitions --- including on answers whose quotes did not
+   appear in the sources they cited.};
+
+%% ------------------------------------------------------------------ key ---
+\node[align=center, font=\footnotesize, anchor=north, text width=13.4cm] at (0,-7.55*\dy)
+  {\textcolor{aivancityGold}{\rule[0.5ex]{9pt}{1.1pt}}~deterministic, no calibration \quad
+   \textcolor{aivancityNavy}{\rule[0.5ex]{9pt}{0.8pt}}~specified and applied \quad
+   \textcolor{draftRed}{\rule[0.5ex]{3pt}{0.8pt}\,\rule[0.5ex]{3pt}{0.8pt}}~threshold left open};
+
+\end{tikzpicture}

@@ -1,0 +1,24 @@
+{
+  "chunk_status_counts": {
+    "auto_mapped": 113,
+    "review_required": 19
+  },
+  "inputs": {
+    "legacy_chunks_sha256": "85750FA0FC8F0278FFE9EC34DBB4AAE51BAE7A1B0185A948F95ABAB25BD5B6D4",
+    "overrides_sha256": "39A810FD8C5B81278E249F0DF6CB2319A036B7FDA7E958774B83AEA7FEEE8D65",
+    "parents_sha256": "4E481936003E209DA32718998C15099C04652FEF5B260C7546A37495C43AC9E0",
+    "qa_sha256": "7AC64199747BB9AAFB222ADF4D91D04235DF439F0EF99CA17AF5DF30C7990E90"
+  },
+  "legacy_chunk_count": 132,
+  "outputs": {
+    "legacy_chunk_parent_map_sha256": "76E4DF0DC7FD53C0167281C5A070F45C4D9CB7209614D22406F38779614B0DD5",
+    "qa_parent_map_sha256": "71E74FE14942C7E9A2123F6812CE4516906B6479804B5A58E7DB3910904DD6AD"
+  },
+  "qa_count": 300,
+  "qa_status_counts": {
+    "accepted_manual": 4,
+    "auto_mapped": 291,
+    "excluded_invalid_source": 4,
+    "rewrite_required": 1
+  }
+}

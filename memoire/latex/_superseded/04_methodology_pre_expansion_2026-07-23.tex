@@ -1,0 +1,222 @@
+\chapter{Methodology}
+\label{chap:method}
+
+\section{Research Design}
+
+The experiment follows a staged ablation design. Each stage changes one major component while preserving the same corpus, benchmark identifiers, and source-grouped split. Retrieval is evaluated before generation so that a failed answer can be attributed to missing evidence, poor ranking, context construction, generation, or verification rather than a single aggregate score.
+
+The experiment ladder is:
+
+\begin{enumerate}
+  \item audit the historical corpus and evaluation artifacts;
+  \item construct a deterministic parent--child corpus;
+  \item map historical questions to exact legal evidence;
+  \item compare two dense embedding models on identical inputs;
+  \item add local BM25 and equal-weight \ac{RRF};
+  \item rerank the fused top-20 pool with a local cross-encoder;
+  \item assemble bounded evidence contexts;
+  \item generate structured answers and verify claims, quotes, and citations;
+  \item calibrate clarification, retrieval expansion, abstention, and human-review triggers.
+\end{enumerate}
+
+All model and parameter choices are selected on the development partition. The test partition is used for held-out reporting, not threshold tuning.
+
+\section{Corpus and Benchmark Construction}
+
+\subsection{Historical Corpus Defects}
+
+The historical corpus contained 132 comparatively flat chunks. Some exceeded 30,000 characters, while the generator received only the first 1,500 characters of the selected chunk. A source could therefore count as retrieved even when the supporting paragraph was absent from the generation context. The audit also found identity and type confounders: similarly numbered provisions from different instruments could be difficult to distinguish, and guidance material required explicit separation from binding regulatory text.
+
+These defects were repaired before interpreting retrieval error as a model limitation.
+
+\subsection{Regulatory Sources and Identity}
+
+The E1 corpus is constructed from the stored EASA Easy Access Rules source export. The parser preserves the identity of each underlying regulation instead of treating the combined publication as one document.
+
+Each legal parent records:
+
+\begin{itemize}
+  \item document, regulation, type, and version;
+  \item formal title and legal-unit type, including ARTICLE, ANNEX, RECITALS, and GM;
+  \item hierarchy path, parent title, and canonical citation;
+  \item cross-references and source XML range;
+  \item the ordered identifiers of all retrievable children.
+\end{itemize}
+
+This identity layer prevents provisions with the same local number in different instruments from colliding. It also preserves the distinction between regulation text and guidance.
+
+\subsection{Parent--Child Representation}
+
+A parent is a coherent legal unit such as a complete article, annex section, recitals block, or guidance section. A child is an atomic retrievable unit such as a paragraph, list item, table row, table header, or callout.
+
+Each child stores a stable identifier, parent identifier, canonical citation, sequence, marker path, unit type, evidence text, hierarchy-enriched retrieval text, word and character counts, and source location. Table rows retain the governing header and necessary context. Short legal units are not merged solely to satisfy a generic minimum length; an atomic item remains interpretable through its stored hierarchy.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Validated E1 corpus composition.}
+  \label{tab:e1-corpus}
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lr}
+    \toprule
+    \textbf{Unit} & \textbf{Count} \\
+    \midrule
+    Legal parents & 109 \\
+    Retrievable children & 1,535 \\
+    ARTICLE parents & 36 \\
+    ANNEX parents & 10 \\
+    RECITALS parents & 4 \\
+    GM parents & 59 \\
+    \midrule
+    List-item children & 823 \\
+    Paragraph children & 477 \\
+    Table-row children & 105 \\
+    Table-header children & 8 \\
+    Callout children & 122 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The deterministic validation checks identifier uniqueness, parent--child lineage, legal-type consistency, source ranges, citation fields, table context, and sequence ordering. The promoted output reports zero critical issues and zero warnings. The parent and child files are identified by SHA-256 hashes inherited by downstream experiment manifests.
+
+\subsection{Legacy Lineage and Candidate Evidence Audit}
+
+The historical dataset contains 300 synthetic question-answer records. Every record was mapped to the E1 hierarchy so that the old source field would not be silently treated as exact evidence.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Legacy parent-lineage audit.}
+  \label{tab:legacy-lineage}
+  \begin{tabular}{lr}
+    \toprule
+    \textbf{Disposition} & \textbf{Records} \\
+    \midrule
+    Automatically mapped & 291 \\
+    Manually accepted & 4 \\
+    Excluded as invalid & 4 \\
+    Rewrite required & 1 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Fuzzy similarity alone was never accepted as gold evidence. Ambiguous mappings entered a review queue and were resolved explicitly.
+
+The 100 question identifiers shared by the stored few-shot, RAG, and LoRA outputs were then linked to exact E1 children. The AI-assisted audit retained 78 records without text changes, rewrote and evidence-linked 21, and excluded one invalid table-of-contents-derived record. The retained candidate benchmark contains 99 records. Every retained record identifies a document-qualified parent and at least one selected evidence child.
+
+\subsection{Independent-Review Gate}
+
+Because the same AI-assisted process proposed benchmark corrections, it cannot independently certify them. The bounded review package therefore contains 33 records:
+
+\begin{itemize}
+  \item all 22 corrected or excluded audit exceptions;
+  \item all three hybrid top-20 residuals, including overlap with the exceptions;
+  \item ten deterministic unchanged controls stratified by source class and split.
+\end{itemize}
+
+For each row, an independent reviewer records question clarity, answer support, citation correctness, evidence completeness, corrections, exclusions, and alternative acceptable evidence sets. Multi-child alternatives are represented as logical evidence routes rather than one union that must always be retrieved together.
+
+The freeze command validates the exact 33 required identifiers, reviewer role and date, allowed decision values, evidence identifiers, source hashes, and correction consistency. It then applies corrections, preserves provenance, excludes rejected records transparently, regenerates parent-grouped splits, and writes SHA-256 manifests.
+
+\draftnote{The independent review is currently 0/33 complete. No candidate retrieval percentage is a final benchmark claim until this gate is passed.}
+
+\subsection{Grouped Development and Test Partitions}
+
+Question-level random splitting would leak near-identical evidence when several questions originate from one article or guidance section. The candidate benchmark is therefore grouped by legal parent.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Candidate parent-grouped evaluation split.}
+  \label{tab:split}
+  \begin{tabular}{lrr}
+    \toprule
+    \textbf{Partition} & \textbf{Questions} & \textbf{Parent groups} \\
+    \midrule
+    Development & 42 & 12 \\
+    Test & 57 & 48 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+No parent appears in both partitions. If review corrections change parent assignments, the split is regenerated before any final calculation.
+
+\section{Retrieval and Reranking}
+
+\subsection{Dense Retrieval}
+
+Two hosted embedding models process the same 1,535 hierarchy-enriched retrieval texts and 99 candidate questions: \texttt{text-embedding-3-small} and \texttt{text-embedding-3-large}. Each model-specific run consumed 172,821 input tokens. Vectors, input hashes, model names, and request metadata are cached so that later label changes do not require repeated embedding requests when question text is unchanged.
+
+Cosine similarity ranks child vectors for each query. The larger model is selected only after comparison on the development partition.
+
+\subsection{Lexical Retrieval}
+
+BM25 is implemented locally with $k_1=1.5$ and $b=0.75$. For query $Q$ and child document $D$, the score is
+
+\begin{equation}
+\operatorname{BM25}(D,Q) =
+\sum_{q \in Q}
+\operatorname{IDF}(q)
+\frac{f(q,D)(k_1+1)}
+     {f(q,D)+k_1\left(1-b+b\frac{|D|}{\operatorname{avgdl}}\right)},
+\label{eq:bm25}
+\end{equation}
+
+where $f(q,D)$ is the term frequency, $|D|$ is the document length, and $\operatorname{avgdl}$ is the corpus mean length. The method provides an exact-terminology channel for article references, acronyms, deadlines, and repeated regulatory expressions.
+
+\subsection{Rank Fusion}
+
+The selected dense ranking and BM25 ranking are combined through equal-weight \ac{RRF} using Equation~\ref{eq:rrf} with $c=60$. The constant is fixed before held-out reporting. Unequal weighting is evaluated on development as a negative ablation rather than tuned on test.
+
+\subsection{Cross-Encoder Reranking}
+
+The fused top-20 candidates are reranked with the \texttt{ms-marco-MiniLM-L6-v2} cross-encoder. The 22.7-million-parameter English passage-ranking model scores each query-passage pair jointly. It runs locally on an NVIDIA RTX 4070 Laptop GPU; no question or regulatory passage is sent to a hosted inference endpoint during reranking. The experiment evaluates 1,980 pairs and stores the model revision, maximum sequence length, runtime, and cached scores.
+
+A reranker can repair ordering only when the relevant evidence is already present in the top-20 pool. An unchanged recall at depth 20 is therefore expected and distinguishes a ranking failure from a candidate-generation failure.
+
+\section{Context Construction and Generation Contract}
+
+Two deterministic contexts are assembled from reranked evidence. The compact variant selects the top five children under a 1,200-word budget. The enriched variant starts from the same five children, adds adjacent units within a radius of one, and applies a 1,600-word budget. Neither procedure consults gold labels.
+
+Each context block exposes only controlled fields: source identifier, canonical citation, document type and version, hierarchy, and evidence text. The generator is instructed to answer exclusively from these blocks and to return JSON containing:
+
+\begin{itemize}
+  \item the answer text;
+  \item atomic claims;
+  \item supporting source identifiers and verbatim quotes;
+  \item an abstention flag and controlled reason;
+  \item an optional clarification request.
+\end{itemize}
+
+The application, not the model, resolves source identifiers to canonical citations. A model cannot create a valid new citation string by itself.
+
+\section{Verification and Selective Answering}
+
+Structural verification rejects malformed output, unknown source identifiers, and supporting quotes that do not occur verbatim in the supplied evidence. This check is deterministic but does not prove semantic support. A separate semantic evaluation determines whether each material claim is entailed and whether the answer omits necessary conditions.
+
+The system records accepted answers, retries, clarification requests, and abstentions. Selective performance is reported through coverage, risk at coverage, and appropriate-abstention rate. The policy favours a correct refusal over an unsupported regulatory answer.
+
+\section{Evaluation Measures}
+
+For a question $j$ with a set of acceptable evidence routes $\mathcal{G}_j$ and retrieved top-$k$ set $R_{j,k}$, evidence-route recall is
+
+\begin{equation}
+\operatorname{EvidenceRecall}_{j}@k =
+\max_{G \in \mathcal{G}_j}
+\frac{|R_{j,k} \cap G|}{|G|}.
+\label{eq:evidence-recall}
+\end{equation}
+
+Any-gold-child recall records whether at least one child belonging to any acceptable route appears. Parent recall records whether a child from an acceptable legal parent appears. \ac{MRR} is
+
+\begin{equation}
+\operatorname{MRR}@k =
+\frac{1}{N}\sum_{j=1}^{N}\frac{1}{r_j},
+\label{eq:mrr}
+\end{equation}
+
+where $r_j$ is the rank of the first acceptable child, with zero contribution when none occurs within $k$. \ac{nDCG} additionally rewards acceptable children appearing earlier in the ranking.
+
+Generation is evaluated separately through valid-schema rate, allowed-source-only rate, quote-verification rate, canonical citation accuracy, claim support, completeness, exact legal-answer accuracy, abstention behaviour, latency, token use, and estimated cost.
+
+\section{Reproducibility and Audit Trail}
+
+All experiment directories are immutable by default. Each manifest records input and output hashes, parameters, software versions, model identifiers, timestamps, and status. Dense vectors and cross-encoder scores are cached. Decisions are append-only, rejected ablations remain documented, and candidate results carry an explicit review-pending label. The historical baseline is preserved separately from the repaired pipeline.
+

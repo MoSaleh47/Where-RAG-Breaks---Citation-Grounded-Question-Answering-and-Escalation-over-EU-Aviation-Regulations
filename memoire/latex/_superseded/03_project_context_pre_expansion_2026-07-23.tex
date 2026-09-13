@@ -1,0 +1,62 @@
+\chapter{Project Context and Scope}
+\label{chap:context}
+
+\section{Host Organisation and Team}
+
+\draftnote{The student must provide the host company name, department, team size, industry-supervisor details, and a factual description of the organisation's AI and data strategy. Confidentiality restrictions must also be confirmed.}
+
+The project is conducted as part of the aivancity PGE5 Final Year Project in Artificial Intelligence and Data Science. The host-company description will remain concise and factual. It will explain where the regulatory question-answering problem arises, who the intended users are, and how the work relates to the student's assigned mission without presenting promotional claims.
+
+\section{Mission and Initial Deliverables}
+
+The initial mission produced three question-answering approaches over aviation regulations: a few-shot prompting baseline, a retrieval-grounded pipeline, and a \ac{LoRA}-adapted model. The project stored model predictions, question sets, source chunks, evaluation outputs, and an intermediate report. The initial research question asked which of the three systems performed best.
+
+A repository and metric audit showed that this comparison did not isolate the causes of failure. The revised mission therefore preserves the three-system comparison as a historical baseline and adds the following deliverables:
+
+\begin{itemize}
+  \item an audited and hierarchy-aware regulatory corpus;
+  \item an evidence-linked evaluation benchmark with source-grouped splits;
+  \item controlled retrieval, fusion, and reranking ablations;
+  \item an evidence-constrained generation and verification protocol;
+  \item a failure taxonomy and observable escalation policy;
+  \item a prototype that displays evidence, citations, abstention, and review status;
+  \item a reproducible research package and final PFE report.
+\end{itemize}
+
+\section{Data}
+
+The source corpus consists of stored EASA Easy Access Rules material containing binding regulation text, annexes, recitals, and guidance material. The source is represented through 109 coherent legal parents and 1,535 retrievable children. Each child records its parent, hierarchy, canonical citation, unit type, order, source range, and retrieval text.
+
+The historical evaluation material contains 300 synthetic question-answer records. A 100-question subset is shared by the stored few-shot, RAG, and LoRA result files. After the evidence audit, 99 records remain in the candidate benchmark. The benchmark is a research instrument rather than an independently authored legal examination set.
+
+\section{Constraints}
+
+The project operates under five constraints.
+
+\begin{enumerate}
+  \item \textbf{Reliability.} A fluent answer without exact supporting evidence is not sufficient for aviation-regulation use.
+  \item \textbf{Benchmark validity.} Synthetic questions and AI-assisted corrections require transparent disclosure and independent review.
+  \item \textbf{Leakage control.} Questions grounded in the same legal parent cannot be split across development and test.
+  \item \textbf{Compute and cost.} Expensive or hosted methods must be justified by measured gains and their inputs, token use, latency, and cost must be recorded.
+  \item \textbf{Time.} The benchmark, end-to-end evaluation, prototype, report, and presentation must be completed within the PFE submission calendar.
+\end{enumerate}
+
+The regulatory sources are public, but hosted processing of project questions and passages is still treated as an explicit data-export decision. Dense embeddings were generated only after informed authorisation. Final hosted answer generation requires a separate authorisation because it exposes question and evidence context to a generation service.
+
+\section{Infrastructure}
+
+Corpus construction, BM25, evaluation, context assembly, and verification run locally in Python. Dense vectors are cached by model and input hash. The cross-encoder reranker runs locally on an NVIDIA RTX 4070 Laptop \ac{GPU}; 1,980 query-passage scores are cached with the model revision and experiment parameters. This design avoids repeated hosted requests and preserves exact reranking outputs for later benchmark relabelling.
+
+\section{Project Governance and Deliverable Schedule}
+
+All new research work is isolated in a versioned project directory. Historical artifacts remain unchanged. Every promoted corpus, benchmark, ranking, context, and report asset has deterministic identifiers or SHA-256 lineage. Architectural decisions and rejected ablations are recorded in an append-only decision log.
+
+\begin{description}[style=multiline,leftmargin=3.7cm,labelwidth=3.1cm]
+  \item[23--29 July] Independent review, frozen benchmark, supervisor presentation, and scope decisions.
+  \item[30 July--9 August] Controlled generation, verification, switching-policy calibration, and prototype core.
+  \item[10--21 August] Complete report draft and supervisor circulation.
+  \item[22--28 August] Revision, references, formatting, traceability, PDF/A checks, and submission package.
+\end{description}
+
+\draftnote{Add a Gantt figure after confirming company milestones and the exact defence calendar.}
+

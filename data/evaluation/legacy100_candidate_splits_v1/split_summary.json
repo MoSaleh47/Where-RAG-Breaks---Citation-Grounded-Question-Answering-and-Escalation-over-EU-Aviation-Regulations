@@ -1,0 +1,17 @@
+{
+  "development_fraction_requested": 0.4,
+  "independent_human_review_complete": false,
+  "input_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+  "manifest_sha256": "BAC26354A58C970C80FB320606767D1EDC9435306449CBF1D6ED91794B4B0150",
+  "parent_counts": {
+    "development": 12,
+    "test": 48
+  },
+  "record_counts": {
+    "development": 42,
+    "test": 57
+  },
+  "seed": "aviation-rag-legacy100-v1",
+  "source_group_leakage_count": 0,
+  "status": "candidate_not_final_gold"
+}

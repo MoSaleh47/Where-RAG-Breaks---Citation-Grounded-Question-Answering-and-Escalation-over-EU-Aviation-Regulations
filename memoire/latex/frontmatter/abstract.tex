@@ -1,0 +1,40 @@
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Large language models answer regulatory questions fluently while citing the wrong
+provision, quoting a rule that omits its own exception, or presenting an
+unsupported conclusion. In aviation such failures are consequential: an answer
+must be traceable to authoritative, versioned legal evidence. This project studies
+citation-grounded question answering over Regulation~(EU)~No~376/2014 on
+occurrence reporting, reframing an initial comparison of few-shot prompting,
+retrieval-augmented generation and parameter-efficient fine-tuning into a
+failure-analysis question: where does retrieval-grounded question answering break
+down, and which condition observable at runtime justifies escalating instead of
+answering?
+
+The evaluation instrument was validated before its measurements were believed.
+Four aviation professionals independently reviewed a bounded sample of the
+benchmark; they agreed on the verdict for fewer than half of the records
+(Fleiss' $\kappa$ = 0.250), which is reported as a finding rather than resolved
+away. The reviewed benchmark of 98 evidence-linked questions
+was then frozen under a pre-registered rule.
+
+Retrieval is not where the system fails: hybrid retrieval with cross-encoder
+reranking places acceptable evidence in the top five results for 89.3\% of
+held-out questions. The failure is citation precision. Under an evaluator that resolves references
+against the corpus rather than matching strings, the retrieval-augmented baseline
+identifies the correct article for 62.5\% of questions but reproduces the complete
+citation, sub-paragraph included, for 44.3\%.
+
+Two results shape the resulting architecture. Deterministic quote verification
+and evidence-selection errors did not co-occur once, so both checks are required.
+And across 140 generated answers the model never once used its explicit,
+cost-free abstention channel --- including on answers that fabricated a source
+identifier. Abstention cannot be delegated to the generator; it must be imposed
+from outside, on evidence the system can check. The escalation policy is
+specified accordingly, with its retrieval-uncertainty threshold left explicitly
+uncalibrated and the sample size that calibration would require stated.
+
+\medskip
+\noindent\textbf{\color{aivancityNavy}Keywords:}
+\textit{\color{aivancityGray}retrieval-augmented generation, legal question answering, aviation regulation, hybrid retrieval, reranking, grounded generation, citation verification, abstention, selective prediction.}

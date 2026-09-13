@@ -1,0 +1,26 @@
+{
+  "completed_at_utc": "2026-08-09T16:00:12.183492+00:00",
+  "experiment_id": "E5_candidate_context_assembly",
+  "inputs": {
+    "audited_qa_sha256": "387EF00E7E88A7265BE9CA25B0E9317B266CF4FC65B2542C662888462E09FC58",
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "parents_sha256": "4E481936003E209DA32718998C15099C04652FEF5B260C7546A37495C43AC9E0",
+    "reranked_sha256": "B95467F6151EB5486D7350B745F2FEDCDC3CC2C86E79A7B034B103DF77BB25C6"
+  },
+  "outputs": {
+    "contexts_sha256": "38EF59A6C5E256E8FA92A2E2108B1F14C8012FC0B9F664D774B872120220386F",
+    "summary_sha256": "DC8CE6C89065264431E8877B11AE575D044B13A8707F778A0AC64ED124AE767F"
+  },
+  "parameters": {
+    "max_per_parent": null,
+    "max_words": 1200,
+    "neighbor_radius": 1,
+    "top_k": 5
+  },
+  "query_count": 98,
+  "software": {
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]"
+  },
+  "status": "candidate_contexts_no_generation_performed"
+}

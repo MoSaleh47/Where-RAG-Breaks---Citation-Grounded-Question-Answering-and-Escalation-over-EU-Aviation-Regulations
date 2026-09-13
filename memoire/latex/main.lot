@@ -1,0 +1,34 @@
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Retrieval families and their principal trade-offs, as characterised by the cited work.}}{11}{table.caption.13}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Escalation levels and the prior work that motivates each. The contribution of this thesis is the calibrated transition between levels, not the levels themselves.}}{19}{table.caption.16}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {3.1}{\ignorespaces Composition of the source material, from the validated corpus.}}{21}{table.caption.17}%
+\contentsline {table}{\numberline {3.2}{\ignorespaces Principal project risks and the mitigation applied to each.}}{26}{table.caption.18}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Experiment ladder. Each stage alters one component relative to the stage above it.}}{30}{table.caption.19}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Stored fields. Parents carry fourteen fields, of which only cross-references are optional; all eleven child fields are required.}}{32}{table.caption.21}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Validated E1 corpus composition, from the stored validation record.}}{33}{table.caption.22}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Legacy parent-lineage audit over 300 historical records.}}{33}{table.caption.23}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Candidate parent-grouped evaluation split, from the stored split summary.}}{36}{table.caption.25}%
+\contentsline {table}{\numberline {4.6}{\ignorespaces Observed context statistics for the enriched variant over all 99 candidate questions.}}{39}{table.caption.26}%
+\contentsline {table}{\numberline {4.7}{\ignorespaces Escalation levels and their trigger conditions. All thresholds are calibrated on development data only.}}{42}{table.caption.27}%
+\contentsline {table}{\numberline {4.8}{\ignorespaces Principal threats to validity and the control applied to each.}}{44}{table.caption.28}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Independent review panel. Reviewers are pseudonymised; the mapping to identities is held separately and is not part of this work.}}{48}{table.caption.29}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces Inter-rater agreement on the overall verdict, computed over the 31 records with at least two raters.}}{49}{table.caption.30}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces Benchmark freeze outcome.}}{49}{table.caption.31}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Development recall for the dense embedding comparison, reviewed labels. Proportion of questions retrieving at least one acceptable evidence child.}}{50}{table.caption.32}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Held-out retrieval on the frozen reviewed benchmark ($n = 56$). Proportion of questions retrieving at least one acceptable evidence child.}}{51}{table.caption.33}%
+\contentsline {table}{\numberline {5.6}{\ignorespaces Held-out recall for hybrid retrieval with cross-encoder reranking, before and after independent review.}}{52}{table.caption.35}%
+\contentsline {table}{\numberline {5.7}{\ignorespaces Historical baselines re-scored on the frozen benchmark ($n = 73$; citation measures over the 63 records with a resolvable gold citation). The loose measure is the original scorer, reproduced verbatim and reported for continuity only.}}{54}{table.caption.36}%
+\contentsline {table}{\numberline {5.8}{\ignorespaces Effect of a single prompt rule forbidding elided quotes. Development partition, $n = 42$.}}{56}{table.caption.37}%
+\contentsline {table}{\numberline {5.9}{\ignorespaces Candidate escalation rules on the development partition ($n = 42$, 9 error events). Precision intervals are Wilson 95\%.}}{58}{table.caption.38}%
+\contentsline {table}{\numberline {5.10}{\ignorespaces Sample size required to demonstrate a given escalation precision against the observed 21.4\% base error rate.}}{59}{table.caption.39}%
+\contentsline {table}{\numberline {5.11}{\ignorespaces Co-occurrence of the two failure modes on the development partition.}}{59}{table.caption.40}%
+\contentsline {table}{\numberline {5.12}{\ignorespaces Resolution of the benchmark's own gold citation labels against the corpus ($n = 98$).}}{61}{table.caption.41}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

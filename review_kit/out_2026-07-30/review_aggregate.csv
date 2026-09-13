@@ -1,0 +1,37 @@
+qa_id,source_class,review_reason,n_reviewers,reviewers,votes_accept,votes_correct,votes_exclude,agg_question_clear_and_unambiguous,agg_answer_fully_supported,agg_citation_correct,agg_gold_evidence_complete,panel_verdict,contested,auto_decision,action_needed,comments
+QA_0003,GM,exception_record,2,R1; R2,0,1,1,uncertain,uncertain,uncertain,uncertain,correct,yes,,reviewers disagree,"R1: Dire ""individus"" est réducteur, ce sont en fait les organisations qui doivent reporter. 
+Qu'entends-tu par ""section 2.2."" dans le 376 ?
+Je ne suis pas sûre que le mot ""soutenue"" et la formulation dans  "" La reponse est-elle entierement soutenue par le texte fourni?"" soit français. || R2: Seules les organisations sont soumis à la notification obligatoire."
+QA_0011,ARTICLE,exception_record,2,R1; R2,1,1,0,uncertain,no,yes,uncertain,correct,yes,,reviewers disagree,"R1: qu'entends-tu par ""subject matter"" ?"
+QA_0040,ARTICLE,stratified_unchanged_ARTICLE_test,1,R2,0,0,1,yes,no,yes,no,exclude,no,,"only 1 reviewer(s), need 2",R2: L'article 12 (1) n'a rien à voir avec la chronologie (timeline).
+QA_0047,ARTICLE,stratified_unchanged_ARTICLE_development,2,R1; R2,2,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0058,ARTICLE,stratified_unchanged_ARTICLE_development,1,R2,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0062,ARTICLE,exception_record,2,R1; R2,0,2,0,yes,no,yes,no,correct,no,,panel wants a correction - you must supply the corrected fields,R1: renvoyer à des textes existants ne me paraît pas donner une réponse claire et rapide à la question || R2: L'article 20 fait référence aux articles 10 et 11...difficile de répondre précisément à la question sans ces articles.
+QA_0063,ARTICLE,hybrid_k20_residual,2,R1; R2,0,0,2,no,no,yes,no,exclude,no,exclude,,R1: What exceptions are noted in Regulation (EU) No 376/2014? --> concerne uniquement l'accès aux doc et à la protection des données. La question ne précise pas cela3 || R2: voir réponse précédente sur ce même article.
+QA_0071,ANNEX,stratified_unchanged_ANNEX_test,2,R1; R2,0,2,0,yes,yes,yes,yes,correct,yes,,reviewers disagree,"R1: qu'entends-tu par ""section 1"" ? || R2: Il faut préciser les champs olbigatoires. Ex: ""Filling information"" => Responsible entity, File number, Occurence Status."
+QA_0080,ANNEX,exception_record;hybrid_k20_residual,1,R2,0,1,0,no,uncertain,uncertain,uncertain,correct,no,,"only 1 reviewer(s), need 2",R2: on parle d'occurence category et d'activity category à ma connaissance.
+QA_0081,ANNEX,stratified_unchanged_ANNEX_test,1,R2,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0083,ANNEX,exception_record,2,R1; R2,0,1,1,yes,no,no,no,exclude,yes,,reviewers disagree,"R1: qu'entends-tu par ""Annex II, item 3.14"" ?"
+QA_0097,ARTICLE,stratified_unchanged_ARTICLE_test,1,R2,0,0,1,no,uncertain,uncertain,no,exclude,no,,"only 1 reviewer(s), need 2","R2: Sauf erreur de ma prt, 2020/2034 non cité dans le 376/2014."
+QA_0163,GM,stratified_unchanged_GM_test,1,R1,0,1,0,yes,no,uncertain,uncertain,correct,no,,"only 1 reviewer(s), need 2",R1: l'Article 4(6) ne me semble pas parler de manque de confiance en son organisation
+QA_0176,GM,exception_record;hybrid_k20_residual,1,R1,0,1,0,yes,yes,yes,yes,correct,no,,"only 1 reviewer(s), need 2",R1: GM 3(1) = ?
+QA_0183,GM,exception_record,1,R1,0,1,0,uncertain,yes,yes,yes,correct,no,,"only 1 reviewer(s), need 2","R1: GM 3.4 = ?
+pourquoi ""design or production organisations"" ?"
+QA_0193,GM,exception_record,0,,0,0,0,uncertain,uncertain,uncertain,uncertain,,yes,,"only 0 reviewer(s), need 2",
+QA_0213,GM,exception_record,1,R1,0,1,0,yes,yes,uncertain,yes,correct,no,,"only 1 reviewer(s), need 2",R1: GM 4.2. = ?
+QA_0229,GM,stratified_unchanged_GM_test,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0235,GM,stratified_unchanged_GM_development,0,,0,0,0,uncertain,uncertain,uncertain,uncertain,,yes,,"only 0 reviewer(s), need 2",
+QA_0248,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0258,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0263,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0265,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0272,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0277,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0278,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0279,ARTICLE,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0287,ARTICLE,exception_record,1,R1,0,0,1,yes,uncertain,no,no,exclude,no,,"only 1 reviewer(s), need 2",R1: l'Article 5(1)-(2) parle de CR volontaires
+QA_0289,GM,stratified_unchanged_GM_development,0,,0,0,0,uncertain,uncertain,uncertain,uncertain,,yes,,"only 0 reviewer(s), need 2",
+QA_0290,GM,exception_record,0,,0,0,0,uncertain,uncertain,uncertain,uncertain,,yes,,"only 0 reviewer(s), need 2",
+QA_0292,GM,exception_record,1,R1,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0293,GM,exception_record,0,,0,0,0,uncertain,uncertain,uncertain,uncertain,,yes,,"only 0 reviewer(s), need 2",
+QA_0294,GM,exception_record,0,,0,0,0,uncertain,uncertain,uncertain,uncertain,,yes,,"only 0 reviewer(s), need 2",

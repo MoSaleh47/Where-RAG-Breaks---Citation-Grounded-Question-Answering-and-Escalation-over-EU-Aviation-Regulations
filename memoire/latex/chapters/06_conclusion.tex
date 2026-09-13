@@ -1,0 +1,278 @@
+\chapter[Conclusion]{Conclusion and Future Work}
+\label{chap:conclusion}
+
+\section{Answer to the Research Question}
+
+The question this project set out to answer was not whether retrieval-augmented
+generation can answer questions about Regulation (EU) No 376/2014. It was
+\emph{where such a system fails, and which condition observable at runtime
+justifies escalating instead of answering}. The distinction matters because a
+single accuracy figure conceals the first question entirely and cannot address
+the second at all.
+
+The answer has three parts, none of which was the answer anticipated at the
+outset.
+
+\subsection{Retrieval is not where this system fails}
+
+On the frozen benchmark, hybrid retrieval with cross-encoder reranking places
+acceptable evidence in the top five results for 89.3\% of held-out questions and
+in the top ten for 94.6\%. The candidate pool at depth 20 contains acceptable
+evidence for 96.4\%. Retrieval was the natural suspect, and the measurements do not support it:
+by the time the generator sees its context, the evidence needed to answer is
+usually present.
+
+What the retrieval work established is narrower than a percentage and bears
+more directly on the policy. The lexical and dense channels fail on different questions, so fusion addresses a coverage gap rather than tuning an existing
+configuration; reranking changes the order of a fixed
+pool without enlarging it, so anything absent at depth 20 is unrecoverable
+downstream and must be handled as a distinct condition rather than as a bad
+answer. Those two facts shape the escalation policy more than the recall figures
+do.
+
+\subsection{The failure is citation precision, and it is invisible to
+conventional measures}
+
+The historical baseline, re-scored on frozen labels and regenerated over the
+whole benchmark, locates the failure more precisely. Retrieval-augmented
+generation identifies the correct legal parent for 62.5\% of questions but
+reproduces the complete citation, sub-paragraph included, for only 44.3\%. Those
+eighteen points are sixteen answers that retrieved the right article, read
+fluently, and cited the wrong paragraph of it.
+
+The original evaluation could not see this. Its citation measure awarded credit
+for substring containment and half credit for naming the article number alone, so
+a prediction citing Article 16(1) where the provision is Article 16(6) was
+recorded as correct. Under the corrected evaluator, few-shot prompting falls from
+0.286 to 0.159, because naming a real article with the wrong sub-paragraph was
+precisely its characteristic error, and precisely what the old measure rewarded.
+
+The ranking of the three historical systems is unchanged. The magnitudes are
+not, and neither is the population they were measured on: an earlier draft
+reported this comparison over 73 records, because 25 of the 98 had been reworded
+after the stored predictions were made. Regenerating those predictions against the
+frozen wording shows the exclusion was not neutral. On the 25 records that had
+been dropped, retrieval-augmented generation reaches 0.360 at parent level against
+0.730 on the 73 that were kept, with non-overlapping intervals, while few-shot
+moves the other way. The questions an audit rewrites for vagueness are harder for
+a retriever and easier for a model answering from memory. All three statements are
+reported together.
+
+\subsection{The escalation condition, and the honest limit on it}
+
+Two conditions observable at runtime were examined. One works and needs no
+calibration at all; the other cannot yet be calibrated on data of this size.
+
+\textbf{Quote verification is a usable gate.} Whether a quoted span appears
+contiguously in the source it cites is decidable without gold labels, without
+model judgement and without a threshold. It has no false positives by
+construction. On the held-out partition it rejected 7 of 56 answers, and every
+rejection was a genuine defect: elided quotes that deleted conditions from legal
+tests, a paraphrase presented as quotation, and a fabricated source identifier one
+character removed from a real one.
+
+\textbf{Retrieval-uncertainty escalation cannot be calibrated on data of this
+size, and no threshold for it is reported.} With nine error events on the development
+partition, every candidate rule's confidence interval on precision contains or
+nearly contains the base error rate. The most promising signal --- disagreement
+between rank fusion and the reranker about which result belongs first --- reaches
+0.42 precision at 0.89 recall, with an interval of [0.23, 0.64] against a base
+rate of 0.21. That is a direction to investigate rather than a threshold. Demonstrating the
+observed effect would require roughly 178 questions against a benchmark of 98.
+
+It is reported as a negative result with a stated sample-size requirement
+rather than as a number fitted to nine events.
+
+\section{What the Project Established That It Did Not Set Out to Find}
+
+Four results emerged from the work rather than from its design, and they are the
+ones most likely to transfer beyond this corpus.
+
+\subsection{Verification and instruction are not substitutes}
+
+The same negative result appears three times.
+
+Instructed to quote verbatim, the generator elided material. Instructed
+explicitly not to elide, it stopped marking omissions with an ellipsis and began
+splicing fragments silently instead --- a failure a syntactic check for ellipsis
+characters would have passed, and which only contiguity matching rejected. The
+prompt rule that eliminated elision on the development partition did not
+eliminate it on unseen questions, where it recurred in 4 of 56 answers. And a
+response the provider's strict structured-output mode had already accepted
+carried a source identifier the application had never supplied.
+
+In each case an instruction shifted the failure rather than removing it, and in
+each case only a check against the evidence detected what remained.
+\textbf{A rule stated to a generator is a request; a rule checked against the
+evidence is a guarantee.} It is the project's central practical claim, and it was reached by trying the
+cheaper option first and measuring the outcome.
+
+\subsection{Abstention cannot be delegated to the generator}
+
+Across 140 generated answers on both partitions, the model abstained zero times.
+The output schema offered four abstention reasons, the prompt instructed their
+use, and strict structured output guaranteed that returning one would be
+well-formed and cost nothing. It abstained on none of the eighteen answers that
+cited the wrong provision, none of the answers whose quotes were not grounded,
+and not on the answer that invented an identifier.
+
+Selective-prediction research generally assumes a model can be induced to signal
+when it should not answer. On this task, with this model, the explicit and freely
+available channel for doing so went entirely unused. Abstention here is therefore
+not a behaviour to elicit but a decision to impose from outside, on evidence the
+system can check.
+
+\subsection{The two failure modes are independent}
+
+On the development partition, nine answers selected the wrong provision and two
+failed quote verification. \emph{No answer did both.} Quote verification has
+precision 0.00 and recall 0.00 for predicting evidence-selection errors.
+
+The consequence is architectural. Misreporting what a provision says is
+detectable at runtime; selecting the wrong provision is not, and must be
+predicted from retrieval signals. A verifier addressing only the first would have
+passed all nine errors of the second. Two layers are required, and the
+requirement is measured rather than assumed.
+
+\subsection{A benchmark's labels can be internally valid and externally
+unreadable}
+
+Twenty-two of the 98 frozen records carry a citation label that cannot be
+resolved to a single provision from the string alone: twelve omit which of four
+regulations they mean, and ten cannot be parsed into a provision at all. Every
+one of them resolves correctly inside the pipeline, which carries the parent
+identifier alongside the display string. The defect is invisible to every
+internal metric by construction and immediately visible to a practitioner holding
+only what the user is shown.
+
+It was found because reviewers were asked, not because anything was measured.
+Six of them wrote variants of \emph{\enquote{GM 3.1 = ?}} in a free-text box. The
+measurement came afterwards and showed the problem to be roughly four times
+larger than the comments suggested.
+
+\section{Contributions}
+
+\begin{enumerate}
+  \item \textbf{A deterministic, hierarchy-aware corpus} of 109 legal parents and
+    1{,}535 retrieval children with byte-identical rebuild and zero validation
+    issues, together with explicit lineage from the historical flat chunks.
+
+  \item \textbf{An independently reviewed benchmark of 98 evidence-linked
+    questions}, split by legal parent with zero leakage, frozen under a
+    pre-registered rule with the review's disagreement reported rather than
+    resolved away. Fleiss' $\kappa$ of 0.250 across four practitioners is itself
+    a finding: a single gold label was never as certain as a single accuracy
+    figure implied.
+
+  \item \textbf{A citation evaluator that resolves references against the corpus}
+    rather than matching strings, reported at two levels of strictness, with the
+    scorer it replaces retained and its errors pinned by tests so the change is
+    auditable rather than asserted.
+
+  \item \textbf{A deterministic verification layer} that checks source
+    admissibility and quote contiguity without gold labels or model judgement,
+    and the measurement showing why it must sit alongside, not instead of, a
+    check on evidence selection.
+
+  \item \textbf{An escalation policy specified against runtime-observable
+    conditions}, with the one component that could be calibrated left explicitly
+    uncalibrated and the required sample size stated.
+
+  \item \textbf{A methodological record} of 45 append-only decisions and a
+    disclosure log of every AI-assisted artefact with what was verified and what
+    remained outstanding, sufficient for the work to be reconstructed and
+    challenged.
+\end{enumerate}
+
+\section{Limitations}
+
+\textbf{The benchmark is small and synthetic in origin.} Ninety-eight records,
+33 of which were independently reviewed, is enough to characterise failure modes
+and not enough to calibrate a policy against them. Its questions were generated
+by a language model and may reflect that model's style.
+
+\textbf{Reviewer agreement is fair, not strong.} A $\kappa$ of 0.250 bounds how
+precisely any figure computed against these labels can be read. This is reported
+as a property of the task rather than a defect of the panel, but it is a real
+limit on interpretation.
+
+\textbf{Semantic support is unmeasured.} Every verification result in this work
+is structural. That a claim points at supplied evidence and reproduces its wording
+contiguously does not establish that the evidence supports the claim. The 83.9\%
+held-out evidence-selection figure counts whether the cited source is among the
+acceptable ones, not whether the sentence built on it is sound.
+
+\textbf{One model, one language, two configurations, one of them development-only.}
+Generation used a single model at a single temperature. The neighbour-enriched
+context variant was evaluated on the development partition and not adopted: it
+costs 79\% more input tokens and moves evidence selection and byte-exact quoting
+by one record each, which 42 questions cannot separate from noise. Retrieval is English-first, and the reranker was
+chosen for local execution and English passage ranking. Nothing here speaks to
+multilingual behaviour, which matters for a regulation applied across the Union.
+
+\textbf{The LoRA arm of the comparison covers 73 of 98 records.} Few-shot and
+RAG were regenerated over the frozen wording and cover all 98; LoRA was not
+re-run, so its stored predictions are scored on the 73 records whose wording did
+not change. That subset is measurably easier for retrieval-augmented systems, so
+any comparison against LoRA flatters RAG rather than the reverse.
+
+\textbf{Equal-weight fusion is deliberately suboptimal.} Convex combination of
+normalised scores outperforms reciprocal-rank fusion when its weights are tuned.
+Tuning them would have required fitting on data that also grounds the reported
+results, so the retrieval figures are a conservative estimate of what the
+architecture can reach.
+
+\textbf{This is a research prototype.} It does not replace qualified
+interpretation of aviation law, and nothing in this work should be read as
+suggesting it could.
+
+\section{Future Work}
+
+\textbf{Extend the benchmark to the size the calibration requires.} The power
+analysis gives the target directly: roughly 178 questions to demonstrate the
+escalation precision actually observed, against 98 today. This is the single
+change that would convert the escalation policy from specified to calibrated, and
+it is a data-collection task rather than a research one.
+
+\textbf{Build the cross-reference subset before building an agent.} Every record
+in the frozen benchmark has its gold evidence inside a single legal parent; none
+requires combining provisions from different parts of the instrument. A benchmark
+with no multi-hop questions cannot exhibit a multi-hop system's benefit, so
+agentic retrieval remains unevaluable here regardless of its merits elsewhere.
+The prerequisite is a subset of questions whose evidence genuinely spans parents,
+constructed and reviewed to the same standard as the present set.
+
+\textbf{Measure semantic support, not only structural grounding.} The natural
+next layer is an entailment check between each claim and the evidence it cites,
+which would close the gap between \enquote{quotes the source correctly} and
+\enquote{is supported by the source}. Given what this project found about
+delegating judgement to a generator, such a check should be validated against
+human ratings before being trusted, and its own agreement with those ratings
+reported.
+
+\textbf{Repair the citation labels, then re-measure.} Twenty-two records carry
+labels a reader cannot resolve. Rewriting them to name their regulation and
+provision unambiguously is mechanical, and it would allow the citation-legibility
+finding to be stated as a repaired defect rather than only as a diagnosis.
+
+\textbf{Test whether the escalation signals transfer across model capability.}
+The generator was deliberately held fixed at the model used for the historical
+baselines, so that the comparison isolated scaffolding from capability. Whether a
+policy calibrated on a weaker generator still holds for a stronger one is an open
+and practically important question, and running the existing pipeline against a
+current model would answer it cheaply.
+
+\section{Closing Remark}
+
+The system this work produced answers questions about occurrence reporting with
+retrieved evidence, checks its own quotations against that evidence, and refuses
+to answer when the check fails. It is not a system that is right more often than
+its predecessor by a large margin. It is a system whose errors can be detected, and detectability is the property
+this domain requires.
+
+Regulatory questions are asked by people who will act on the answer. For them,
+a confident wrong citation is worse than a referral to a human, and an answer
+that cannot be audited is worse than no answer. The finding that bears most directly on deployment is that the generator will
+not signal when it is in that position ---
+140 opportunities, zero abstentions --- and that the system must therefore be built
+to determine it independently.

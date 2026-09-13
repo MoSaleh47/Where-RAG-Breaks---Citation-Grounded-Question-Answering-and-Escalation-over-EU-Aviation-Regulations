@@ -1,0 +1,155 @@
+\chapter{Selected Source Code}
+\label{app:code}
+
+The full codebase is in the repository given in
+Appendix~\ref{app:reproducibility}. This appendix reproduces the four excerpts
+on which the claims of Chapters~\ref{chap:method} and~\ref{chap:results} most
+directly depend, so that a reader can check the argument against the
+implementation without cloning anything. Each listing is quoted verbatim from
+the file and line range named in its caption; nothing is paraphrased for
+presentation.
+
+\section{Quote Grounding}
+
+Listing~\ref{lst:quote-grounding} is the check the central claim of this work
+rests on. \texttt{quote\_is\_grounded} accepts a quote only when its word
+sequence appears \emph{contiguously} in the cited evidence, after typographic
+and punctuation normalisation. Contiguity is what rejects a quote assembled
+from two fragments, which is the failure a syntactic search for ellipsis
+characters passes (Section~\ref{sec:generation}). The byte-level rule is kept
+alongside it and reported as a second figure throughout, rather than replaced.
+
+\begin{lstlisting}[style=thesis,caption={The contiguity definition of a verbatim quote, with the byte-level rule retained beside it. Source: \texttt{src/aviation\_rag/generation/verification.py}, lines 60--90.},label={lst:quote-grounding}]
+def _normalize(value: str) -> str:
+    """Whitespace and case only -- the original, strictest rule."""
+    return WHITESPACE.sub(" ", value).strip().casefold()
+
+
+def _normalize_typography(value: str) -> str:
+    value = unicodedata.normalize("NFKC", value)
+    for source, target in _TYPOGRAPHY.items():
+        value = value.replace(source, target)
+    return value
+
+
+def _normalize_for_matching(value: str) -> str:
+    """Typography- and punctuation-insensitive; word order is preserved."""
+    value = NON_WORD.sub(" ", _normalize_typography(value))
+    return WHITESPACE.sub(" ", value).strip().casefold()
+
+
+def quote_is_grounded(quote: str, evidence_text: str) -> bool:
+    """Does the quote's word sequence appear contiguously in the evidence?"""
+    return _normalize_for_matching(quote) in _normalize_for_matching(evidence_text)
+
+
+def quote_is_verbatim(quote: str, evidence_text: str) -> bool:
+    """Byte-level check under the original whitespace-and-case rule."""
+    return _normalize(quote) in _normalize(evidence_text)
+
+
+def contains_elision(quote: str) -> bool:
+    """Does the quote mark omitted material with an ellipsis?"""
+    return bool(ELLIPSIS.search(quote))
+\end{lstlisting}
+
+\section{Structural Verification}
+
+Listing~\ref{lst:verify-loop} is the loop that decides whether a claim is
+supported. Two properties are worth reading off the code directly. A support
+whose \texttt{source\_id} is absent from \texttt{evidence\_by\_id} fails
+immediately --- this is the check that caught the fabricated identifier
+\texttt{EU\_376\_2014\_ART\_5\_\_C001} on \texttt{QA\_0017}, inside a response
+the provider's strict structured-output mode had already accepted. And a claim
+can lose its support without contributing to \texttt{quote\_errors}, which is
+why Section~\ref{sec:generation} reads support coverage from the list of
+supported claim identifiers rather than inferring it from the decision.
+
+\begin{lstlisting}[style=thesis,caption={The support loop: supplied-source admissibility, contiguity, and the byte-level second opinion. Source: \texttt{src/aviation\_rag/generation/verification.py}, lines 105--132.},label={lst:verify-loop}]
+            claim_id = claim.get("claim_id", "?")
+            claim_supported = True
+            for support in claim.get("supports", []):
+                if not isinstance(support, dict):
+                    claim_supported = False
+                    continue
+                source_id = support.get("source_id")
+                quote = support.get("quote")
+                if (
+                    source_id not in evidence_by_id
+                    or not isinstance(quote, str)
+                    or not quote.strip()
+                ):
+                    claim_supported = False
+                    continue
+                evidence_text = evidence_by_id[source_id]["text"]
+                if contains_elision(quote):
+                    elided_quotes.append(f"{claim_id}: elided quote from {source_id}")
+                if not quote_is_grounded(quote, evidence_text):
+                    quote_errors.append(
+                        f"{claim_id}: quote not found in {source_id}"
+                    )
+                    claim_supported = False
+                if not quote_is_verbatim(quote, evidence_text):
+                    strict_errors.append(
+                        f"{claim_id}: quote not byte-verbatim in {source_id}"
+                    )
+            if claim_supported and claim.get("claim_id"):
+\end{lstlisting}
+
+\section{Citation Scoring}
+
+The evaluator that replaces the historical scorer resolves references against
+the corpus instead of matching strings. Listing~\ref{lst:cite-exact} is the
+exact measure, and the reason 10 of the 98 frozen records fall outside its
+denominator rather than scoring zero: a gold citation that no parser can
+resolve is usually one no reader can resolve either, and that count is reported
+as a finding in Section~\ref{sec:invisible}.
+
+\begin{lstlisting}[style=thesis,caption={Exact citation matching, with unresolvable gold labels excluded rather than failed. Source: \texttt{src/aviation\_rag/evaluation/citations.py}, lines 314--328.},label={lst:cite-exact}]
+def exact_citation_match(prediction: str, gold_citation: str) -> tuple[bool | None, list[str]]:
+    """Is every atomic unit of the gold citation named in the prediction?
+
+    Returns ``(None, [])`` when the gold citation contains no parseable unit --
+    for instance ``GM to Reg. (EU) No 376/2014 [04]`` or a bare ``Paragraph 3``.
+    Those records are excluded from the exact metric's denominator rather than
+    silently scored zero, and their count is itself a finding: a citation label
+    a parser cannot resolve is usually one a reader cannot resolve either.
+    """
+    gold_units = parse_citations(gold_citation)
+    if not gold_units:
+        return None, []
+    predicted = {citation.signature() for citation in parse_citations(prediction)}
+    missing = [str(unit) for unit in gold_units if unit.signature() not in predicted]
+    return (not missing), missing
+\end{lstlisting}
+
+Listing~\ref{lst:cite-candidates} handles the ambiguity the benchmark itself
+carries. Where a gold citation names a provision without naming which of the
+four regulations it belongs to, every regulation holding that provision counts
+as a candidate. A prediction is therefore never marked wrong for failing to
+draw a distinction the gold label does not draw.
+
+\begin{lstlisting}[style=thesis,caption={Ambiguous gold citations resolve to a candidate set, not to a default attribution. Source: \texttt{src/aviation\_rag/evaluation/citations.py}, lines 138--158.},label={lst:cite-candidates}]
+    def resolve_candidates(self, citation: Citation) -> set[str]:
+        """Every parent the citation could denote, given what it actually says.
+
+        A citation that names its regulation denotes exactly one parent. A bare
+        ``Article 2`` denotes any of the four regulations that have an Article 2,
+        and this returns all of them. Scoring against the candidate set rather
+        than against the default attribution means a prediction is never marked
+        wrong for failing to make a distinction that the gold citation itself
+        does not make.
+        """
+        if not citation.defaulted_regulation:
+            parent = self.resolve(citation)
+            return {parent} if parent else set()
+        candidates = set()
+        for regulation in REGULATION_PREFIX:
+            parent = self.resolve(
+                Citation(regulation, citation.kind, citation.number, citation.subs)
+            )
+            if parent:
+                candidates.add(parent)
+        return candidates
+\end{lstlisting}
+

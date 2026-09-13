@@ -1,0 +1,46 @@
+{
+  "experiment_id": "legacy_rerun_frozen98_v1",
+  "completed_at_utc": "2026-08-30T16:31:37.036419+00:00",
+  "purpose": "Regenerate the historical few-shot and RAG baselines over the frozen question wording so the three-system comparison covers all 98 records.",
+  "inputs": {
+    "benchmark": "data\\evaluation\\reviewed_benchmark_v1\\reviewed_benchmark.jsonl",
+    "benchmark_sha256": "387EF00E7E88A7265BE9CA25B0E9317B266CF4FC65B2542C662888462E09FC58",
+    "qa_pairs_sha256": "7AC64199747BB9AAFB222ADF4D91D04235DF439F0EF99CA17AF5DF30C7990E90",
+    "chunks_sha256": "85750FA0FC8F0278FFE9EC34DBB4AAE51BAE7A1B0185A948F95ABAB25BD5B6D4",
+    "records": 98,
+    "chunks_indexed": 127
+  },
+  "parameters": {
+    "model": "gpt-4o-mini-2024-07-18",
+    "embed_model": "text-embedding-3-small",
+    "temperature": 0.0,
+    "k_shots": [
+      1,
+      5,
+      10
+    ],
+    "rag_top_k": [
+      1,
+      3,
+      5
+    ],
+    "random_seed": 42,
+    "retrieval": "numpy cosine over L2-normalised vectors (faiss IndexFlatIP equivalent)"
+  },
+  "usage": {
+    "new_api_calls": 593,
+    "cache_hits": 0,
+    "input_tokens": 426671,
+    "output_tokens": 34688,
+    "embedding_tokens": 58762,
+    "estimated_cost_usd": 0.086
+  },
+  "outputs": {
+    "results_fewshot.json": "4A6C385757166216C1BCA40AE37085EBE111BFA8BAB26AB09B848E76BFD1637C",
+    "results_rag.json": "8AD48C27924966736A237E11229432E9138D434B2120D68CC7A7C6403B672B90"
+  },
+  "software": {
+    "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0"
+  }
+}

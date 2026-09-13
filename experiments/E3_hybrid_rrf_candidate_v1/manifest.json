@@ -1,0 +1,23 @@
+{
+  "completed_at_utc": "2026-07-20T09:40:09.876308+00:00",
+  "experiment_id": "E3_hybrid_rrf_candidate",
+  "inputs": {
+    "dense_rankings_sha256": "2ADFF6B3ED406665E809629D3DA231FB833E0873567BDCDD114A067D96E186E2",
+    "lexical_rankings_sha256": "53DB367025697E8F0BC06707CA465DD8A3819E33F76AFFA74F7B8C8C64177A3C"
+  },
+  "maximum_rank": 20,
+  "outputs": {
+    "metrics_sha256": "CAE8515455519A50293A90E9CBD9DB0E2BF7B6A5727024E1D1D8241902F5FA41",
+    "rankings_sha256": "3A7176DB2BDED3EFDA6946584CD4FEE3CE617F89BAC11FB76B04B016C06C53DE"
+  },
+  "parameters": {
+    "method": "equal_weight_reciprocal_rank_fusion",
+    "rrf_constant": 60
+  },
+  "query_count": 99,
+  "software": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_evaluation_independent_human_review_pending"
+}

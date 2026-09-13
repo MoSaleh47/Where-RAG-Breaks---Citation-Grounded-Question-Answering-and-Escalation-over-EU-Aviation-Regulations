@@ -1,0 +1,154 @@
+\chapter{Project Context and Scope}
+\label{chap:context}
+
+\section{Host Organisation and Team}
+\label{sec:context-org}
+
+\draftnote{This section requires facts that only the student can supply: the host company name, the department and team, the industry-supervisor's role, a factual description of the organisation's data and AI activity, and confirmation of any confidentiality restriction on naming the organisation or describing its internal processes. Everything else in this chapter is drawn from stored project artefacts and can stand as written.}
+
+The project is conducted as part of the aivancity PGE5 Final Year Project in Artificial Intelligence and Data Science. The description of the host organisation is deliberately concise and factual. It states where the regulatory question-answering problem arises in practice, who the intended users are, and how the work relates to the assigned mission, without promotional claims about the organisation or the technology.
+
+\section{The Regulatory Domain}
+\label{sec:context-domain}
+
+The subject matter of the system is occurrence reporting in civil aviation, governed by Regulation~(EU)~No~376/2014~\cite{eu2014reg376}. The source material used throughout this work is the \ac{EASA} Easy Access Rules consolidation of that regime~\cite{easa2022easyaccess376}, which presents the base regulation together with its implementing and amending instruments and the associated guidance material in a single publication.
+
+Understanding why this domain is difficult for an automated system requires understanding how the material is structured. The consolidated publication is not one document. As parsed and validated in Chapter~\ref{chap:method}, it comprises four distinct legal instruments plus a body of guidance:
+
+\begin{table}[htbp]
+  \centering
+  \caption{Composition of the source material, from the validated corpus.}
+  \label{tab:context-sources}
+  \small
+  \begin{tabularx}{\textwidth}{@{}l r r r X@{}}
+    \toprule
+    \textbf{Instrument} & \textbf{Art.} & \textbf{Ann.} & \textbf{Rec.} & \textbf{Subject} \\
+    \midrule
+    Regulation (EU) No 376/2014 & 24 & 3 & 1 & The base occurrence-reporting regime \\
+    Regulation (EU) 2015/1018 & 2 & 5 & 1 & Lists of occurrences subject to mandatory reporting \\
+    Regulation (EU) 2020/2034 & 4 & 1 & 1 & Common European risk classification scheme \\
+    Regulation (EU) 2021/2082 & 6 & 1 & 1 & Conversion from existing risk-classification tools \\
+    \midrule
+    Guidance material & \multicolumn{3}{c}{59 sections} & Explanatory material on applying the regime \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Three properties of this material shape every design decision in the project.
+
+\textbf{The instruments are separable and must stay separable.} An article numbered~6 exists in more than one of these instruments. A retrieval system that treats the consolidated publication as a single document can return a provision from the wrong instrument while appearing to answer correctly, and a citation of the form ``Article~6'' is then ambiguous rather than wrong --- which is worse, because ambiguity is harder to detect than error.
+
+\textbf{Binding text and guidance material are not interchangeable.} Fifty-nine of the 109 legal units in the corpus are guidance material. Guidance explains how a requirement may be met; it does not itself impose the requirement. An answer that cites guidance where the regulation governs is superficially reasonable and legally wrong, and this distinction must therefore survive parsing, indexing, retrieval, and citation resolution rather than being recoverable only by a reader who already knows the difference.
+
+\textbf{The operative content is fine-grained.} The base regulation's articles address objectives, definitions, scope, mandatory reporting, voluntary reporting, collection and storage, quality and content of reports, the European Central Repository, exchange and dissemination of information, analysis and follow-up at national and Union level, confidentiality and appropriate use, protection of the information source, and penalties. Within any one of these, the obligation that answers a specific question typically sits in a single subparagraph, while the conditions that qualify it sit in neighbouring ones. The annexes of Regulation (EU) 2015/1018 are lists of reportable occurrences organised by operational domain --- aircraft operation, technical condition and maintenance, air navigation services, aerodromes and ground services, and non-complex aircraft --- and these are tabular and enumerative rather than prose.
+
+\draftnote{Before submission, verify directly against the corpus and add one worked example: a question, the provision that answers it, and the neighbouring provision that qualifies it. A concrete instance is worth more than the general argument above, and the material to build it is in \texttt{data/processed/E1\_parent\_child\_v1/}.}
+
+\section{Intended Users and Use}
+\label{sec:context-users}
+
+The system is intended to support a person who already has the competence to evaluate a regulatory answer but not the time to locate it: a safety officer determining whether an event is reportable, a compliance function checking a deadline or an addressee, an operations specialist confirming which annex covers a particular occurrence class.
+
+That framing sets the acceptance criterion. The value of the system is not that it produces an answer; it is that it produces an answer whose supporting provision can be checked in seconds. An answer without a verifiable citation transfers the entire verification burden back to the user and therefore delivers no benefit. This is why the evaluation reported in this thesis measures citation support separately from answer correctness, and why abstention is treated as a legitimate output rather than a failure.
+
+\section{Mission and Its Revision}
+\label{sec:context-mission}
+
+The initial mission produced three question-answering approaches over aviation regulations --- a few-shot prompting baseline, a retrieval-grounded pipeline, and a \ac{LoRA}-adapted model --- together with stored model predictions, question sets, source chunks, evaluation outputs, and an intermediate report. The initial research question asked which of the three performed best.
+
+A repository and metric audit showed that this comparison could not isolate the causes of failure, for the reasons set out in Section~\ref{sec:intro-problem}. The revised mission preserves the three-system comparison as a historical baseline and adds the following deliverables:
+
+\begin{itemize}
+  \item an audited and hierarchy-aware regulatory corpus with preserved instrument identity;
+  \item an evidence-linked evaluation benchmark with source-grouped splits and a documented validity gate;
+  \item controlled retrieval, fusion, and reranking ablations under a fixed corpus and split policy;
+  \item an evidence-constrained generation and verification protocol;
+  \item a failure taxonomy and an escalation policy driven by observable runtime signals;
+  \item a prototype that displays evidence, citations, abstention state, and review status;
+  \item a reproducible research package and the final report.
+\end{itemize}
+
+The revision was recorded as a dated decision rather than applied silently, and the earlier artefacts were preserved unchanged rather than overwritten, so that the two phases of the project can be compared as they actually were.
+
+\section{Data and Provenance}
+\label{sec:context-data}
+
+Three source artefacts are recorded in the project manifest with their SHA-256 digests and marked immutable: the Easy Access Rules XML export used as the primary corpus, the consolidated regulation text as the authoritative reference, and the Easy Access Rules PDF as a rendering reference for manual checks. Only the XML export is parsed; the other two support human verification of the parser's output.
+
+From this source the project derives 109 coherent legal parents and 1{,}535 retrievable children. Each child records its parent, hierarchy path, canonical citation, unit type, sequence, source range, and an indexing text distinct from its displayed evidence text. The rationale for that separation, and the validation applied to the result, are given in Chapter~\ref{chap:method}.
+
+The historical evaluation material consists of 300 synthetic question--answer records generated over the earlier flat-chunk corpus. A 100-question subset is shared by the stored few-shot, \ac{RAG}, and \ac{LoRA} result files, and it is this subset that carries continuity with the baseline. After the evidence audit, 99 records remain in the candidate benchmark.
+
+The provenance of this benchmark must be stated plainly, because it bounds what the thesis can claim. The questions were machine-generated. The reference answers were machine-generated. The evidence links were proposed with machine assistance and then corrected. It is a research instrument, not an independently authored legal examination set, and the validity gate described in Chapter~\ref{chap:method} exists precisely because that provenance cannot be argued away.
+
+\section{Constraints}
+\label{sec:context-constraints}
+
+The project operates under six constraints.
+
+\begin{enumerate}
+  \item \textbf{Reliability.} A fluent answer without exact supporting evidence is not sufficient for aviation-regulation use. Citation support is a first-class requirement, not a presentational feature.
+  \item \textbf{Benchmark validity.} Synthetic questions and machine-assisted corrections require transparent disclosure and independent review before any figure is presented as final.
+  \item \textbf{Leakage control.} Questions grounded in the same legal parent cannot be split across development and test, and no threshold may be fitted on the test partition.
+  \item \textbf{Compute and cost.} Hosted or expensive methods must be justified by measured gains, and their inputs, token use, latency, and cost recorded. Where a local model suffices, it is preferred --- as with reranking, which runs entirely on local hardware.
+  \item \textbf{Data export.} The regulatory sources are public, but transmitting project questions and passages to a hosted service is treated as an explicit decision requiring authorisation, not a routine operation.
+  \item \textbf{Time.} The benchmark, end-to-end evaluation, prototype, report, and defence must be completed within the submission calendar, which is compressed relative to the original plan.
+\end{enumerate}
+
+The fifth constraint has already shaped the project's history. An initial attempt to compute dense embeddings was blocked because it would have exported corpus and question text without explicit authorisation; the experiment was suspended, the authorisation obtained and recorded, and only then were the two embedding runs executed, with the exact token counts logged. Final hosted answer generation is subject to the same requirement and remains unauthorised at the time of writing.
+
+\section{Infrastructure}
+\label{sec:context-infra}
+
+Corpus construction, lexical retrieval, evaluation, context assembly, and verification run locally in Python. Dense vectors are cached by model identifier and input hash, so that a change to a label does not force re-embedding when the underlying text is unchanged. The cross-encoder reranker runs locally on an NVIDIA RTX 4070 Laptop \ac{GPU}, and its 1{,}980 query--passage scores are cached together with the model revision and the experiment parameters.
+
+This arrangement serves two purposes beyond cost. It keeps project text out of hosted inference at the reranking stage entirely. And it makes re-scoring against corrected labels cheap: when the benchmark is frozen with reviewer corrections applied, the retrieval and reranking outputs do not need to be recomputed, only re-evaluated.
+
+\section{Governance and Traceability}
+\label{sec:context-governance}
+
+All new research work is isolated in a versioned project directory; historical artefacts remain unchanged. Every promoted corpus, benchmark, ranking, context, and report asset carries deterministic identifiers or SHA-256 lineage, so that any result can be traced to the exact inputs that produced it. Experiment directories are immutable by default, and each manifest records parameters, software and model versions, hardware, timestamps, and a status field.
+
+Architectural decisions are recorded in an append-only decision log, with reversals entered as new decisions referencing the ones they supersede. Rejected ablations remain documented. Artefacts produced with machine assistance are recorded in a separate log that also states what verification was performed on each and what author work remains outstanding; that log is the source of record for the disclosure in Appendix~\ref{app:ai-disclosure}.
+
+\section{Deliverable Schedule}
+\label{sec:context-schedule}
+
+The schedule below reflects the revision of 25~July~2026, which moved the full-draft target forward to accommodate a supervisor review before the end-of-August submission.
+
+\begin{description}[style=multiline,leftmargin=3.9cm,labelwidth=3.3cm]
+  \item[25 July -- 6 August] Multi-reviewer collection on the benchmark validity gate, in parallel with author adjudication of the review queue.
+  \item[6 -- 7 August] Response aggregation, adjudication of contested records, and benchmark freeze.
+  \item[7 -- 10 August] End-to-end generation, structural and semantic verification, and abstention.
+  \item[10 -- 11 August] Escalation calibration on development data, held-out reporting, final tables and figures.
+  \item[11 -- 12 August] Completion of the results and conclusion chapters; full draft circulated.
+  \item[13 -- 25 August] Supervisor feedback incorporated; discussion, limitations, ethics, and conclusion finalised. No new major experiments.
+  \item[26 -- 31 August] Final revision, reference and caption checks, traceability verification, and submission.
+\end{description}
+
+One scheduling rule is worth stating explicitly because it is a methodological commitment rather than a convenience. The review collection closes on 6~August regardless of the coverage achieved, and the benchmark is frozen on whatever coverage exists at that date. A cutoff that moves whenever a response is outstanding is not a schedule; more importantly, a cutoff chosen after observing the response rate would allow coverage to be selected in favour of a preferred result. Records that have not reached the two-reviewer minimum at the cutoff fall to author adjudication and are reported as such, and any response arriving after the freeze is retained and reported as a robustness check rather than merged into the frozen set.
+
+\section{Risks and Mitigations}
+\label{sec:context-risks}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Principal project risks and the mitigation applied to each.}
+  \label{tab:context-risks}
+  \small
+  \begin{tabularx}{\textwidth}{@{}l X@{}}
+    \toprule
+    \textbf{Risk} & \textbf{Mitigation} \\
+    \midrule
+    Insufficient reviewer coverage by the cutoff & The author fills the review queue in parallel; records below the minimum are adjudicated and reported separately rather than dropped. \\
+    Corpus defects mistaken for model limitations & Corpus repaired and deterministically validated before any retrieval error is attributed to a model. \\
+    Benchmark provenance undermining final claims & Stratified human audit with reported agreement; both the immutable baseline view and the audited view reported. \\
+    Evidence leakage inflating results & Parent-grouped partitioning with a programmatic assertion that no group spans both splits. \\
+    Hosted generation not authorised in time & Generation is the last stage and is isolated; the retrieval and reranking contributions stand independently of it. \\
+    Scope creep into multi-step retrieval & Multi-step retrieval is admitted only for a residual failure shown, after review, to require it. \\
+    Report written too late & Chapters not dependent on final results were drafted while experiments were still blocked. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+The last row describes what actually happened. The state of the art, methodology, introduction, and project context were written during the period in which generation was blocked behind the benchmark freeze, which converted a scheduling constraint into writing time rather than into idle time.

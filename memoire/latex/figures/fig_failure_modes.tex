@@ -1,0 +1,52 @@
+%% Figure: the two failure modes on the development partition, one cell per
+%% answered question (n = 42). Cells are grouped by outcome; position within
+%% the grid carries no meaning.
+%% Requires tikz with libraries arrows.meta, calc.
+\begin{tikzpicture}[
+  font=\footnotesize,
+  cell/.style={draw=white, line width=1pt, minimum size=6.2mm, inner sep=0pt},
+  clean/.style={cell, fill=aivancityLight},
+  wrong/.style={cell, fill=aivancityNavy},
+  quote/.style={cell, fill=aivancityGold},
+  key/.style={draw=white, line width=0.8pt, minimum size=3.6mm, inner sep=0pt},
+]
+
+%% 42 answered questions: 9 wrong provision, 2 ungrounded quote, 31 neither.
+\foreach \i in {0,...,41} {
+  \pgfmathtruncatemacro{\col}{mod(\i,14)}
+  \pgfmathtruncatemacro{\row}{div(\i,14)}
+  \pgfmathtruncatemacro{\kind}{ifthenelse(\i<9, 0, ifthenelse(\i<11, 1, 2))}
+  \ifnum\kind=0
+    \node[wrong] at (\col*6.6mm, -\row*6.6mm) {};
+  \else
+    \ifnum\kind=1
+      \node[quote] at (\col*6.6mm, -\row*6.6mm) {};
+    \else
+      \node[clean] at (\col*6.6mm, -\row*6.6mm) {};
+    \fi
+  \fi
+}
+
+%% brace over the two failing groups
+\draw[draw=aivancityGray, line width=0.5pt]
+  (-3.6mm, 4.0mm) -- (69.9mm, 4.0mm);
+\node[anchor=south, font=\footnotesize, text=aivancityGray] at (33.0mm, 4.3mm)
+  {42 answered questions, development partition};
+
+%% ------------------------------------------------------------------- key ---
+\node[key, fill=aivancityNavy, anchor=west] (kw) at (-3.6mm, -20.0mm) {};
+\node[anchor=west, font=\footnotesize] at ($(kw.east)+(1.6mm,0)$)
+  {wrong provision selected --- 9};
+
+\node[key, fill=aivancityGold, anchor=west] (kq) at (58.0mm, -20.0mm) {};
+\node[anchor=west, font=\footnotesize] at ($(kq.east)+(1.6mm,0)$)
+  {quote not grounded --- 2};
+
+\node[key, fill=aivancityLight, anchor=west] (kc) at (-3.6mm, -26.0mm) {};
+\node[anchor=west, font=\footnotesize] at ($(kc.east)+(1.6mm,0)$)
+  {neither failure --- 31};
+
+\node[anchor=west, font=\footnotesize\bfseries, text=draftRed] at (58.0mm, -26.0mm)
+  {both failures --- 0};
+
+\end{tikzpicture}

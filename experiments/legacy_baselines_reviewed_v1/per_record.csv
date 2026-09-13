@@ -1,0 +1,512 @@
+system,variant,qa_id,split,question_type,difficulty,gold_citation,gold_parent_id,rouge_l,content_above_floor,has_citation,legacy_citation_match,legacy_correct,parent_citation_correct,exact_citation_correct,gold_citation_ambiguous,gold_citation_resolvable,predicted_citations,missing_exact_units,retrieval_parent_hit
+fewshot,1,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.3095,1,1,0.5,1,1,0,0,1,Article 18(5) [376/2014],Article 18(2) [376/2014],
+fewshot,1,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.2476,1,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 3(2) [376/2014],
+fewshot,1,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.3415,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+fewshot,1,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.2564,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Article 3(2) [376/2014],
+fewshot,1,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.2545,1,1,0.0,0,,,0,0,Article 1(2) [376/2014],,
+fewshot,1,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2373,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Annex I [376/2014],
+fewshot,1,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.2619,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(6) [376/2014],
+fewshot,1,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.375,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 14(1) [376/2014],
+fewshot,1,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.2535,1,1,0.0,0,0,0,0,1,Article 13(1) [376/2014],Article 9(1) [376/2014],
+fewshot,1,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.225,1,1,0.0,0,0,0,1,1,Article 6(1) [376/2014],Article 4(4) [376/2014],
+fewshot,1,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.2535,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(2) [376/2014]; Article 4(3) [376/2014],
+fewshot,1,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.2619,1,1,0.0,0,0,0,0,1,Article 16(1) [376/2014],Article 15(1) [376/2014],
+fewshot,1,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.3009,1,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Recital 5 [376/2014],
+fewshot,1,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.2222,1,1,0.0,0,,,0,0,Article 1 [376/2014],,
+fewshot,1,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.2,1,1,0.0,0,0,0,1,1,Article 2(2) [376/2014],Article 3(2) [376/2014],
+fewshot,1,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.1707,1,1,0.0,0,0,0,1,1,,Article 2 [376/2014],
+fewshot,1,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.2133,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 9(1) [376/2014]; Article 13(9) [376/2014],
+fewshot,1,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2889,1,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Recital 5 [376/2014],
+fewshot,1,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.15,1,1,1.0,1,1,1,0,1,Article 16(11) [376/2014],,
+fewshot,1,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.0941,0,1,1.0,0,1,1,1,1,Article 4(6)(b) [376/2014],,
+fewshot,1,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.1077,0,1,0.0,0,1,1,1,1,Annex I [376/2014],,
+fewshot,1,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.1867,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(12) [376/2014],
+fewshot,1,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.1389,0,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 2 [376/2014],
+fewshot,1,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.2727,1,1,0.5,1,1,0,1,1,Article 5(1) [376/2014],Article 5(2) [376/2014],
+fewshot,1,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2593,1,1,0.0,0,0,0,0,1,Article 1(1) [376/2014],Article 16 [376/2014],
+fewshot,1,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.4348,1,1,0.0,0,0,0,0,1,Article 6(1) [376/2014],Article 7(4) [376/2014],
+fewshot,1,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.2381,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 15(4) [376/2014],
+fewshot,1,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.2619,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6) [376/2014],
+fewshot,1,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.2316,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 6(3) [376/2014],
+fewshot,1,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.3333,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6)(e) [376/2014],
+fewshot,1,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.3,1,1,0.0,0,,,0,0,Article 5(1) [376/2014],,
+fewshot,1,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.3662,1,1,0.0,0,0,0,1,1,Article 6(1) [376/2014],Article 4(6)(d) [376/2014],
+fewshot,1,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.1163,0,1,0.5,0,1,0,1,1,Article 2(2) [376/2014],Article 2(8) [376/2014],
+fewshot,1,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.3469,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Article 5(1) [376/2014],
+fewshot,1,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.2857,1,1,0.0,0,,,0,0,Annex I [376/2014],,
+fewshot,1,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.3544,1,1,0.0,0,0,0,0,1,Article 7(3) [376/2014],Article 18(4) [376/2014],
+fewshot,1,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.2857,1,1,0.0,0,,,0,0,Article 4(1) [376/2014],,
+fewshot,1,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.1795,1,1,0.0,0,0,0,1,1,Article 11(4) [376/2014],Annex II [376/2014],
+fewshot,1,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.2653,1,1,0.0,0,0,0,1,1,Article 4(2) [376/2014],Article 6(1) [376/2014],
+fewshot,1,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1798,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7 [376/2014],
+fewshot,1,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.2623,1,1,1.0,1,1,1,0,1,Article 19(1) [376/2014],,
+fewshot,1,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.2105,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 13(8) [376/2014],
+fewshot,1,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.375,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7(8) [376/2014],
+fewshot,1,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.32,1,1,0.0,0,0,0,1,1,Article 1 [2020/2034]; Article 1(2) [2020/2034],Article 4 [376/2014],
+fewshot,1,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.2105,1,1,0.0,0,,,0,0,Article 1(2) [376/2014],,
+fewshot,1,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.1636,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014]; Article 6(1) [376/2014],Article 4(6) [376/2014],
+fewshot,1,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.1935,1,1,0.5,1,1,0,1,1,Article 3(1) [376/2014],Article 3(2) [376/2014],
+fewshot,1,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.3133,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 13(1) [376/2014],
+fewshot,1,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.3429,1,1,0.0,0,0,0,1,1,Annex I [376/2014],Article 3(3) [376/2014],
+fewshot,1,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.2564,1,1,1.0,1,1,0,1,1,Article 2(1)(d) [376/2014],Article 2(1) [376/2014],
+fewshot,1,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.3404,1,1,1.0,1,1,1,0,1,Article 17 [376/2014]; Article 17(1) [376/2014],,
+fewshot,1,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.2453,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014],
+fewshot,1,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.2222,1,1,0.0,0,0,0,0,1,Article 20(1) [376/2014],Article 24(1) [376/2014],
+fewshot,1,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.1584,1,1,0.0,0,,,0,0,Article 9(1) [376/2014],,
+fewshot,1,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.3857,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014]; Article 10(1) [376/2014],Article 15(1) [376/2014]; Article 15(4) [376/2014],
+fewshot,1,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.1591,1,1,0.0,0,0,0,1,1,Article 14(1) [376/2014],Article 4(7) [376/2014],
+fewshot,1,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.2817,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Article 5(4) [376/2014],
+fewshot,1,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.1647,1,1,0.0,0,,,0,0,Article 4(1) [376/2014],,
+fewshot,1,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.3077,1,1,0.0,0,,,0,0,Article 5(1) [376/2014],,
+fewshot,1,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.2169,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 13(4) [376/2014]; Article 13(5) [376/2014],
+fewshot,1,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.2989,1,1,0.5,1,1,0,1,1,Article 4(1) [376/2014],Article 4(6) [376/2014],
+fewshot,1,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.2022,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Recital 4 [376/2014],
+fewshot,1,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.25,1,1,0.0,0,0,0,0,1,Article 4(1) [376/2014],Annex V [2015/1018],
+fewshot,1,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.1928,1,1,0.0,0,,,0,0,Article 1(1) [376/2014],,
+fewshot,1,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.3516,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],
+fewshot,1,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.4167,1,1,0.0,0,0,0,0,1,Article 20(1) [376/2014],Article 24(2) [376/2014],
+fewshot,1,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.2889,1,1,0.0,0,0,0,0,1,Article 12(1) [376/2014],Article 18(2) [376/2014],
+fewshot,1,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.2069,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(12) [376/2014],
+fewshot,1,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.2222,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7(4) [376/2014],
+fewshot,1,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.2022,1,1,0.0,0,0,0,0,1,Article 6(1) [376/2014],Article 7(1) [376/2014],
+fewshot,1,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.1687,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 4(1) [376/2014],,
+fewshot,1,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.2,1,1,1.0,1,1,0,1,1,Article 2(1)(d) [376/2014],Article 2(1) [376/2014],
+fewshot,1,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.3617,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 3(1) [376/2014],
+fewshot,5,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.325,1,1,0.5,1,1,0,0,1,Article 18(5) [376/2014],Article 18(2) [376/2014],
+fewshot,5,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.198,1,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 3(2) [376/2014],
+fewshot,5,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.2759,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+fewshot,5,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.2439,1,1,0.0,0,0,0,1,1,Article 16(1) [376/2014],Article 3(2) [376/2014],
+fewshot,5,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.2909,1,1,0.0,0,,,0,0,Article 1(2) [376/2014],,
+fewshot,5,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2718,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014],Annex I [376/2014],
+fewshot,5,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.2381,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(6) [376/2014],
+fewshot,5,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.2824,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 14(1) [376/2014],
+fewshot,5,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.2683,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 9(1) [376/2014],
+fewshot,5,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.2439,1,1,0.0,0,0,0,1,1,Article 14(1) [376/2014],Article 4(4) [376/2014],
+fewshot,5,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.2667,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(2) [376/2014]; Article 4(3) [376/2014],
+fewshot,5,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.2529,1,1,0.0,0,0,0,0,1,Article 16(1) [376/2014],Article 15(1) [376/2014],
+fewshot,5,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2727,1,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Recital 5 [376/2014],
+fewshot,5,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.1748,1,1,0.0,0,,,0,0,Recital 1 [376/2014],,
+fewshot,5,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.1731,1,1,0.0,0,0,0,1,1,Article 2(2) [376/2014],Article 3(2) [376/2014],
+fewshot,5,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.3143,1,1,0.0,0,0,0,1,1,Article 8(1) [376/2014],Article 2 [376/2014],
+fewshot,5,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.1613,1,1,0.5,1,0,0,0,1,Article 9(1) [376/2014],Article 13(9) [376/2014],
+fewshot,5,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2828,1,1,0.0,0,1,0,1,1,Recital 1 [376/2014],Recital 5 [376/2014],
+fewshot,5,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.1791,1,1,1.0,1,1,1,0,1,Article 16(11) [376/2014],,
+fewshot,5,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.1918,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+fewshot,5,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.128,0,1,0.0,0,1,1,1,1,Annex I [376/2014],,
+fewshot,5,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.1728,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 16(12) [376/2014],
+fewshot,5,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.0882,0,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 2 [376/2014],
+fewshot,5,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.2989,1,1,0.0,0,0,0,1,1,Article 4(3) [376/2014],Article 5(2) [376/2014],
+fewshot,5,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2549,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 16 [376/2014],
+fewshot,5,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.3333,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 7(4) [376/2014],
+fewshot,5,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.2529,1,1,0.0,0,0,0,0,1,Article 14(1) [376/2014],Article 15(4) [376/2014],
+fewshot,5,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.2857,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6) [376/2014],
+fewshot,5,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.2376,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Article 6(3) [376/2014],
+fewshot,5,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.25,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6)(e) [376/2014],
+fewshot,5,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.2029,1,1,0.0,0,,,0,0,,,
+fewshot,5,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.3768,1,1,0.5,1,1,0,1,1,Article 4(6)(a) [376/2014],Article 4(6)(d) [376/2014],
+fewshot,5,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.2118,1,1,0.5,1,1,0,1,1,Article 2(2) [376/2014],Article 2(8) [376/2014],
+fewshot,5,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.382,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014],Article 5(1) [376/2014],
+fewshot,5,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.2941,1,1,0.0,0,,,0,0,Article 14(3) [376/2014],,
+fewshot,5,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.3836,1,1,0.0,0,0,0,0,1,Article 6(1) [376/2014],Article 18(4) [376/2014],
+fewshot,5,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.2791,1,1,0.0,0,,,0,0,Article 5(1) [376/2014],,
+fewshot,5,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.1505,1,1,0.0,0,0,0,1,1,Article 11(4) [376/2014],Annex II [376/2014],
+fewshot,5,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.2703,1,1,0.0,0,0,0,1,1,Article 7(1) [376/2014],Article 6(1) [376/2014],
+fewshot,5,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1649,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7 [376/2014],
+fewshot,5,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.2388,1,1,0.5,1,1,0,0,1,Article 19 [376/2014],Article 19(1) [376/2014],
+fewshot,5,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.2278,1,1,0.0,0,0,0,0,1,Article 12(1) [376/2014],Article 13(8) [376/2014],
+fewshot,5,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.3846,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7(8) [376/2014],
+fewshot,5,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.5556,1,1,0.0,0,0,0,1,1,Article 1(2) [2020/2034],Article 4 [376/2014],
+fewshot,5,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.2667,1,1,0.0,0,,,0,0,Article 20(1) [376/2014],,
+fewshot,5,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.1905,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014],Article 4(6) [376/2014],
+fewshot,5,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.16,1,1,0.5,1,1,0,1,1,Article 3 [376/2014],Article 3(2) [376/2014],
+fewshot,5,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.2727,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 13(1) [376/2014],
+fewshot,5,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.3467,1,1,0.0,0,0,0,1,1,,Article 3(3) [376/2014],
+fewshot,5,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.2308,1,1,0.5,1,1,0,1,1,Article 2(7) [376/2014],Article 2(1) [376/2014],
+fewshot,5,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.3542,1,1,1.0,1,1,0,0,1,Article 290 [376/2014]; Article 17(1) [376/2014],Article 17 [376/2014],
+fewshot,5,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.24,1,1,0.0,0,0,0,0,1,Article 15(2) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014],
+fewshot,5,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.2222,1,1,0.0,0,0,0,0,1,Article 20(1) [376/2014],Article 24(1) [376/2014],
+fewshot,5,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.1875,1,1,0.0,0,,,0,0,Article 6(1) [376/2014],,
+fewshot,5,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.331,1,1,0.0,0,0,0,0,1,Article 14(1) [376/2014]; Article 14(2) [376/2014],Article 15(1) [376/2014]; Article 15(4) [376/2014],
+fewshot,5,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.2105,1,1,0.0,0,0,0,1,1,Article 5(3) [376/2014],Article 4(7) [376/2014],
+fewshot,5,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.2667,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Article 5(4) [376/2014],
+fewshot,5,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.2581,1,1,0.0,0,,,0,0,Article 4(1) [376/2014],,
+fewshot,5,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.2198,1,1,0.0,0,,,0,0,Article 15(1) [376/2014],,
+fewshot,5,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.3902,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 13(4) [376/2014]; Article 13(5) [376/2014],
+fewshot,5,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.4615,1,1,0.0,0,0,0,1,1,Article 5(5) [376/2014],Article 4(6) [376/2014],
+fewshot,5,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.1928,1,1,0.0,0,0,0,1,1,Article 2(1) [376/2014],Recital 4 [376/2014],
+fewshot,5,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.2667,1,1,0.0,0,0,0,0,1,Article 2(1) [376/2014],Annex V [2015/1018],
+fewshot,5,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.2469,1,1,0.0,0,,,0,0,Article 1(2) [376/2014],,
+fewshot,5,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.3133,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],
+fewshot,5,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.3235,1,1,0.0,0,0,0,0,1,Article 20(1) [376/2014],Article 24(2) [376/2014],
+fewshot,5,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.321,1,1,0.0,0,0,0,0,1,Article 20(1) [376/2014],Article 18(2) [376/2014],
+fewshot,5,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.2143,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(12) [376/2014],
+fewshot,5,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.2581,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7(4) [376/2014],
+fewshot,5,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.1782,1,1,0.0,0,0,0,0,1,Article 6(1) [376/2014],Article 7(1) [376/2014],
+fewshot,5,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.2093,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 4(1) [376/2014],,
+fewshot,5,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.1562,1,1,1.0,1,1,1,1,1,Article 2(1) [376/2014],,
+fewshot,5,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.2979,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 3(1) [376/2014],
+fewshot,10,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.3733,1,1,0.5,1,1,0,0,1,Article 18(5) [376/2014],Article 18(2) [376/2014],
+fewshot,10,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.1458,0,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 3(2) [376/2014],
+fewshot,10,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.3696,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+fewshot,10,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.3377,1,1,0.0,0,0,0,1,1,Article 16(1) [376/2014],Article 3(2) [376/2014],
+fewshot,10,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.2909,1,1,0.0,0,,,0,0,Article 20(1) [376/2014],,
+fewshot,10,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2632,1,1,0.0,0,0,0,1,1,Article 16(1) [376/2014],Annex I [376/2014],
+fewshot,10,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.2472,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(6) [376/2014],
+fewshot,10,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.2791,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 14(1) [376/2014],
+fewshot,10,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.2716,1,1,0.0,0,0,0,0,1,Article 14(1) [376/2014],Article 9(1) [376/2014],
+fewshot,10,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.2588,1,1,0.5,1,1,0,1,1,Article 4(1) [376/2014],Article 4(4) [376/2014],
+fewshot,10,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.3514,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(2) [376/2014]; Article 4(3) [376/2014],
+fewshot,10,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.241,1,1,0.0,0,0,0,0,1,Article 16(11) [376/2014],Article 15(1) [376/2014],
+fewshot,10,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2703,1,1,0.0,0,0,0,1,1,Article 1 [376/2014],Recital 5 [376/2014],
+fewshot,10,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.1553,1,1,0.0,0,,,0,0,Recital 1 [376/2014],,
+fewshot,10,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.1782,1,1,0.0,0,0,0,1,1,Article 2(2) [376/2014],Article 3(2) [376/2014],
+fewshot,10,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.2609,1,1,0.0,0,0,0,1,1,,Article 2 [376/2014],
+fewshot,10,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.1404,0,1,0.5,0,0,0,0,1,Article 9(1) [376/2014],Article 13(9) [376/2014],
+fewshot,10,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2979,1,1,0.0,0,1,0,1,1,Article 1 [376/2014]; Recital 1 [376/2014],Recital 5 [376/2014],
+fewshot,10,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.1905,1,1,1.0,1,1,1,0,1,Article 16(11) [376/2014],,
+fewshot,10,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.1875,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+fewshot,10,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.0992,0,1,0.0,0,0,0,1,1,Annex II [376/2014],Annex I [376/2014],
+fewshot,10,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.2353,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(12) [376/2014],
+fewshot,10,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.1176,0,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 2 [376/2014],
+fewshot,10,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.25,1,1,0.0,0,0,0,1,1,Article 6(1) [376/2014],Article 5(2) [376/2014],
+fewshot,10,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2376,1,1,0.0,0,0,0,0,1,Article 1(1) [376/2014],Article 16 [376/2014],
+fewshot,10,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.2973,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 7(4) [376/2014],
+fewshot,10,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.2564,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 15(4) [376/2014],
+fewshot,10,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.2973,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6) [376/2014],
+fewshot,10,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.2093,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 6(3) [376/2014],
+fewshot,10,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.1791,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6)(e) [376/2014],
+fewshot,10,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.2373,1,1,0.0,0,,,0,0,Article 5(1) [376/2014],,
+fewshot,10,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.3662,1,1,0.5,1,1,0,1,1,Article 4(6) [376/2014],Article 4(6)(d) [376/2014],
+fewshot,10,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.1957,1,1,0.0,0,0,0,1,1,Article 3(3) [376/2014],Article 2(8) [376/2014],
+fewshot,10,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.3441,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014],Article 5(1) [376/2014],
+fewshot,10,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.2857,1,1,0.0,0,,,0,0,Annex I [376/2014],,
+fewshot,10,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.3733,1,1,0.0,0,0,0,0,1,Article 20(2) [376/2014],Article 18(4) [376/2014],
+fewshot,10,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.2697,1,1,0.0,0,,,0,0,Article 4(6) [376/2014],,
+fewshot,10,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.1915,1,1,0.0,0,0,0,1,1,Article 11(4) [376/2014],Annex II [376/2014],
+fewshot,10,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.3148,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 6(1) [376/2014],
+fewshot,10,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1616,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7 [376/2014],
+fewshot,10,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.254,1,1,0.5,1,1,0,0,1,Article 19 [376/2014],Article 19(1) [376/2014],
+fewshot,10,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.2143,1,1,0.0,0,0,0,0,1,Article 14(1) [376/2014],Article 13(8) [376/2014],
+fewshot,10,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.359,1,1,0.0,0,0,0,0,1,Article 5(2) [376/2014],Article 7(8) [376/2014],
+fewshot,10,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.5556,1,1,0.0,0,0,0,1,1,Article 1(2) [2020/2034],Article 4 [376/2014],
+fewshot,10,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.2857,1,1,0.0,0,,,0,0,Article 17 [376/2014],,
+fewshot,10,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.1593,1,1,0.0,0,0,0,1,1,Article 5(1) [376/2014],Article 4(6) [376/2014],
+fewshot,10,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.1538,1,1,0.5,1,1,0,1,1,Article 3 [376/2014],Article 3(2) [376/2014],
+fewshot,10,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.3,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 13(1) [376/2014],
+fewshot,10,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.3582,1,1,0.5,1,1,0,1,1,Article 3(2) [376/2014],Article 3(3) [376/2014],
+fewshot,10,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.2683,1,1,0.5,1,1,0,1,1,Article 2(7) [376/2014],Article 2(1) [376/2014],
+fewshot,10,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.3448,1,1,1.0,1,1,0,0,1,Article 17(1) [376/2014],Article 17 [376/2014],
+fewshot,10,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.3301,1,1,0.0,0,0,0,0,1,Article 14(1) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014],
+fewshot,10,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.2373,1,1,0.0,0,0,0,0,1,Article 20 [376/2014],Article 24(1) [376/2014],
+fewshot,10,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.1609,1,1,0.0,0,,,0,0,Article 9(1) [376/2014],,
+fewshot,10,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.3448,1,1,0.0,0,0,0,0,1,Article 16(1) [376/2014]; Article 16(2) [376/2014],Article 15(1) [376/2014]; Article 15(4) [376/2014],
+fewshot,10,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.1818,1,1,0.0,0,0,0,1,1,Article 6(4) [376/2014],Article 4(7) [376/2014],
+fewshot,10,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.2609,1,1,0.5,1,1,0,1,1,Article 5(1) [376/2014],Article 5(4) [376/2014],
+fewshot,10,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.3011,1,1,0.0,0,,,0,0,Article 4(1) [376/2014],,
+fewshot,10,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.3023,1,1,0.0,0,,,0,0,Article 14(1) [376/2014],,
+fewshot,10,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.3256,1,1,0.5,1,1,0,0,1,Article 13(1) [376/2014],Article 13(4) [376/2014]; Article 13(5) [376/2014],
+fewshot,10,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.4167,1,1,0.0,0,0,0,1,1,Article 16(4) [376/2014],Article 4(6) [376/2014],
+fewshot,10,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.1978,1,1,0.0,0,0,0,1,1,Article 4(1) [376/2014],Recital 4 [376/2014],
+fewshot,10,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.2222,1,1,0.0,0,0,0,0,1,Article 4(1) [376/2014],Annex V [2015/1018],
+fewshot,10,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.1553,1,1,0.0,0,,,0,0,Article 288 [376/2014],,
+fewshot,10,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.3516,1,1,0.5,1,0,0,1,1,Article 16(1) [376/2014],Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],
+fewshot,10,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.4167,1,1,0.0,0,0,0,0,1,Article 18(1) [376/2014],Article 24(2) [376/2014],
+fewshot,10,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.3291,1,1,0.0,0,0,0,0,1,Article 22(1) [376/2014],Article 18(2) [376/2014],
+fewshot,10,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.1967,1,1,0.5,1,1,0,0,1,Article 16(1) [376/2014],Article 16(12) [376/2014],
+fewshot,10,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.2338,1,1,0.0,0,0,0,0,1,Article 16(1) [376/2014],Article 7(4) [376/2014],
+fewshot,10,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.2105,1,1,0.0,0,0,0,0,1,Article 5(1) [376/2014],Article 7(1) [376/2014],
+fewshot,10,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.2169,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 4(1) [376/2014],,
+fewshot,10,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.2712,1,1,0.5,1,1,0,1,1,Article 2(7) [376/2014],Article 2(1) [376/2014],
+fewshot,10,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.3571,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014],Article 3(1) [376/2014],
+rag,1,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.5676,1,1,1.0,1,1,1,0,1,Article 18(2) [376/2014],,1
+rag,1,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.4571,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,1,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.4545,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,1
+rag,1,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.7222,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,1,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.3396,1,1,0.0,0,,,0,0,,,0
+rag,1,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2479,1,1,0.0,0,0,0,1,1,,Annex I [376/2014],0
+rag,1,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.0513,0,0,0.0,0,0,0,0,1,,Article 16(6) [376/2014],0
+rag,1,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.325,1,1,0.0,0,0,0,0,1,Article 8 [376/2014],Article 14(1) [376/2014],0
+rag,1,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.5574,1,1,1.0,1,1,1,0,1,Article 9(1) [376/2014],,1
+rag,1,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.0,0,0,0.0,0,0,0,1,1,,Article 4(4) [376/2014],0
+rag,1,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.0571,0,0,0.0,0,0,0,1,1,,Article 4(2) [376/2014]; Article 4(3) [376/2014],0
+rag,1,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.2444,1,1,0.0,0,0,0,0,1,,Article 15(1) [376/2014],0
+rag,1,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.1849,1,1,0.0,0,0,0,1,1,,Recital 5 [376/2014],0
+rag,1,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.5055,1,1,1.0,1,,,0,0,,,1
+rag,1,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.0727,0,0,0.0,0,0,0,1,1,,Article 3(2) [376/2014],0
+rag,1,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.6957,1,1,1.0,1,1,1,1,1,Article 2 [376/2014],,1
+rag,1,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.1867,1,1,0.0,0,0,0,0,1,,Article 9(1) [376/2014]; Article 13(9) [376/2014],0
+rag,1,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.5833,1,1,1.0,1,1,1,1,1,Recital 5 [376/2014],,1
+rag,1,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.0,0,0,0.0,0,0,0,0,1,,Article 16(11) [376/2014],0
+rag,1,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.2093,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,1
+rag,1,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.0,0,0,0.0,0,0,0,1,1,,Annex I [376/2014],0
+rag,1,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.1613,1,1,0.0,0,0,0,0,1,Article 21 [376/2014],Article 16(12) [376/2014],0
+rag,1,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.75,1,1,1.0,1,1,1,1,1,Article 2 [2015/1018],,1
+rag,1,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.0476,0,0,0.0,0,0,0,1,1,,Article 5(2) [376/2014],0
+rag,1,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2957,1,1,0.0,0,0,0,0,1,,Article 16 [376/2014],0
+rag,1,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.3913,1,1,1.0,1,1,1,0,1,Article 7(4) [376/2014],,0
+rag,1,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.0465,0,0,0.0,0,0,0,0,1,,Article 15(4) [376/2014],0
+rag,1,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.2439,1,1,0.0,0,0,0,1,1,,Article 4(6) [376/2014],0
+rag,1,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.7111,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 5 [376/2014]; Article 6(3) [376/2014],,1
+rag,1,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.4176,1,1,1.0,1,1,1,1,1,Article 4(6)(e) [376/2014],,1
+rag,1,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.2593,1,1,1.0,1,,,0,0,,,1
+rag,1,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.2,1,1,0.5,1,1,0,1,1,Article 4(6)(c) [376/2014],Article 4(6)(d) [376/2014],1
+rag,1,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.7407,1,1,0.0,0,0,0,1,1,,Article 2(8) [376/2014],1
+rag,1,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.9091,1,1,1.0,1,1,1,1,1,Article 5(1) [376/2014],,1
+rag,1,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.7647,1,1,1.0,1,,,0,0,,,1
+rag,1,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.3529,1,1,1.0,1,1,1,0,1,Article 18(4) [376/2014],,1
+rag,1,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.0,0,0,0.0,0,,,0,0,,,0
+rag,1,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.2571,1,1,0.0,0,1,1,1,1,Article 11(4) [376/2014]; Annex II [376/2014],,1
+rag,1,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.5625,1,1,1.0,1,1,1,1,1,Article 6(1) [376/2014],,1
+rag,1,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1441,0,1,0.0,0,0,0,0,1,,Article 7 [376/2014],0
+rag,1,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.0,0,0,0.0,0,0,0,0,1,,Article 19(1) [376/2014],0
+rag,1,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.9375,1,1,1.0,1,1,1,0,1,Article 13(8) [376/2014],,1
+rag,1,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.0556,0,0,0.0,0,0,0,0,1,,Article 7(8) [376/2014],0
+rag,1,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.6316,1,1,1.0,1,1,1,1,1,Article 4 [2020/2034],,1
+rag,1,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.6067,1,1,0.0,0,,,0,0,,,1
+rag,1,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.5547,1,1,0.0,0,0,0,1,1,,Article 4(6) [376/2014],1
+rag,1,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.6765,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,1,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.413,1,1,0.5,1,1,0,0,1,Article 13 [376/2014],Article 13(1) [376/2014],1
+rag,1,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.7463,1,1,1.0,1,1,1,1,1,Article 3(3) [376/2014],,1
+rag,1,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.0556,0,0,0.0,0,0,0,1,1,,Article 2(1) [376/2014],0
+rag,1,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.0444,0,0,0.0,0,0,0,0,1,,Article 17 [376/2014],0
+rag,1,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.0323,0,0,0.0,0,0,0,0,1,,Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014],0
+rag,1,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.0714,0,0,0.0,0,0,0,0,1,,Article 24(1) [376/2014],0
+rag,1,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.2105,1,1,0.0,0,,,0,0,,,0
+rag,1,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.3432,1,1,0.5,1,1,0,0,1,Article 15 [376/2014],Article 15(1) [376/2014]; Article 15(4) [376/2014],1
+rag,1,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.4681,1,1,1.0,1,1,1,1,1,Article 4(7) [376/2014],,1
+rag,1,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.129,0,0,0.0,0,0,0,1,1,,Article 5(4) [376/2014],0
+rag,1,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.5753,1,1,0.0,0,,,0,0,,,0
+rag,1,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.85,1,1,1.0,1,,,0,0,,,1
+rag,1,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.0,0,0,0.0,0,0,0,0,1,,Article 13(4) [376/2014]; Article 13(5) [376/2014],0
+rag,1,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.6486,1,1,1.0,1,1,0,1,1,Article 4(6)(a) [376/2014],Article 4(6) [376/2014],1
+rag,1,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.2,1,1,0.0,0,0,0,1,1,,Recital 4 [376/2014],0
+rag,1,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.6197,1,1,0.0,0,1,1,0,1,Annex V [2015/1018],,1
+rag,1,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.5797,1,1,1.0,1,,,0,0,,,1
+rag,1,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.7416,1,1,0.0,0,0,0,1,1,,Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],1
+rag,1,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.0,0,0,0.0,0,0,0,0,1,,Article 24(2) [376/2014],0
+rag,1,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.8276,1,1,1.0,1,1,1,0,1,Article 18(2) [376/2014],,1
+rag,1,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.2857,1,1,1.0,1,1,1,0,1,Article 16(12) [376/2014],,1
+rag,1,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.5641,1,1,1.0,1,1,1,0,1,Article 7(4) [376/2014],,1
+rag,1,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.4915,1,1,0.0,0,0,0,0,1,Annex I [376/2014],Article 7(1) [376/2014],1
+rag,1,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.375,1,1,0.5,1,1,0,1,1,Article 4 [376/2014],Article 4(1) [376/2014],1
+rag,1,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.0,0,0,0.0,0,0,0,1,1,,Article 2(1) [376/2014],0
+rag,1,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.5275,1,1,0.5,1,1,0,1,1,Article 3 [376/2014],Article 3(1) [376/2014],1
+rag,3,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.5405,1,1,1.0,1,1,1,0,1,Article 18(2) [376/2014],,1
+rag,3,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.6182,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,3,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.466,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,1
+rag,3,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.642,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,3,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.2857,1,1,0.0,0,,,0,0,Article 23 [376/2014],,0
+rag,3,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2241,1,1,0.0,0,0,0,1,1,Article 7(4) [376/2014],Annex I [376/2014],0
+rag,3,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.0513,0,0,0.0,0,0,0,0,1,,Article 16(6) [376/2014],0
+rag,3,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.3291,1,1,0.0,0,0,0,0,1,Article 9(1) [376/2014],Article 14(1) [376/2014],0
+rag,3,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.5574,1,1,1.0,1,1,1,0,1,Article 9(1) [376/2014],,1
+rag,3,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.0,0,0,0.0,0,0,0,1,1,,Article 4(4) [376/2014],0
+rag,3,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.4118,1,1,0.5,1,1,0,1,1,Article 4(6) [376/2014]; Article 5(2) [376/2014],Article 4(2) [376/2014]; Article 4(3) [376/2014],0
+rag,3,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.3178,1,1,1.0,1,1,1,0,1,Article 15(1) [376/2014],,1
+rag,3,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2542,1,1,0.0,0,0,0,1,1,,Recital 5 [376/2014],0
+rag,3,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.7045,1,1,1.0,1,,,0,0,,,1
+rag,3,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.6038,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,3,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.6,1,1,1.0,1,1,0,1,1,Article 2(6) [376/2014],Article 2 [376/2014],1
+rag,3,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.1538,1,1,0.0,0,0,0,0,1,,Article 9(1) [376/2014]; Article 13(9) [376/2014],0
+rag,3,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.549,1,1,1.0,1,1,1,1,1,Recital 5 [376/2014],,1
+rag,3,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.7458,1,1,1.0,1,1,1,0,1,Article 16(11) [376/2014],,1
+rag,3,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.1975,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,1
+rag,3,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.5694,1,1,0.0,0,1,1,1,1,Annex I [376/2014],,1
+rag,3,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.5634,1,1,1.0,1,1,1,0,1,Article 16(12) [376/2014],,1
+rag,3,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.4231,1,1,1.0,1,1,1,1,1,Article 2 [376/2014],,1
+rag,3,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.2824,1,1,0.0,0,0,0,1,1,Article 9(2) [376/2014],Article 5(2) [376/2014],0
+rag,3,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2909,1,1,0.0,0,0,0,0,1,,Article 16 [376/2014],0
+rag,3,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.338,1,1,1.0,1,1,1,0,1,Article 7(4) [376/2014],,0
+rag,3,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.1684,1,1,0.0,0,0,0,0,1,,Article 15(4) [376/2014],1
+rag,3,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.1538,1,1,0.0,0,0,0,1,1,,Article 4(6) [376/2014],0
+rag,3,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.6889,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 5 [376/2014]; Article 6(3) [376/2014],,1
+rag,3,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.4691,1,1,1.0,1,1,1,1,1,Article 4(6)(e) [376/2014],,1
+rag,3,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.2593,1,1,1.0,1,,,0,0,,,1
+rag,3,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.2597,1,1,1.0,1,1,1,1,1,Article 4(6)(c) [376/2014]; Article 4(6)(d) [376/2014],,1
+rag,3,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.7407,1,1,0.0,0,0,0,1,1,,Article 2(8) [376/2014],1
+rag,3,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.9091,1,1,1.0,1,1,1,1,1,Article 5(1) [376/2014],,1
+rag,3,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.7647,1,1,1.0,1,,,0,0,,,1
+rag,3,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.5556,1,1,1.0,1,1,1,0,1,Article 18(4) [376/2014],,1
+rag,3,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.6024,1,1,1.0,1,,,0,0,,,1
+rag,3,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.1818,1,1,0.0,0,1,1,1,1,Annex II [376/2014],,1
+rag,3,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.5532,1,1,1.0,1,1,1,1,1,Article 6(1) [376/2014],,1
+rag,3,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1584,1,1,0.0,0,0,0,0,1,,Article 7 [376/2014],0
+rag,3,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.3846,1,1,0.5,1,1,0,0,1,Article 65 [376/2014]; Article 19 [376/2014],Article 19(1) [376/2014],1
+rag,3,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.9375,1,1,1.0,1,1,1,0,1,Article 13(8) [376/2014],,1
+rag,3,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.3421,1,1,0.0,0,0,0,0,1,Article 14(3) [376/2014],Article 7(8) [376/2014],0
+rag,3,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.6316,1,1,1.0,1,1,1,1,1,Article 4 [2020/2034],,1
+rag,3,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.4944,1,1,0.0,0,,,0,0,,,1
+rag,3,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.5,1,1,0.0,0,0,0,1,1,,Article 4(6) [376/2014],1
+rag,3,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.6765,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,3,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.4773,1,1,0.5,1,1,0,0,1,Article 13 [376/2014],Article 13(1) [376/2014],1
+rag,3,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.5152,1,1,1.0,1,1,1,1,1,Article 3(3) [376/2014],,1
+rag,3,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.0556,0,0,0.0,0,0,0,1,1,,Article 2(1) [376/2014],0
+rag,3,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.8409,1,1,1.0,1,1,1,0,1,Article 17 [376/2014],,1
+rag,3,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.2115,1,1,0.5,1,1,0,0,1,Article 16(3) [376/2014]; Article 16(4) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014],1
+rag,3,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.0714,0,0,0.0,0,0,0,0,1,,Article 24(1) [376/2014],0
+rag,3,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.2018,1,1,0.0,0,,,0,0,,,0
+rag,3,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.3436,1,1,0.5,1,1,0,0,1,Article 15(1) [376/2014],Article 15(4) [376/2014],1
+rag,3,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.5,1,1,0.0,0,0,0,1,1,,Article 4(7) [376/2014],1
+rag,3,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.4127,1,1,0.5,1,1,0,1,1,Article 5(1) [376/2014],Article 5(4) [376/2014],1
+rag,3,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.7368,1,1,0.0,0,,,0,0,,,1
+rag,3,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.85,1,1,1.0,1,,,0,0,,,1
+rag,3,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.3421,1,1,0.5,1,1,0,0,1,Article 13(2) [376/2014],Article 13(4) [376/2014]; Article 13(5) [376/2014],1
+rag,3,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.6486,1,1,1.0,1,1,0,1,1,Article 4(6)(a) [376/2014],Article 4(6) [376/2014],1
+rag,3,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.2885,1,1,0.0,0,0,0,1,1,,Recital 4 [376/2014],1
+rag,3,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.5833,1,1,0.0,0,1,1,0,1,Annex V [2015/1018],,1
+rag,3,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.3218,1,1,1.0,1,,,0,0,,,1
+rag,3,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.5981,1,1,0.0,0,0,0,1,1,Article 15(1) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],1
+rag,3,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.44,1,1,1.0,1,1,1,0,1,Article 24(2) [376/2014],,1
+rag,3,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.8276,1,1,1.0,1,1,1,0,1,Article 18(2) [376/2014],,1
+rag,3,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.2857,1,1,1.0,1,1,1,0,1,Article 16(12) [376/2014],,1
+rag,3,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.3793,1,1,1.0,1,1,1,0,1,Article 7(4) [376/2014],,1
+rag,3,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.1429,0,1,0.0,0,0,0,0,1,Annex I [376/2014],Article 7(1) [376/2014],1
+rag,3,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.3146,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 4(1) [376/2014],,1
+rag,3,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.0,0,0,0.0,0,0,0,1,1,,Article 2(1) [376/2014],0
+rag,3,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.4842,1,1,0.5,1,1,0,1,1,Article 3 [376/2014],Article 3(1) [376/2014],1
+rag,5,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.6222,1,1,1.0,1,1,1,0,1,Article 18(2) [376/2014],,1
+rag,5,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.6476,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,5,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.4545,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,1
+rag,5,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.4086,1,1,0.0,0,0,0,1,1,,Article 3(2) [376/2014],1
+rag,5,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.4,1,1,0.0,0,,,0,0,Article 23 [376/2014],,1
+rag,5,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2689,1,1,0.0,0,1,1,1,1,Article 7(1) [376/2014]; Article 7(3) [376/2014]; Annex I [376/2014],,1
+rag,5,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.0513,0,0,0.0,0,0,0,0,1,,Article 16(6) [376/2014],0
+rag,5,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.8197,1,1,1.0,1,1,1,0,1,Article 14(1) [376/2014],,1
+rag,5,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.5574,1,1,1.0,1,1,1,0,1,Article 9(1) [376/2014],,1
+rag,5,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.2804,1,1,0.5,1,1,0,1,1,Article 4(6) [376/2014],Article 4(4) [376/2014],0
+rag,5,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.3836,1,1,0.5,1,1,0,1,1,Article 4(6) [376/2014],Article 4(2) [376/2014]; Article 4(3) [376/2014],0
+rag,5,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.3158,1,1,1.0,1,1,1,0,1,Article 15(1) [376/2014]; Article 16(3) [376/2014],,1
+rag,5,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.25,1,1,0.0,0,0,0,1,1,,Recital 5 [376/2014],0
+rag,5,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.4235,1,1,1.0,1,,,0,0,,,1
+rag,5,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.6095,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,5,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.6,1,1,1.0,1,1,0,1,1,Article 2(6) [376/2014],Article 2 [376/2014],1
+rag,5,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.2118,1,1,0.5,1,1,0,0,1,Article 13(4) [376/2014]; Article 13(5) [376/2014]; Article 9(1) [376/2014],Article 13(9) [376/2014],1
+rag,5,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.5333,1,1,1.0,1,1,1,1,1,Recital 5 [376/2014],,1
+rag,5,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.5676,1,1,1.0,1,1,1,0,1,Article 16(11) [376/2014],,1
+rag,5,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.2093,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,1
+rag,5,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.5694,1,1,0.0,0,1,1,1,1,Annex I [376/2014],,1
+rag,5,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.5316,1,1,0.0,0,0,0,0,1,,Article 16(12) [376/2014],1
+rag,5,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.3099,1,1,0.0,0,0,0,1,1,,Article 2 [376/2014],1
+rag,5,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.2338,1,1,0.0,0,0,0,1,1,Article 9(1) [376/2014]; Article 9(2) [376/2014],Article 5(2) [376/2014],0
+rag,5,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2564,1,1,0.0,0,0,0,0,1,,Article 16 [376/2014],1
+rag,5,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.338,1,1,0.5,1,1,0,0,1,Article 7 [376/2014],Article 7(4) [376/2014],0
+rag,5,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.2,1,1,0.0,0,0,0,0,1,Article 14(1) [376/2014],Article 15(4) [376/2014],1
+rag,5,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.1522,1,1,0.0,0,0,0,1,1,,Article 4(6) [376/2014],1
+rag,5,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.6889,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 5 [376/2014]; Article 6(3) [376/2014],,1
+rag,5,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.4691,1,1,1.0,1,1,1,1,1,Article 4(6)(e) [376/2014],,1
+rag,5,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.2593,1,1,1.0,1,,,0,0,,,1
+rag,5,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.4416,1,1,1.0,1,1,1,1,1,Article 4(6)(c) [376/2014]; Article 4(6)(d) [376/2014],,1
+rag,5,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.7407,1,1,0.0,0,0,0,1,1,,Article 2(8) [376/2014],1
+rag,5,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.9091,1,1,1.0,1,1,1,1,1,Article 5(1) [376/2014],,1
+rag,5,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.7573,1,1,1.0,1,,,0,0,,,1
+rag,5,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.386,1,1,1.0,1,1,1,0,1,Article 18(4) [376/2014],,1
+rag,5,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.6316,1,1,1.0,1,,,0,0,,,1
+rag,5,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.303,1,1,0.0,0,1,1,1,1,Article 11(4) [376/2014]; Annex II [376/2014],,1
+rag,5,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.5532,1,1,1.0,1,1,1,1,1,Article 6(1) [376/2014],,1
+rag,5,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1468,0,1,0.0,0,0,0,0,1,,Article 7 [376/2014],0
+rag,5,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.5957,1,1,0.5,1,1,0,0,1,Article 65 [376/2014]; Article 19 [376/2014],Article 19(1) [376/2014],1
+rag,5,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.9375,1,1,1.0,1,1,1,0,1,Article 13(8) [376/2014],,1
+rag,5,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.3279,1,1,0.0,0,0,0,0,1,Article 14(3) [376/2014],Article 7(8) [376/2014],1
+rag,5,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.4444,1,1,1.0,1,1,1,1,1,Article 4 [2020/2034],,1
+rag,5,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.5055,1,1,0.0,0,,,0,0,,,1
+rag,5,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.5641,1,1,1.0,1,1,1,1,1,Article 4(6) [376/2014],,1
+rag,5,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.6667,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,1
+rag,5,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.5208,1,1,0.5,1,1,0,0,1,Article 13 [376/2014],Article 13(1) [376/2014],1
+rag,5,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.5152,1,1,1.0,1,1,1,1,1,Article 3(3) [376/2014],,1
+rag,5,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.8657,1,1,1.0,1,1,1,1,1,Article 2(1) [376/2014],,1
+rag,5,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.8315,1,1,1.0,1,1,1,0,1,Article 17 [376/2014],,1
+rag,5,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.2131,1,1,0.5,1,1,0,0,1,Article 16(3) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014],1
+rag,5,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.7407,1,1,0.5,1,1,0,0,1,Article 24 [376/2014],Article 24(1) [376/2014],1
+rag,5,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.3509,1,1,0.0,0,,,0,0,,,1
+rag,5,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.2166,1,1,0.5,1,1,0,0,1,Article 15(1) [376/2014],Article 15(4) [376/2014],1
+rag,5,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.4783,1,1,0.0,0,0,0,1,1,,Article 4(7) [376/2014],1
+rag,5,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.4127,1,1,0.5,1,1,0,1,1,Article 5(1) [376/2014],Article 5(4) [376/2014],1
+rag,5,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.7368,1,1,0.0,0,,,0,0,,,1
+rag,5,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.85,1,1,1.0,1,,,0,0,,,1
+rag,5,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.3421,1,1,0.5,1,1,0,0,1,Article 13(2) [376/2014],Article 13(4) [376/2014]; Article 13(5) [376/2014],1
+rag,5,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.6486,1,1,1.0,1,1,0,1,1,Article 4(6)(a) [376/2014],Article 4(6) [376/2014],1
+rag,5,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.1649,1,1,0.0,0,0,0,1,1,,Recital 4 [376/2014],1
+rag,5,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.5833,1,1,0.0,0,1,1,0,1,Annex V [2015/1018],,1
+rag,5,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.5773,1,1,1.0,1,,,0,0,,,1
+rag,5,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.6735,1,1,0.5,1,0,0,1,1,Article 15(1) [376/2014]; Article 16(1) [376/2014],Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],1
+rag,5,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.44,1,1,1.0,1,1,1,0,1,Article 24(2) [376/2014],,1
+rag,5,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.8276,1,1,1.0,1,1,1,0,1,Article 18(2) [376/2014],,1
+rag,5,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.2667,1,1,1.0,1,1,1,0,1,Article 16(12) [376/2014],,1
+rag,5,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.3793,1,1,1.0,1,1,1,0,1,Article 7(4) [376/2014],,1
+rag,5,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.1443,0,1,0.0,0,0,0,0,1,Annex I [376/2014],Article 7(1) [376/2014],1
+rag,5,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.3146,1,1,1.0,1,1,1,1,1,Article 4 [376/2014]; Article 4(1) [376/2014],,1
+rag,5,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.0,0,0,0.0,0,0,0,1,1,,Article 2(1) [376/2014],0
+rag,5,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.4894,1,1,0.5,1,1,0,1,1,Article 3 [376/2014],Article 3(1) [376/2014],1
+lora,lora-3b,QA_0057,development,exception,medium,Article 18(2),EU_376_2014_ART_18,0.4746,1,1,0.0,0,0,0,0,1,Article 8(3) [376/2014],Article 18(2) [376/2014],
+lora,lora-3b,QA_0012,development,scope,medium,Article 3(2),EU_376_2014_ART_3,0.1282,0,1,0.5,0,1,0,1,1,Article 3(1) [376/2014],Article 3(2) [376/2014],
+lora,lora-3b,QA_0140,development,scope,medium,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.1918,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+lora,lora-3b,QA_0125,test,obligation,medium,Article 3(2),GM_EU_376_2014_SEC_1_6,0.3529,1,1,1.0,1,1,1,1,1,Article 3(2) [376/2014],,
+lora,lora-3b,QA_0114,test,scope,medium,Paragraph 3,GM_EU_376_2014_SEC_1_2,0.3529,1,1,0.0,0,,,0,0,Article 1(2) [376/2014],,
+lora,lora-3b,QA_0071,test,obligation,medium,"Annex I, Section 1",EU_376_2014_ANNEX_I,0.2222,1,1,0.0,0,0,0,1,1,Article 3(2) [376/2014],Annex I [376/2014],
+lora,lora-3b,QA_0052,development,exception,medium,Article 16(6),EU_376_2014_ART_16,0.3333,1,1,0.0,0,0,0,0,1,Article 4(3) [376/2014],Article 16(6) [376/2014],
+lora,lora-3b,QA_0044,test,obligation,easy,Article 14(1),EU_376_2014_ART_14,0.3768,1,1,0.0,0,0,0,0,1,Article 4(1) [376/2014],Article 14(1) [376/2014],
+lora,lora-3b,QA_0216,test,timeline,easy,Article 9(1),GM_EU_376_2014_SEC_4_4,0.3729,1,1,0.0,0,0,0,0,1,Article 5(2) [376/2014],Article 9(1) [376/2014],
+lora,lora-3b,QA_0016,development,obligation,medium,Article 4(4),EU_376_2014_ART_4,0.3333,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Article 4(4) [376/2014],
+lora,lora-3b,QA_0015,development,responsibility,medium,Article 4(2) and Article 4(3),EU_376_2014_ART_4,0.4651,1,1,0.5,1,1,0,1,1,Article 4(1) [376/2014],Article 4(2) [376/2014]; Article 4(3) [376/2014],
+lora,lora-3b,QA_0047,development,obligation,easy,Article 15(1),EU_376_2014_ART_15,0.209,1,1,0.0,0,0,0,0,1,Article 3(2) [376/2014],Article 15(1) [376/2014],
+lora,lora-3b,QA_0111,test,definition,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.2118,1,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Recital 5 [376/2014],
+lora,lora-3b,QA_0119,test,scope,medium,GM to Reg. (EU) No 376/2014 and its IRs [06],GM_EU_376_2014_SEC_1_5,0.1972,1,1,0.0,0,,,0,0,Article 1(1) [376/2014],,
+lora,lora-3b,QA_0013,development,exception,medium,Article 3(2),EU_376_2014_ART_3,0.2708,1,1,0.0,0,0,0,1,1,Article 2(2) [376/2014],Article 3(2) [376/2014],
+lora,lora-3b,QA_0101,test,definition,medium,Article 2,EU_2021_2082_ART_2,0.2154,1,1,0.0,0,0,0,1,1,Article 3(2) [376/2014],Article 2 [376/2014],
+lora,lora-3b,QA_0214,test,timeline,easy,"Article 9(1), Article 13(9)",GM_EU_376_2014_SEC_4_3,0.3673,1,1,0.0,0,0,0,0,1,Article 5(3) [376/2014],Article 9(1) [376/2014]; Article 13(9) [376/2014],
+lora,lora-3b,QA_0112,test,obligation,medium,Recital 5,GM_EU_376_2014_SEC_1_1,0.321,1,1,0.0,0,0,0,1,1,Article 2(1) [376/2014],Recital 5 [376/2014],
+lora,lora-3b,QA_0229,test,obligation,medium,Article 16(11),GM_EU_376_2014_SEC_4_9,0.2449,1,1,1.0,1,1,1,0,1,Article 16(11) [376/2014],,
+lora,lora-3b,QA_0142,development,definition,hard,Article 4(6)(b),GM_EU_376_2014_SEC_2_2,0.2051,1,1,1.0,1,1,1,1,1,Article 4(6)(b) [376/2014],,
+lora,lora-3b,QA_0081,test,scope,medium,"Annex I, Section 1.3, items (1)–(12)",EU_2015_1018_ANNEX_I,0.1277,0,1,0.0,0,0,0,1,1,Article 2(1)(c) [376/2014],Annex I [376/2014],
+lora,lora-3b,QA_0174,test,obligation,medium,Article 16(12),GM_EU_376_2014_SEC_2_14,0.3265,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 16(12) [376/2014],
+lora,lora-3b,QA_0079,test,obligation,medium,Article 2,EU_2015_1018_ART_2,0.0923,0,1,0.0,0,0,0,1,1,Article 1(1) [376/2014],Article 2 [376/2014],
+lora,lora-3b,QA_0110,test,obligation,easy,Article 5(2),EU_2021_2082_ART_5,0.2909,1,1,0.0,0,0,0,1,1,Article 4(2) [376/2014],Article 5(2) [376/2014],
+lora,lora-3b,QA_0172,test,obligation,medium,Article 16,GM_EU_376_2014_SEC_2_13,0.2632,1,1,0.0,0,0,0,0,1,Article 3(1) [376/2014],Article 16 [376/2014],
+lora,lora-3b,QA_0194,test,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_10,0.2581,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 7(4) [376/2014],
+lora,lora-3b,QA_0049,development,responsibility,medium,Article 15(4),EU_376_2014_ART_15,0.4776,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 15(4) [376/2014],
+lora,lora-3b,QA_0135,development,obligation,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.3704,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Article 4(6) [376/2014],
+lora,lora-3b,QA_0022,development,responsibility,medium,Article 6(3),EU_376_2014_ART_6,0.1918,1,1,0.0,0,0,0,1,1,Article 3(2) [376/2014],Article 6(3) [376/2014],
+lora,lora-3b,QA_0150,development,definition,medium,Article 4(6)(e),GM_EU_376_2014_SEC_2_2,0.24,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Article 4(6)(e) [376/2014],
+lora,lora-3b,QA_0185,test,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_5,0.381,1,1,0.0,0,,,0,0,Article 3(1) [376/2014],,
+lora,lora-3b,QA_0147,development,definition,easy,Article 4(6)(d),GM_EU_376_2014_SEC_2_2,0.2909,1,1,0.0,0,0,0,1,1,Article 2(1) [376/2014],Article 4(6)(d) [376/2014],
+lora,lora-3b,QA_0180,test,exception,medium,Article 2(8),GM_EU_376_2014_SEC_3_3,0.2174,1,1,0.5,1,1,0,1,1,Article 2(1) [376/2014],Article 2(8) [376/2014],
+lora,lora-3b,QA_0017,test,obligation,easy,Article 5(1),EU_376_2014_ART_5,0.3951,1,1,0.0,0,0,0,1,1,Article 4(2) [376/2014],Article 5(1) [376/2014],
+lora,lora-3b,QA_0169,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_2_11,0.2286,1,1,0.0,0,,,0,0,Article 3(2) [376/2014],,
+lora,lora-3b,QA_0058,development,obligation,easy,Article 18(4),EU_376_2014_ART_18,0.24,1,1,0.0,0,0,0,0,1,Article 7(2) [376/2014],Article 18(4) [376/2014],
+lora,lora-3b,QA_0197,development,scope,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_3_11,0.268,1,1,0.0,0,,,0,0,Article 3(2) [376/2014],,
+lora,lora-3b,QA_0074,test,scope,medium,ANNEX II (b),EU_376_2014_ANNEX_II,0.037,0,0,0.0,0,0,0,1,1,,Annex II [376/2014],
+lora,lora-3b,QA_0020,development,obligation,easy,Article 6(1),EU_376_2014_ART_6,0.2857,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Article 6(1) [376/2014],
+lora,lora-3b,QA_0218,test,obligation,medium,Article 7,GM_EU_376_2014_SEC_4_5,0.1263,0,1,0.0,0,0,0,0,1,Article 3(2) [376/2014]; Annex I [376/2014],Article 7 [376/2014],
+lora,lora-3b,QA_0059,test,responsibility,easy,Article 19(1),EU_376_2014_ART_19,0.3846,1,1,1.0,1,1,1,0,1,Article 19(1) [376/2014],,
+lora,lora-3b,QA_0221,test,responsibility,medium,Article 13(8),GM_EU_376_2014_SEC_4_6,0.3673,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 13(8) [376/2014],
+lora,lora-3b,QA_0025,test,responsibility,medium,Article 7(8),EU_376_2014_ART_7,0.4151,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 7(8) [376/2014],
+lora,lora-3b,QA_0097,test,timeline,easy,Article 4,EU_2020_2034_ART_4,0.5556,1,1,0.0,0,0,0,1,1,Article 1(1) [2020/2034],Article 4 [376/2014],
+lora,lora-3b,QA_0116,test,responsibility,medium,GM to Reg. (EU) No 376/2014 [04],GM_EU_376_2014_SEC_1_3,0.2727,1,1,0.0,0,,,0,0,Article 4(2) [376/2014],,
+lora,lora-3b,QA_0162,test,scope,medium,Article 4(6),GM_EU_376_2014_SEC_2_8,0.1538,1,1,0.5,1,1,0,1,1,Article 4(2) [376/2014],Article 4(6) [376/2014],
+lora,lora-3b,QA_0093,development,definition,medium,Article 3(2),EU_2020_2034_ART_3,0.2188,1,1,0.5,1,1,0,1,1,Article 3 [376/2014],Article 3(2) [376/2014],
+lora,lora-3b,QA_0041,development,obligation,medium,"Article 13, paragraph 1",EU_376_2014_ART_13,0.2807,1,1,0.0,0,0,0,0,1,Article 3(1) [376/2014],Article 13(1) [376/2014],
+lora,lora-3b,QA_0094,development,definition,medium,Article 3(3),EU_2020_2034_ART_3,0.3922,1,1,0.0,0,0,0,1,1,Article 5(2) [376/2014],Article 3(3) [376/2014],
+lora,lora-3b,QA_0090,test,definition,easy,Article 2(1),EU_2020_2034_ART_2,0.2857,1,1,1.0,1,1,1,1,1,Article 2(1) [376/2014],,
+lora,lora-3b,QA_0053,test,obligation,medium,Article 17,EU_376_2014_ART_17,0.2545,1,1,1.0,1,1,0,0,1,Article 17(1) [376/2014],Article 17 [376/2014],
+lora,lora-3b,QA_0171,test,obligation,medium,"Article 16(1), (2) and (3)",GM_EU_376_2014_SEC_2_12,0.2326,1,1,0.0,0,0,0,0,1,Article 4(1) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014],
+lora,lora-3b,QA_0068,test,timeline,easy,Article 24(1),EU_376_2014_ART_24,0.2222,1,1,0.0,0,0,0,0,1,Article 1(1) [376/2014],Article 24(1) [376/2014],
+lora,lora-3b,QA_0179,test,scope,medium,"GM to Reg. (EU) No 376/2014, Section ii",GM_EU_376_2014_SEC_3_2,0.2154,1,1,0.0,0,,,0,0,Article 3(1) [376/2014],,
+lora,lora-3b,QA_0273,development,obligation,hard,Article 15(1) and Article 15(4),EU_376_2014_ART_15,0.3439,1,1,0.0,0,0,0,0,1,Article 3(1) [376/2014]; Article 4(1) [376/2014],Article 15(1) [376/2014]; Article 15(4) [376/2014],
+lora,lora-3b,QA_0165,test,exception,medium,Article 4(7),GM_EU_376_2014_SEC_2_9,0.2857,1,1,0.0,0,0,0,1,1,Article 3(2) [376/2014],Article 4(7) [376/2014],
+lora,lora-3b,QA_0018,test,scope,medium,Article 5(4),EU_376_2014_ART_5,0.2192,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Article 5(4) [376/2014],
+lora,lora-3b,QA_0155,test,definition,medium,"GM to Reg. (EU) No 376/2014, paragraph 1",GM_EU_376_2014_SEC_2_4,0.28,1,1,0.0,0,,,0,0,Article 3(1) [376/2014],,
+lora,lora-3b,QA_0237,test,responsibility,medium,GM to Reg. (EU) No 376/2014,GM_EU_376_2014_SEC_5_6,0.3462,1,1,0.0,0,,,0,0,Article 3(2) [376/2014],,
+lora,lora-3b,QA_0043,development,obligation,medium,"Article 13, paragraphs 4 and 5",EU_376_2014_ART_13,0.2593,1,1,0.0,0,0,0,0,1,Article 3(1) [376/2014],Article 13(4) [376/2014]; Article 13(5) [376/2014],
+lora,lora-3b,QA_0136,development,exception,medium,Article 4(6),GM_EU_376_2014_SEC_2_2,0.3509,1,1,0.0,0,0,0,1,1,Article 2(2) [376/2014],Article 4(6) [376/2014],
+lora,lora-3b,QA_0186,test,obligation,medium,Recital 4,GM_EU_376_2014_SEC_3_6,0.2545,1,1,0.0,0,0,0,1,1,Article 3(1) [376/2014],Recital 4 [376/2014],
+lora,lora-3b,QA_0234,development,obligation,easy,"Regulation 2015/1018, Annex V",GM_EU_376_2014_SEC_5_3,0.0891,0,0,0.0,0,0,0,0,1,,Annex V [2015/1018],
+lora,lora-3b,QA_0118,test,exception,medium,GM to Reg. (EU) No 376/2014 and its IRs [05],GM_EU_376_2014_SEC_1_4,0.15,1,1,0.0,0,,,0,0,Article 1(1) [376/2014],,
+lora,lora-3b,QA_0240,test,obligation,medium,"Article 16(1), (2) and (3) and Recital 35",GM_EU_376_2014_SEC_5_8,0.3077,1,1,0.0,0,0,0,1,1,Article 3(2) [376/2014],Article 16(1) [376/2014]; Article 16(2) [376/2014]; Article 16(3) [376/2014]; Recital 35 [376/2014],
+lora,lora-3b,QA_0069,test,obligation,medium,Article 24(2),EU_376_2014_ART_24,0.449,1,1,0.0,0,0,0,0,1,Article 15(2) [376/2014],Article 24(2) [376/2014],
+lora,lora-3b,QA_0056,development,timeline,medium,Article 18(2),EU_376_2014_ART_18,0.2759,1,1,0.0,0,0,0,0,1,Article 7(3) [376/2014],Article 18(2) [376/2014],
+lora,lora-3b,QA_0175,test,definition,easy,Article 16(12),GM_EU_376_2014_SEC_2_14,0.28,1,1,0.0,0,0,0,0,1,Article 4(2) [376/2014],Article 16(12) [376/2014],
+lora,lora-3b,QA_0196,development,obligation,easy,Article 7(4),GM_EU_376_2014_SEC_3_11,0.2388,1,1,0.0,0,0,0,0,1,Article 3(1) [376/2014],Article 7(4) [376/2014],
+lora,lora-3b,QA_0198,test,obligation,medium,Article 7(1),GM_EU_376_2014_SEC_3_12,0.1148,0,0,0.0,0,0,0,0,1,Annex I [376/2014],Article 7(1) [376/2014],
+lora,lora-3b,QA_0014,development,scope,medium,Article 4(1),EU_376_2014_ART_4,0.209,1,1,0.5,1,1,0,1,1,Article 3(1) [376/2014]; Article 4 [376/2014],Article 4(1) [376/2014],
+lora,lora-3b,QA_0008,development,definition,easy,Article 2(1),EU_376_2014_ART_2,0.1111,0,1,1.0,0,1,1,1,1,Article 2(1) [376/2014],,
+lora,lora-3b,QA_0102,test,responsibility,medium,Article 3(1),EU_2021_2082_ART_3,0.411,1,1,0.5,1,1,0,1,1,Article 3(2) [376/2014],Article 3(1) [376/2014],

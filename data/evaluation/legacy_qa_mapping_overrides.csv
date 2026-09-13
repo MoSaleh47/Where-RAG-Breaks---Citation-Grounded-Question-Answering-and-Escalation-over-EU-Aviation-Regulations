@@ -1,0 +1,10 @@
+qa_id,decision,parent_id,review_note
+QA_0000,rewrite,EU_2021_2082_ART_6,"Editorial source is outside the legal corpus; the date can be re-grounded in Article 6, but wording must be reviewed."
+QA_0001,exclude,EU_2021_2082_ART_6,"Question concerns the editor contact address, not aviation-regulation QA."
+QA_0002,exclude,GM_EU_376_2014_SEC_1_3,"Generated from table-of-contents text rather than evidence; answer is tautological."
+QA_0003,exclude,GM_EU_376_2014_SEC_2_2,"Generated from table-of-contents text rather than evidence; answer is tautological."
+QA_0004,exclude,GM_EU_376_2014_SEC_2_3,"Generated from table-of-contents text rather than evidence; answer is tautological."
+QA_0152,accept,GM_EU_376_2014_SEC_2_3,"Legacy text differs only in formatting from the complete guidance parent."
+QA_0153,accept,GM_EU_376_2014_SEC_2_3,"Legacy text differs only in formatting from the complete guidance parent."
+QA_0246,accept,GM_EU_376_2014_ACRONYMS,"Acronym table is now a dedicated GM reference parent."
+QA_0247,accept,GM_EU_376_2014_ACRONYMS,"Acronym table is now a dedicated GM reference parent."

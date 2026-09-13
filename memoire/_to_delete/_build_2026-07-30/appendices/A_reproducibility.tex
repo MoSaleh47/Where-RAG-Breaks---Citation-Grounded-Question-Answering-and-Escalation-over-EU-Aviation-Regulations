@@ -1,0 +1,23 @@
+\chapter{Reproducibility Artifacts}
+\label{app:reproducibility}
+
+The research package preserves historical artifacts and isolates new work under \path{aviation_rag_research/}. The following directories contain the primary evidence used in this report:
+
+\begin{itemize}
+  \item \path{data/processed/E1_parent_child_v1}: validated parent and child corpus;
+  \item \path{data/evaluation/legacy100_ai_audited_v1}: AI-assisted candidate benchmark;
+  \item \path{data/evaluation/independent_review_v1}: bounded independent-review package and required-ID manifest;
+  \item \path{experiments/E1_dense_3small_candidate_v1}: small-embedding run;
+  \item \path{experiments/E2_dense_3large_candidate_v1}: large-embedding run;
+  \item \path{experiments/E3_hybrid_rrf_candidate_v1}: hybrid fusion run;
+  \item \path{experiments/E4_cross_encoder_rerank_candidate_v1}: local reranking run;
+  \item \path{experiments/E5_context_top5_candidate_v1}: compact contexts;
+  \item \path{experiments/E5_context_top5_neighbors_candidate_v1}: enriched contexts;
+  \item \path{docs/decision_log.md}: append-only research decisions;
+  \item \path{reports/}: audited tables, figures, and result narratives.
+\end{itemize}
+
+Each experiment records input and output hashes, parameters, software versions, model identifiers, timestamps, and validity status. The automated suite contains 70 passing tests as of 23 July 2026.
+
+\draftnote{Before final submission, export the exact Python and package versions, operating system, GPU, random seeds, hosted API model identifiers, request counts, token counts, latency, and monetary cost into a final environment table.}
+

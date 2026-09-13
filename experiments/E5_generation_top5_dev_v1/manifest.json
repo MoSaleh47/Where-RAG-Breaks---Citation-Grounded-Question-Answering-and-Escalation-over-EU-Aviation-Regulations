@@ -1,0 +1,27 @@
+{
+  "completed_at_utc": "2026-08-09T17:16:31.762838+00:00",
+  "experiment_id": "E5_generation_top5_dev_v1",
+  "inputs": {
+    "contexts_sha256": "5BACB8D26BA455D17DF0161D53AB0BF6A187BB34C4A80D2300ED4E65B2AEDB98",
+    "prompt_sha256": "F05B9CCE384E4F0FA447F2D958EBF2EC8F81E2B5B81033663DA192300489BD15",
+    "schema_sha256": "AEE56830FD359E67E973D87CA503647AFC1049D95941E5B94BD304A8831631DE"
+  },
+  "outputs": {
+    "answers_sha256": "3E83D310416304EC4FDC2569131B9A1E3319AD7EB7CA45D5448AA04E470DF162",
+    "generation_summary_sha256": "1FAABD268486C9288A1D64A609E42EF9402C63925AE00DD7514CCB958127EE62"
+  },
+  "parameters": {
+    "model_requested": "gpt-4o-mini",
+    "model_resolved": [
+      "gpt-4o-mini-2024-07-18"
+    ],
+    "split": "development",
+    "temperature": 0.0
+  },
+  "software": {
+    "openai": "2.53.0",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "generated_on_frozen_reviewed_benchmark"
+}

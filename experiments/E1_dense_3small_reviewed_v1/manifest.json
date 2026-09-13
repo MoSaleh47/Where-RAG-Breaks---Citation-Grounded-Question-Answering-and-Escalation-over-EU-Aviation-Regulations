@@ -1,0 +1,30 @@
+{
+  "api_input_tokens_this_run": 1736,
+  "cache": {
+    "corpus_reused": true,
+    "queries_reused": false
+  },
+  "completed_at_utc": "2026-08-08T20:10:04.504482+00:00",
+  "corpus_count": 1535,
+  "embedding_dimensions": 1536,
+  "experiment_id": "E1_dense_candidate",
+  "inputs": {
+    "audited_qa_sha256": "387EF00E7E88A7265BE9CA25B0E9317B266CF4FC65B2542C662888462E09FC58",
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "split_manifest_sha256": "8E0C06135232AD1D0ECABD24F3DA9670D07A46B86558744E3AB7F2EF3B1E96CA"
+  },
+  "maximum_rank": 20,
+  "model": "text-embedding-3-small",
+  "outputs": {
+    "metrics_sha256": "7CB333CE11A152FF801DE737910F64AA31A04AD118D30AFECBA436BBC3A2DD66",
+    "rankings_sha256": "8F239FB07248C978B89440A659B098AB84DD8A32CEBC29CDD8F531701A572185"
+  },
+  "query_count": 98,
+  "software": {
+    "numpy": "2.2.6",
+    "openai": "2.53.0",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_evaluation_independent_human_review_pending"
+}

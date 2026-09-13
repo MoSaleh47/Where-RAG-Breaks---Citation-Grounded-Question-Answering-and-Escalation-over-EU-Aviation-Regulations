@@ -1,0 +1,27 @@
+\chapter[Conclusion]{Conclusion and Future Work}
+\label{chap:conclusion}
+
+\draftnote{This is an interim conclusion. Replace it only after the reviewed benchmark, generation evaluation, switching calibration, and prototype evaluation are complete. No new result may be introduced here.}
+
+\section{Interim Answer to the Research Question}
+
+The project shows that a single RAG score can conceal several distinct failures. In the historical system, corpus boundaries and context truncation confounded retrieval with evidence delivery. After corpus repair, changing from the smaller to the larger embedding model improves retrieval modestly but does not remove the gap. Lexical BM25 remains competitive, and fusion expands the recoverable candidate pool. A local cross-encoder then repairs ranking failures by moving relevant evidence into a context of approximately five children.
+
+The current residuals cannot be interpreted as one homogeneous ceiling. They include an ambiguous question, an incomplete acceptable-evidence label, and a genuine alignment failure. This finding supports a failure-conditioned escalation policy: rerank when evidence is present but poorly ordered, expand locally when context is incomplete, clarify when intent is ambiguous, and abstain or request human review when evidence is absent or conflicting.
+
+These conclusions remain provisional until the independent benchmark review and end-to-end generation evaluation are complete.
+
+\section{Contributions}
+
+The work contributes a deterministic hierarchy-aware corpus, exact benchmark lineage, leakage-resistant splits, controlled retrieval ablations, cached local reranking, evidence-context variants, a structured citation and quote contract, and a reproducible benchmark-freeze mechanism. Methodologically, it separates data, retrieval, ranking, generation, and verification failure instead of assigning every error to RAG as a whole.
+
+\section{Limitations}
+
+The evaluation set is synthetic, small, and only partially selected for independent review. The present retrieval protocol is English-first. The local reranker was selected for efficiency and English passage ranking rather than multilingual coverage. Test results were inspected during candidate analysis, so subsequent choices must be development-only. The system is a research prototype and cannot replace qualified interpretation of aviation law.
+
+\section{Future Work}
+
+The immediate work is to complete independent review, freeze the benchmark, run evidence-constrained generation, evaluate semantic support and abstention, and calibrate observable switching thresholds. The prototype must then expose evidence, canonical citations, confidence signals, and review status.
+
+Longer-term work may add independently authored expert questions, multilingual evaluation, temporal source updates, cross-regulation reasoning, and an agentic retrieval stage for validated multi-step cases. Any such extension should be compared with the simpler escalation ladder in quality, latency, cost, and failure rate.
+

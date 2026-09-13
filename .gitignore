@@ -1,0 +1,65 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Generated data and model artifacts
+data/raw/*
+!data/raw/README.md
+data/interim/*
+!data/interim/README.md
+data/processed/*
+!data/processed/README.md
+data/evaluation/generated/*
+experiments/*/artifacts/
+experiments/*/outputs/
+*.faiss
+*.npy
+*.npz
+*.safetensors
+*.pt
+*.pth
+
+# Reports generated from experiments
+reports/figures/generated/
+reports/tables/generated/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Reviewer identities -- never committed, never published.
+# The mapping from pseudonym R1--R4 to a named person is held outside version
+# control. Chapter 5 and Appendix C refer to reviewers only by pseudonym.
+review_kit/_private/
+review_kit/_private_final/
+review_kit/**/_private*/
+**/reviewer_key_PRIVATE.csv
+**/*PRIVATE*
+
+# Provider billing exports (account identifiers stripped, still not published)
+docs/billing/*.csv
+
+# Raw review responses exactly as exported from the form. The free-text
+# identity field ("Nom ou role") carries reviewer names, and in one case an
+# employer. Only the pseudonymised derivative is ever public.
+review_kit/*Form Responses*.csv
+review_kit/*Reponses*.csv
+review_kit/*Responses*.csv
+
+# Request/response caches: large, and they hold full prompts and payloads.
+# Reproducibility rests on the manifests' digests, not on shipping the cache.
+experiments/cache/

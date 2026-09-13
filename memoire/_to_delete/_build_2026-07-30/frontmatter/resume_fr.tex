@@ -1,0 +1,16 @@
+\chapter*{R\'{e}sum\'{e} (French Summary)}
+\addcontentsline{toc}{chapter}{R\'{e}sum\'{e} (French Summary)}
+\draftnote{R\'{e}sum\'{e} provisoire. Il devra contenir 250--300 mots et \^{e}tre valid\'{e} par l'\'{e}tudiant apr\`{e}s les exp\'{e}riences finales.}
+
+Les grands mod\`{e}les de langage peuvent produire des r\'{e}ponses r\'{e}glementaires convaincantes tout en citant un article incorrect, en r\'{e}cup\'{e}rant une partie seulement de la r\`{e}gle applicable ou en formulant une conclusion non \'etay\'{e}e. Dans le domaine de l'aviation, une r\'{e}ponse utile doit \^{e}tre rattach\'{e}e \`{a} une source juridique officielle, versionn\'{e}e et pr\'{e}cis\'{e}ment cit\'{e}e. Ce projet \'etudie la question-r\'{e}ponse fond\'{e}e sur les preuves dans les r\`{e}glements a\'{e}ronautiques de l'Union europ\'{e}enne. Il transforme une comparaison initiale entre prompting few-shot, g\'{e}n\'{e}ration augment\'{e}e par recherche et adaptation LoRA en une analyse des limites du RAG : o\`{u} le syst\`{e}me \'echoue-t-il et quel signal observable justifie une m\'{e}thode plus complexe ou une revue humaine ?
+
+La m\'{e}thode commence par auditer le corpus et le benchmark historiques. Elle construit ensuite un corpus hi\'{e}rarchique parent--enfant, des identifiants juridiques stables et des partitions de d\'{e}veloppement et de test regroup\'{e}es par source. Les exp\'{e}riences comparent BM25, deux mod\`{e}les d'embeddings, une fusion par rang r\'{e}ciproque et un reranker cross-encoder local. Les r\'{e}sultats candidats montrent que le grand mod\`{e}le d'embeddings apporte un gain modeste, tandis que les signaux lexicaux et s\'{e}mantiques restent compl\'{e}mentaires. Les erreurs r\'{e}siduelles combinent ambigu\"{i}t\'{e}, labels incomplets et v\'{e}ritables \'echecs de recherche.
+
+Cette conception par \'{e}tapes s\'{e}pare les d\'{e}faillances du corpus, de la recherche, du classement, du contexte, de la g\'{e}n\'{e}ration et de la v\'{e}rification, afin de ne pas confondre un gain local avec une fiabilit\'{e} globale.
+
+La phase finale mesurera la g\'{e}n\'{e}ration contrainte par les preuves, la pr\'{e}cision des citations, la v\'{e}rification des affirmations, l'abstention, la latence et le co\^{u}t sur un benchmark revu ind\'{e}pendamment.
+
+\medskip
+\noindent\textbf{\color{aivancityNavy}Mots-cl\'{e}s~:}
+\textit{\color{aivancityGray}RAG, question-r\'{e}ponse juridique, r\'{e}glementation a\'{e}ronautique, recherche hybride, reranking, v\'{e}rification, abstention.}
+

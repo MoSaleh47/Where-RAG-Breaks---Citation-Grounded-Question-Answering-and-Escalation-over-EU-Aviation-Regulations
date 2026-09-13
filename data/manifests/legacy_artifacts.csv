@@ -1,0 +1,6 @@
+artifact_id,role,records,relative_path,sha256,status
+legacy_qa,synthetic_qa_dataset,300,../Documents/qa_pairs_final.json,7AC64199747BB9AAFB222ADF4D91D04235DF439F0EF99CA17AF5DF30C7990E90,frozen_with_known_limitations
+legacy_fewshot,stored_predictions,300,../Documents/results_fewshot.json,072D6681950225EE5A19FB3E87AA0A933D10CEC9D68B5D1D2475EDC25E4B7DA9,frozen
+legacy_rag,stored_predictions,300,../Documents/results_rag.json,1F3EB2B73AB42FB60F5D9076803B8BE89ADCACBB3F9C3C94C313E36F1FE596E7,frozen
+legacy_lora,stored_predictions,100,../Documents/results_lora.json,0060AF178B37A8BBA26199761AC7622E47B5A6B14FA70E6EBFE5C05FFA21DC0A,frozen
+

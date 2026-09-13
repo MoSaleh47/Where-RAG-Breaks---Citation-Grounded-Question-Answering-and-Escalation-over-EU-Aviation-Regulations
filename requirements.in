@@ -1,0 +1,20 @@
+# Runtime dependencies will be pinned into a lock file after the active
+# environment and Windows/GPU constraints have been audited.
+numpy
+pandas
+matplotlib
+openai
+python-dotenv
+pyyaml
+rank-bm25
+transformers
+
+# Research and validation
+pytest
+ruff
+
+# FAISS must be installed using the verified Windows/Conda route for the
+# selected environment. Do not add an untested pip pin here.
+# PyTorch must match the local CUDA/driver combination and is recorded in
+# reranking manifests rather than assigned a generic pip pin here.
+

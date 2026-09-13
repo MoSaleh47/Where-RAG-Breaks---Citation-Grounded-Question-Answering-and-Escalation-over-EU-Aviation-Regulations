@@ -1,0 +1,44 @@
+{
+  "benchmark_scope_note": "All audit exceptions and a deterministic stratified unchanged sample were independently reviewed; unselected retained records were not individually reviewed.",
+  "cached_question_embeddings_fully_reusable": false,
+  "cached_rankings_require_recomputation": true,
+  "changed_parent_qa_ids": [],
+  "changed_question_qa_ids": [
+    "QA_0040",
+    "QA_0083",
+    "QA_0163",
+    "QA_0213",
+    "QA_0235",
+    "QA_0279",
+    "QA_0289",
+    "QA_0294"
+  ],
+  "decision_counts": {
+    "accept": 19,
+    "accept_with_alternative_evidence": 0,
+    "correct": 12,
+    "exclude": 2
+  },
+  "development_fraction_requested": 0.4,
+  "excluded_qa_ids": [
+    "QA_0003",
+    "QA_0063"
+  ],
+  "full_benchmark_expert_review_complete": false,
+  "independently_reviewed_retained_count": 31,
+  "input_record_count": 100,
+  "retained_record_count": 98,
+  "review_queue_count": 33,
+  "source_group_leakage_count": 0,
+  "split_parent_counts": {
+    "development": 11,
+    "test": 49
+  },
+  "split_record_counts": {
+    "development": 40,
+    "test": 58
+  },
+  "split_seed": "aviation-rag-v1",
+  "status": "frozen_reviewed_exceptions_and_stratified_sample",
+  "unreviewed_retained_count": 67
+}

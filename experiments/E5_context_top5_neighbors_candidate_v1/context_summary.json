@@ -1,0 +1,24 @@
+{
+  "anchor_count_mean": 5,
+  "configuration": {
+    "max_per_parent": null,
+    "max_words": 1600,
+    "neighbor_radius": 1,
+    "top_k": 5
+  },
+  "evidence_words": {
+    "maximum": 1090,
+    "mean": 473.34343434343435,
+    "median": 453,
+    "p95": 823
+  },
+  "neighbor_count_mean": 6.363636363636363,
+  "query_count": 99,
+  "questions_with_budget_skips": 0,
+  "source_count": {
+    "maximum": 15,
+    "mean": 11.363636363636363,
+    "median": 11,
+    "p95": 15
+  }
+}

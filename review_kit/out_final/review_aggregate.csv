@@ -1,0 +1,37 @@
+qa_id,source_class,review_reason,n_reviewers,reviewers,votes_accept,votes_correct,votes_exclude,agg_question_clear_and_unambiguous,agg_answer_fully_supported,agg_citation_correct,agg_gold_evidence_complete,panel_verdict,contested,auto_decision,action_needed,comments
+QA_0003,GM,exception_record,3,R1; R2; R4,0,2,1,yes,uncertain,uncertain,no,correct,yes,,reviewers disagree,"R1: Dire ""individus"" est réducteur, ce sont en fait les organisations qui doivent reporter. 
+Qu'entends-tu par ""section 2.2."" dans le 376 ?
+Je ne suis pas sûre que le mot ""soutenue"" et la formulation dans  "" La reponse est-elle entierement soutenue par le texte fourni?"" soit français. || R2: Seules les organisations sont soumis à la notification obligatoire. || R4: texte manquant"
+QA_0011,ARTICLE,exception_record,4,R1; R2; R3; R4,3,1,0,yes,yes,yes,yes,accept,no,accept,,"R1: qu'entends-tu par ""subject matter"" ?"
+QA_0040,ARTICLE,stratified_unchanged_ARTICLE_test,3,R2; R3; R4,1,1,1,yes,no,yes,no,exclude,yes,,reviewers disagree,"R2: L'article 12 (1) n'a rien à voir avec la chronologie (timeline). || R3: Il me semble qu'on peut être plus direct avec des ""timelines"" plus précises (3j pour notifier un évènement, 3mois pour en faire l'analyse, etc) mais à confirmer"
+QA_0047,ARTICLE,stratified_unchanged_ARTICLE_development,4,R1; R2; R3; R4,3,1,0,yes,yes,yes,yes,accept,no,accept,,R3: Pas assez concret comme réponse je trouve
+QA_0058,ARTICLE,stratified_unchanged_ARTICLE_development,3,R2; R3; R4,3,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0062,ARTICLE,exception_record,4,R1; R2; R3; R4,0,4,0,yes,no,yes,no,correct,no,,panel wants a correction - you must supply the corrected fields,"R1: renvoyer à des textes existants ne me paraît pas donner une réponse claire et rapide à la question || R2: L'article 20 fait référence aux articles 10 et 11...difficile de répondre précisément à la question sans ces articles. || R3: Réponse trop vague encore peut-être chercher à plus précisier || R4: expliciter 1049/200, Directive 95/46/EC et 45/2001."
+QA_0063,ARTICLE,hybrid_k20_residual,4,R1; R2; R3; R4,0,2,2,no,no,yes,no,exclude,yes,,reviewers disagree,R1: What exceptions are noted in Regulation (EU) No 376/2014? --> concerne uniquement l'accès aux doc et à la protection des données. La question ne précise pas cela3 || R2: voir réponse précédente sur ce même article. || R3: Pas sûr d'avoir compris< l'intérêt de cette question || R4: expliciter question
+QA_0071,ANNEX,stratified_unchanged_ANNEX_test,4,R1; R2; R3; R4,1,3,0,yes,yes,yes,yes,correct,yes,,reviewers disagree,"R1: qu'entends-tu par ""section 1"" ? || R2: Il faut préciser les champs olbigatoires. Ex: ""Filling information"" => Responsible entity, File number, Occurence Status. || R4: question plus explicite sur la qualité des données. réponse plus explicite en fournissant la liste des 13 champs communs obligatoires."
+QA_0080,ANNEX,exception_record;hybrid_k20_residual,3,R2; R3; R4,2,1,0,yes,yes,yes,yes,accept,no,accept,,R2: on parle d'occurence category et d'activity category à ma connaissance.
+QA_0081,ANNEX,stratified_unchanged_ANNEX_test,3,R2; R3; R4,2,1,0,yes,no,yes,yes,accept,yes,,reviewers disagree,R4: terme catégorie ambigu dans la question. réponse non exhaustive
+QA_0083,ANNEX,exception_record,4,R1; R2; R3; R4,1,2,1,yes,no,yes,no,correct,yes,,reviewers disagree,"R1: qu'entends-tu par ""Annex II, item 3.14"" ? || R4: la question fait référence au 2015/1018 et non au 376/2014"
+QA_0097,ARTICLE,stratified_unchanged_ARTICLE_test,3,R2; R3; R4,1,1,1,no,yes,yes,yes,exclude,yes,,reviewers disagree,"R2: Sauf erreur de ma prt, 2020/2034 non cité dans le 376/2014. || R4: il manque le libellé en clair du texte référencé"
+QA_0163,GM,stratified_unchanged_GM_test,3,R1; R3; R4,0,3,0,yes,no,yes,yes,correct,no,,panel wants a correction - you must supply the corrected fields,R1: l'Article 4(6) ne me semble pas parler de manque de confiance en son organisation || R3: Réponse pas assez complète à mon avis but manquant et dimension analytique prévention des risques pas assez mentionnée comparée à ce qu'il y a dans le texte || R4: expliciter la question sur le canal de remontée préférentiel
+QA_0176,GM,exception_record;hybrid_k20_residual,3,R1; R3; R4,2,1,0,yes,yes,yes,yes,accept,no,accept,,R1: GM 3(1) = ?
+QA_0183,GM,exception_record,3,R1; R3; R4,1,2,0,yes,yes,yes,yes,correct,no,,panel wants a correction - you must supply the corrected fields,"R1: GM 3.4 = ?
+pourquoi ""design or production organisations"" ? || R4: préciser dans la réponse le délai supplémentaire de 72h pour le report à l'Autorité"
+QA_0193,GM,exception_record,2,R3; R4,2,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0213,GM,exception_record,3,R1; R3; R4,0,3,0,uncertain,yes,yes,yes,correct,no,,panel wants a correction - you must supply the corrected fields,R1: GM 4.2. = ? || R3: Question peut-être trop floue || R4: A reformuler car la question et la réponse ne sont pas alignées entre organisation/individu d'un côté et obligatoire/volontaire de l'autre.
+QA_0229,GM,stratified_unchanged_GM_test,3,R1; R3; R4,3,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0235,GM,stratified_unchanged_GM_development,2,R3; R4,0,2,0,yes,no,uncertain,yes,correct,yes,,reviewers disagree,R3: Peut-être donner directement les éléments du fameux article 4(5) || R4: la question est trop vague
+QA_0248,ARTICLE,exception_record,3,R1; R3; R4,3,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0258,ARTICLE,exception_record,3,R1; R3; R4,2,1,0,yes,yes,yes,yes,accept,no,accept,,"R4: dans la question ""information"" est vague. Dans la réponse expliciter le contenu des articles 4 et 5"
+QA_0263,ARTICLE,exception_record,3,R1; R3; R4,3,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0265,ARTICLE,exception_record,3,R1; R3; R4,3,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0272,ARTICLE,exception_record,3,R1; R3; R4,1,2,0,yes,yes,yes,yes,correct,yes,,reviewers disagree,R3: Pas sûr de la clarté de la question || R4: Revoir la question
+QA_0277,ARTICLE,exception_record,3,R1; R3; R4,3,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0278,ARTICLE,exception_record,3,R1; R3; R4,2,1,0,yes,yes,yes,yes,accept,no,accept,,R4: question à clarifier. dans la réponse bien séparer organisation d'un côté et member state de l'autre
+QA_0279,ARTICLE,exception_record,3,R1; R3; R4,1,2,0,uncertain,yes,yes,yes,correct,yes,,reviewers disagree,"R3: Trop flou en général || R4: il manque dans la question et la réponse ""article 16"" à associer à paragraphe 10."
+QA_0287,ARTICLE,exception_record,3,R1; R3; R4,1,1,1,yes,yes,yes,yes,exclude,yes,,reviewers disagree,R1: l'Article 5(1)-(2) parle de CR volontaires || R4: la question n'est pas claire
+QA_0289,GM,stratified_unchanged_GM_development,2,R3; R4,2,0,0,yes,yes,yes,yes,accept,yes,,reviewers disagree,
+QA_0290,GM,exception_record,2,R3; R4,2,0,0,yes,yes,yes,yes,accept,no,accept,,
+QA_0292,GM,exception_record,2,R1; R4,1,1,0,yes,yes,yes,yes,accept,yes,,reviewers disagree,"R4: ne pas faire commencer la réponse par ""the guidance..."""
+QA_0293,GM,exception_record,1,R4,1,0,0,yes,yes,yes,yes,accept,no,,"only 1 reviewer(s), need 2",
+QA_0294,GM,exception_record,1,R4,0,1,0,uncertain,yes,yes,yes,correct,no,,"only 1 reviewer(s), need 2",R4: reformuler question (le terme criteria est ambigu)

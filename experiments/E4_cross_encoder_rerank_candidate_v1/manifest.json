@@ -1,0 +1,39 @@
+{
+  "cache": {
+    "score_cache_sha256": "676BD8E8CB7FB14EDBAAF26BCA2407BF227E15DD5B4998D123EAD8131817DDA4",
+    "scores_reused": false
+  },
+  "completed_at_utc": "2026-07-22T07:44:48.608456+00:00",
+  "experiment_id": "E4_cross_encoder_rerank_candidate",
+  "inputs": {
+    "audited_qa_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+    "candidate_k": 20,
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "hybrid_rankings_sha256": "3A7176DB2BDED3EFDA6946584CD4FEE3CE617F89BAC11FB76B04B016C06C53DE",
+    "max_length": 512,
+    "model": "cross-encoder/ms-marco-MiniLM-L6-v2"
+  },
+  "model_runtime": {
+    "cuda": true,
+    "device": "cuda",
+    "torch": "2.6.0+cu118",
+    "transformers_model_commit": "c5ee24cb16019beea0893ab7796b1df96625c6b8"
+  },
+  "outputs": {
+    "metrics_sha256": "1F87E76764D0A13D9D2011D03B7AFD75BBEFF9DA364988E89B0CBE4CC735D525",
+    "rankings_sha256": "BCE83E30662E845A8CED297E00E39C2F9126505D95D271282FBD06032004F851"
+  },
+  "pair_count": 1980,
+  "parameters": {
+    "batch_size": 64,
+    "candidate_k": 20,
+    "max_length": 512,
+    "model": "cross-encoder/ms-marco-MiniLM-L6-v2"
+  },
+  "query_count": 99,
+  "software": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_evaluation_independent_human_review_pending"
+}

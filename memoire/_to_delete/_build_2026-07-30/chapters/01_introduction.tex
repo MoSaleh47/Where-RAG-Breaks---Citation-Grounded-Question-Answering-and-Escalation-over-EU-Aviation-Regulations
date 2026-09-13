@@ -1,0 +1,99 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background and Motivation}
+\label{sec:intro-background}
+
+European aviation safety rests on a layered body of binding regulation, implementing acts, annexes, and guidance material. A person answering a regulatory question must identify not merely a plausible rule but the applicable instrument, the article, the paragraph, the version in force, and the conditions and exceptions that surround it. Two provisions may state compatible obligations while only one of them governs a given operator; a requirement may be qualified by an exception three subparagraphs later; and guidance material may explain how a requirement is commonly met without itself imposing anything.
+
+This makes aviation-regulation question answering fundamentally different from open-domain conversational assistance. Fluency is not merely insufficient --- it is actively dangerous, because a fluent answer that cites the wrong provision is harder for a non-specialist to detect than an obviously uncertain one. A useful answer must be supported by authoritative text and traceable to a precise citation that a qualified reader can check in a few seconds.
+
+\acp{LLM} create a genuine opportunity here. Regulatory material is voluminous, cross-referenced, and difficult to navigate for anyone who is not a full-time specialist, and a system that answers in natural language while pointing at the governing provision would meaningfully reduce the cost of finding an answer. But the same technology introduces a reliability problem that the aviation domain cannot absorb. A model can produce a confident explanation when it has retrieved the wrong provision, or when the cited source does not entail the claim built on it.
+
+\ac{RAG} reduces this risk by placing retrieved evidence in the generation context. It does not eliminate it. A recent audit of commercial retrieval-augmented legal research tools found that they still produce unsupported or miscited output in a substantial fraction of responses~\cite{magesh2025hallucination}, and a human evaluation of generative search engines found that only about half of generated sentences were fully supported by their own citations, with fluency correlating \emph{inversely} with citation precision~\cite{liu2023verifiability}. Grounding is an improvement, not a safety property.
+
+There is a second and less-discussed difficulty. ``\ac{RAG}'' names a family of separable decisions rather than a single intervention: source parsing, chunk boundaries, retrieval model, candidate depth, ranking, context construction, prompt contract, citation handling, and verification policy~\cite{gao2023ragsurvey}. Each of these can fail independently, and each failure mode calls for a different response. A single end-to-end accuracy figure conceals which component failed, and therefore conceals what should be done about it.
+
+\section{Problem Statement}
+\label{sec:intro-problem}
+
+The initial phase of this project compared three approaches over the same regulatory material: few-shot prompting, a retrieval-grounded pipeline, and a model adapted with \ac{LoRA}. The retrieval-grounded system performed best. That comparison remains an informative baseline, but two problems prevent it from supporting the conclusions it appears to support.
+
+The first is confounding. The corpus of that phase represented the source material as comparatively flat chunks, some longer than 30{,}000 characters, while the generator received only the first 1{,}500 characters of the selected chunk. A retrieval evaluation could therefore count a source as found when the supporting paragraph never reached the generator at all. The benchmark itself consisted of synthetic questions whose reference answers had not been checked against the provisions they cited, citation matching was performed by substring comparison so that a partial match to the wrong subparagraph scored half credit, and document identity was not preserved across the several instruments consolidated in the source publication. Treating every observed error as an intrinsic limitation of retrieval-augmented generation would confound system failure with data and evaluation failure.
+
+The second is that a leaderboard does not answer the operational question. Knowing that one architecture scores higher than another says nothing about what a deployed system should do when it is about to answer badly. In a compliance setting that second question is the one that matters, because the acceptable behaviour on an unanswerable question is not a low-confidence guess --- it is a refusal and a referral.
+
+This work therefore repairs the confounders first, and then reframes the contribution around failure diagnosis and calibrated escalation.
+
+\begin{infobox}
+\textbf{Primary research question.}
+Where and why does retrieval-augmented generation fail in citation-bearing aviation-regulation question answering, and which observable conditions justify escalating from standard RAG to more advanced retrieval, verification, multi-step reasoning, or human review?
+\end{infobox}
+
+The primary question is decomposed into six operational questions:
+
+\begin{enumerate}
+  \item How much error originates in corpus parsing, retrieval, ranking, context construction, generation, or citation verification?
+  \item Does a hierarchy-aware parent--child representation improve evidence retrieval and exact citation traceability?
+  \item Does a larger dense embedding model provide a meaningful gain over the smaller baseline under an identical corpus and query set?
+  \item Does hybrid lexical and dense retrieval recover terminology-heavy and semantically paraphrased questions more reliably than either channel alone?
+  \item When does cross-encoder reranking or local context expansion recover evidence already present in a broader candidate set?
+  \item Under which conditions should the system clarify, abstain, or refer the question to a qualified human rather than apply another automated step?
+\end{enumerate}
+
+The sixth question is the one that carries the contribution. The first five are instrumental to it: each identifies a class of failure, and the escalation policy is the answer to what should be done when that class of failure is detected at runtime.
+
+\section{Methodological Stance}
+\label{sec:intro-stance}
+
+Three commitments shape how the work is conducted, and they are stated here because they explain several choices that would otherwise look conservative.
+
+\textbf{The measuring instrument is validated before its measurements are believed.} A benchmark whose gold labels are partly machine-generated cannot certify itself. Before any performance figure in this thesis is described as final, a stratified sample of the evaluation set is audited by human reviewers and the agreement between them is reported rather than asserted. This is why the retrieval results in Chapter~\ref{chap:results} carry a candidate status: not because they are unreliable, but because the standard of evidence for a final claim has not yet been met.
+
+\textbf{One component changes at a time.} Where two changes are of interest, they are run as separate experiments with separate manifests. This costs experimental throughput and buys attributability, which is the only thing that makes a failure analysis possible.
+
+\textbf{A negative result is retained.} Configurations that were tried and rejected --- unequal fusion weights, parent-mass score boosting --- remain documented rather than quietly removed, so that the reported design can be read against the alternatives that were considered.
+
+\section{Objectives and Contributions}
+\label{sec:intro-contributions}
+
+The project pursues five measurable objectives. First, it establishes a reproducible evidence corpus in which every retrievable unit is linked to a coherent legal parent, a source document, a hierarchy, and a canonical citation. Second, it audits the legacy benchmark rather than silently treating synthetic source labels as ground truth. Third, it compares retrieval interventions through controlled ablations that hold the corpus, questions, and split policy fixed. Fourth, it separates evidence retrieval from answer generation and from citation verification, so that each can fail visibly and independently. Fifth, it converts the resulting failure taxonomy into a switching policy driven by observable runtime signals rather than by gold labels that are unavailable in deployment.
+
+The principal technical and methodological contributions are:
+
+\begin{itemize}
+  \item a deterministic parent--child representation of the stored aviation-regulation sources, preserving instrument identity and the distinction between binding text and guidance material;
+  \item exact lineage from historical question identifiers to parent and child evidence units, with fuzzy matches never silently accepted;
+  \item parent-grouped development and test partitions that prevent evidence leakage between tuning and reporting;
+  \item a controlled comparison of two dense embedding models, local BM25, reciprocal-rank fusion, and a local cross-encoder reranker, with model selection performed on development data only;
+  \item structured generation using application-resolved citations and verbatim evidence quotes, so that a citation cannot be fabricated by the model;
+  \item a pre-registered multi-reviewer validation protocol for the benchmark, with chance-corrected agreement reported and contested records listed individually;
+  \item a distinction, made empirically rather than assumed, between ranking failures, candidate-generation failures, ambiguous questions, incomplete benchmark labels, unsupported generation, and evidence conflict;
+  \item a cost-aware escalation ladder that reserves multi-step or agentic retrieval for residual cases that have been validated as genuinely requiring it.
+\end{itemize}
+
+The seventh of these deserves emphasis, because it is the finding that reframed the project. Three questions in the evaluation set resist retrieval even at a candidate depth of twenty. It would be natural to report that as a system ceiling. Examined individually, they turn out to be three different problems: one question is ambiguous, one has equivalent evidence that the gold label failed to record, and only the third is a genuine retrieval failure. Reporting them as a single ceiling would have been a measurement error rather than a result --- and that observation is what motivated the validity protocol that now governs the whole evaluation.
+
+\section{Scope and Delimitations}
+\label{sec:intro-scope}
+
+The empirical source material is restricted to the aviation-regulation documents stored in the project workspace: Regulation~(EU)~No~376/2014 on occurrence reporting, together with its implementing and amending instruments and the associated guidance material, as consolidated in the \ac{EASA} Easy Access Rules publication~\cite{eu2014reg376,easa2022easyaccess376}. No claim is made about generalisation to other regulatory instruments; the corpus, benchmark, and protocol are designed to be transferable, but transfer is not demonstrated here.
+
+The present benchmark evaluates English regulatory evidence. French-to-English retrieval, bilingual answer generation, and a bilingual corpus are realistic extensions and are treated in the state of the art, but they are not mixed into the current evaluation without an explicit protocol, because doing so would confound a language effect with the retrieval effects under study.
+
+Three further delimitations apply. The three-system baseline is an end-to-end comparison, not a causal claim about architectures: the systems do not share a base model, so any difference between them confounds architecture with model capability. The generation stage evaluates a commercial model that cannot be fine-tuned, so all adaptation in this work is on the retrieval side. And the evaluation set, while grounded in real regulatory text, consists of synthetic questions audited by human reviewers rather than questions independently authored by domain practitioners.
+
+Finally, the study evaluates a research prototype, not a certified legal decision system. Generated answers cannot replace competent legal or aviation-safety review. Where evidence is absent, ambiguous, or conflicting, abstention and human referral are intended outcomes rather than system failures --- a position that is not a disclaimer but a design commitment, and one that is tested as a safety property in Chapter~\ref{chap:method}.
+
+\section{Report Structure}
+\label{sec:intro-structure}
+
+Chapter~\ref{chap:sota} reviews the research this work builds on and the research that defines what an adequate answer to the problem would look like: retrieval-augmented generation, lexical and dense retrieval, granularity and reranking, legal and regulatory language processing, attribution and verifiability, selective answering, and the evaluation methodology through which any of it can be measured.
+
+Chapter~\ref{chap:context} presents the professional context, the mission and its revision, the regulatory domain, the data and its provenance, and the constraints under which the project operates.
+
+Chapter~\ref{chap:method} describes the corpus redesign, the benchmark audit and its validity gate, the retrieval architecture, the generation contract, verification and selective answering, the escalation policy and its calibration, the evaluation measures, and the reproducibility controls.
+
+Chapter~\ref{chap:results} reports the audit of the historical baseline and the candidate retrieval and reranking results, before presenting the end-to-end evaluation.
+
+Chapter~\ref{chap:conclusion} answers the research question to the extent that the reviewed evidence supports, and states the limitations and the work that remains.

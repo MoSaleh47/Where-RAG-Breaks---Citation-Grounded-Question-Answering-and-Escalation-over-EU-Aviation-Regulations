@@ -1,0 +1,23 @@
+{
+  "completed_at_utc": "2026-08-08T20:10:09.598672+00:00",
+  "experiment_id": "E3_hybrid_rrf_candidate",
+  "inputs": {
+    "dense_rankings_sha256": "703E3F03BFA127A3AEA8BEF382E7DBCF32F05C56779805369CA8D4B96C865074",
+    "lexical_rankings_sha256": "656695496835F2E61EF9907BC8C0B5E0682D456BDC2282BC276D649102A23379"
+  },
+  "maximum_rank": 20,
+  "outputs": {
+    "metrics_sha256": "A10AF94ACB381A18449596BEB3F7655EB9FFC528032EDE42DD20EB8D0ADC0DAA",
+    "rankings_sha256": "217D52E11FF2C5CB7CC0D1F51D8AD891515D5735318B0259F569E7F7FC3B2CBD"
+  },
+  "parameters": {
+    "method": "equal_weight_reciprocal_rank_fusion",
+    "rrf_constant": 60
+  },
+  "query_count": 98,
+  "software": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_evaluation_independent_human_review_pending"
+}

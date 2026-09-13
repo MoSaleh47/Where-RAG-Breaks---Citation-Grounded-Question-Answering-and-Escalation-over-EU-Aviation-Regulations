@@ -1,0 +1,25 @@
+{
+  "completed_at_utc": "2026-07-18T21:15:29.639261+00:00",
+  "corpus_count": 1535,
+  "experiment_id": "BM25_local_candidate",
+  "inputs": {
+    "audited_qa_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "split_manifest_sha256": "BAC26354A58C970C80FB320606767D1EDC9435306449CBF1D6ED91794B4B0150"
+  },
+  "maximum_rank": 20,
+  "outputs": {
+    "metrics_sha256": "308D4BE2A1474C5561B68F6ECA959B8FCE45680F414498DF9FD7DE30266C41B5",
+    "rankings_sha256": "53DB367025697E8F0BC06707CA465DD8A3819E33F76AFFA74F7B8C8C64177A3C"
+  },
+  "parameters": {
+    "b": 0.75,
+    "k1": 1.5
+  },
+  "query_count": 99,
+  "software": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_evaluation_independent_human_review_pending"
+}

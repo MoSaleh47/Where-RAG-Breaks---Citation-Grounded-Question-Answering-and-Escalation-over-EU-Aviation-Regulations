@@ -1,0 +1,231 @@
+\chapter[Reproducibility and Cost]{Reproducibility, Environment\texorpdfstring{\\}{ }and Cost}
+\label{app:reproducibility}
+
+\section{Execution Environments}
+
+The work was not carried out in a single environment, and this appendix records
+the three that were used rather than presenting a tidy composite. Each experiment
+directory contains a \texttt{manifest.json} recording the interpreter and library
+versions actually present when that experiment ran, so any run can be attributed
+to its environment without relying on Table~\ref{tab:environments}.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Environments used, as recorded in the experiment manifests.}
+  \label{tab:environments}
+  \small
+  \begin{tabularx}{\textwidth}{@{}l l l X@{}}
+    \toprule
+    \textbf{Env.} & \textbf{Python} & \textbf{OpenAI client} & \textbf{Used for} \\
+    \midrule
+    A & 3.10.11 & 2.24.0 &
+      Candidate retrieval runs, both candidate dense-embedding runs, and the
+      held-out generation run \\
+    B & 3.10.16 (Anaconda) & 2.53.0 &
+      Reviewed retrieval runs, both reviewed dense-embedding runs, and the
+      development generation runs \\
+    C & 3.10.12 (Linux) & --- &
+      Context assembly, escalation calibration, and the re-scoring of the
+      historical baselines. No hosted call is made by any of these. \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+Table~\ref{tab:environment} details environment~B, the machine on which most of the work was performed.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Hardware and principal library versions for environment B, the machine on which most of the work was performed.}
+  \label{tab:environment}
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Component} & \textbf{Value} \\
+    \midrule
+    Operating system & Windows 10.0.26200 \\
+    Processor & Intel64 Family 6 Model 186 Stepping 2 \\
+    Logical CPUs & 16 \\
+    GPU & NVIDIA GeForce RTX 4070 Laptop \\
+    Python & 3.10.16 (CPython, Anaconda) \\
+    \midrule
+    \texttt{openai} & 2.53.0 \\
+    \texttt{numpy} & 2.2.6 \\
+    \texttt{torch} & 2.7.1+cu118 \\
+    \texttt{transformers} & 5.12.1 \\
+    \texttt{matplotlib} & 3.10.0 \\
+    \texttt{python-dotenv} & 1.0.1 \\
+    \texttt{scikit-learn} & 1.6.0 \\
+    \texttt{peft} & 0.12.0 \\
+    \texttt{accelerate} & 1.14.0 \\
+    \texttt{bitsandbytes} & 0.49.2 \\
+    \texttt{safetensors} & 0.5.2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\paragraph{A difference between the two generation runs.}
+Development generation was performed in environment B and held-out generation in
+environment A, so the two runs used different client library versions
+(2.53.0 and 2.24.0) and different Python patch releases. This was not intended
+and is recorded because Chapter~\ref{chap:results} compares those two runs
+directly. The request is determined by the prompt, the schema, the model
+identifier and the temperature, all of which are pinned and hashed identically in
+both manifests, and the model itself
+(\texttt{gpt-4o-mini-2024-07-18}) executes server-side; a client-version effect
+is therefore unlikely. It is not excluded. The runs were not repeated to test it:
+responses are cached by model, prompt, schema and context, so a repeat would
+return the stored answers without contacting the API, and bypassing the cache
+would spend the held-out partition a second time, which decision D043 forbids.
+
+\section{Determinism and Caching}
+
+Generation used temperature 0 throughout. Every response is cached on disk under
+a key covering the model, the system instruction, the user message and the schema
+digest, so a repeated run reproduces the stored answers exactly and cannot be
+re-billed. The corpus embeddings were copied between cache directories rather
+than recomputed when the benchmark was frozen, because the corpus text did not
+change; the copies are recorded in the usage tables with
+\texttt{billed = no} so the saving is visible rather than silent.
+
+The evaluation split is deterministic and derived from a string seed consumed by
+SHA-256 rather than from a random number generator. The frozen split is
+\emph{inherited} from the candidate split rather than recomputed, for the reason
+given in decision D028.
+
+\section{Hosted API Usage}
+
+Two model families were used: \texttt{gpt-4o-mini-2024-07-18} for all generation,
+and \texttt{text-embedding-3-small} and \texttt{text-embedding-3-large} for dense
+retrieval. The LoRA-adapted system was executed locally on the GPU listed above
+and made no hosted call.
+
+Table~\ref{tab:usage-completions} reports the completion requests and their tokens.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Completion requests and tokens, from the provider's usage export. Consolidated in \texttt{docs/billing/}.}
+  \label{tab:usage-completions}
+  \small
+  \begin{tabular}{llrrr}
+    \toprule
+    \textbf{Date} & \textbf{Run} & \textbf{Requests} & \textbf{Input} & \textbf{Output} \\
+    \midrule
+    2026-03-18 & Few-shot baseline & 300 & 168{,}466 & 18{,}913 \\
+    2026-05-26 & RAG baseline & 300 & 267{,}952 & 17{,}268 \\
+    2026-08-09 & E5 generation, development & 84 & 135{,}852 & 28{,}065 \\
+    2026-08-12 & E5 generation, held-out & 56 & 90{,}638 & 16{,}462 \\
+    \midrule
+    & \textbf{Total} & \textbf{740} & \textbf{662{,}908} & \textbf{80{,}708} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:usage-embeddings} reports embedding tokens separately, deduplicated on the text digest so that copied caches are not counted twice.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Embedding tokens, from the stored cache metadata, deduplicated on the text digest.}
+  \label{tab:usage-embeddings}
+  \small
+  \begin{tabular}{llrr}
+    \toprule
+    \textbf{Model} & \textbf{Texts} & \textbf{Tokens} & \textbf{Billed} \\
+    \midrule
+    \texttt{text-embedding-3-large} & 1{,}535 corpus children & 171{,}186 & yes \\
+    \texttt{text-embedding-3-small} & 1{,}535 corpus children & 171{,}186 & yes \\
+    \texttt{text-embedding-3-large} & 99 candidate questions & 1{,}635 & yes \\
+    \texttt{text-embedding-3-small} & 99 candidate questions & 1{,}635 & yes \\
+    \texttt{text-embedding-3-large} & 98 frozen questions & 1{,}736 & yes \\
+    \texttt{text-embedding-3-small} & 98 frozen questions & 1{,}736 & yes \\
+    \texttt{text-embedding-3-small} & 127 legacy chunks $+$ 98 questions & 58{,}762 & yes \\
+    \midrule
+    \multicolumn{2}{l}{\textbf{Total billed}} & \textbf{407{,}876} & \\
+    \multicolumn{2}{l}{Reused from cache, not re-billed} & 342{,}372 & no \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Cost}
+
+Table~\ref{tab:cost} lists the recorded charges.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Recorded charges, from the provider's cost export.}
+  \label{tab:cost}
+  \small
+  \begin{tabular}{llr}
+    \toprule
+    \textbf{Date} & \textbf{What} & \textbf{USD} \\
+    \midrule
+    2026-03-18 & Few-shot baseline generation & 0.0366 \\
+    2026-05-26 & RAG baseline generation & 0.0506 \\
+    2026-07-20 & Corpus and question embeddings, both models & 0.0259 \\
+    2026-08-08 & Question re-embedding after the freeze & 0.0003 \\
+    2026-08-09 & E5 generation, development & 0.0372 \\
+    2026-08-12 & E5 generation, held-out & 0.0235 \\
+    2026-08-30 & E5 generation, enriched context, development & 0.0276 \\
+    2026-08-30 & Few-shot and RAG baselines regenerated over 98 records & 0.0860 \\
+    \midrule
+    & \textbf{Total} & \textbf{0.2877} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{The entire project consumed roughly twenty-nine United States cents of
+hosted inference.} The first six charges are taken from the provider's billing
+record. The two of 30 August are computed from the token counts the runs
+themselves report, at the same unit prices; they were incurred after the last
+billing export used here and are marked as such rather than presented as
+reconciled.
+
+As a consistency check, five of the first six charges reconstruct exactly from the
+recorded token counts at unit prices of \$0.15 and \$0.60 per million tokens for
+input and output on \texttt{gpt-4o-mini}, and \$0.02 and \$0.13 per million input
+tokens for the small and large embedding models. The remaining charge, for the
+RAG baseline on 26 May, exceeds its reconstruction by \$0.00008686; that script
+also embeds each query before retrieving, and those embedding calls do not appear
+in the completions export.
+
+The cost is worth stating plainly because it bears on the argument of this work.
+The expensive parts of building a defensible system here were the corpus repair,
+the benchmark construction, and the independent review --- none of which is
+inference. Nothing in Chapter~\ref{chap:results} would have been improved by
+spending more on model calls, and the two most useful findings, the
+citation-legibility defect and the reviewers' disagreement, cost nothing at all
+because they came from asking practitioners rather than from running a model.
+
+\section{Reproducing the Results}
+
+\noindent\textbf{Repository.} \url{https://github.com/MoSaleh47/Where-RAG-Breaks---Citation-Grounded-Question-Answering-and-Escalation-over-EU-Aviation-Regulations}
+
+\noindent The repository carries the corpus builders, the retrieval, context and generation drivers, the citation evaluator, the verification layer, the test suite, the decision log and the generated-artefact log. It does not carry the reviewer identity files: the mapping from the pseudonyms R1--R4 to named people is held outside version control and is excluded by \texttt{.gitignore}, so it has never entered the repository's history. Provider billing exports and credentials are excluded on the same basis.
+
+Every experiment writes an immutable directory containing its outputs, a
+\texttt{manifest.json} with SHA-256 digests of all inputs and outputs, and the
+software versions in use. The order of reconstruction is:
+
+\begin{enumerate}
+  \item \texttt{build\_parent\_child\_corpus.py} --- deterministic corpus; the
+    rebuild is byte-identical.
+  \item \texttt{map\_legacy\_sources.py}, \texttt{build\_legacy100\_ai\_audit.py}
+    --- lineage from the historical flat chunks and the evidence-linked
+    candidate benchmark.
+  \item \texttt{freeze\_reviewed\_benchmark.py} with \texttt{--inherit-splits}
+    --- the frozen benchmark. Refuses incomplete or malformed review input.
+  \item \texttt{rerun\_reviewed\_retrieval.py} --- all five retrieval
+    configurations; resumes from completed stages and reuses cached vectors.
+  \item \texttt{rescore\_legacy\_baselines.py} --- historical baselines under the
+    corrected evaluator. Makes no model call.
+  \item \texttt{build\_candidate\_contexts.py}, \texttt{run\_generation.py} ---
+    evidence contexts and generation. The latter defaults to the development
+    partition and refuses the held-out partition without an explicit flag.
+  \item \texttt{calibrate\_escalation.py} --- escalation signals and rules.
+    Fits nothing; makes no model call.
+  \item \texttt{capture\_environment.py} --- regenerates the tables in this
+    appendix from the manifests and cache metadata.
+\end{enumerate}
+
+Unit tests covering the corpus parser, the lineage mapping, grouped splitting,
+BM25, fusion, reranking, context assembly, the review contract, citation
+resolution and answer verification are run with \texttt{python -m pytest tests/}.

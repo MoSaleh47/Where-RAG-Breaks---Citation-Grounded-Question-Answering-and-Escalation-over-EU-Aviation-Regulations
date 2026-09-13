@@ -1,0 +1,38 @@
+{
+  "abstention": {
+    "count": 0,
+    "reasons": {}
+  },
+  "api_calls": 42,
+  "cache_hits": 0,
+  "model_requested": "gpt-4o-mini-2024-07-18",
+  "model_resolved": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "note": "Structural and quote verification are deterministic. They establish that a claim points at a supplied source and reproduces its wording exactly; they do not establish that the source supports the claim. Semantic support remains a separate question.",
+  "record_count": 42,
+  "schema_conformance": {
+    "parse_failures": 0,
+    "refusals": 0,
+    "schema_violations": 0
+  },
+  "split": "development",
+  "status": "generated_on_frozen_reviewed_benchmark",
+  "temperature": 0.0,
+  "usage_tokens": {
+    "completion_tokens": 14673,
+    "prompt_tokens": 125205
+  },
+  "verification": {
+    "answers_with_elided_quotes": 1,
+    "both_pass": 40,
+    "decisions": {
+      "accept_structurally": 40,
+      "retry_or_abstain": 2
+    },
+    "quote_pass": 40,
+    "quote_pass_strict": 32,
+    "quote_span_total": 140,
+    "structural_pass": 42
+  }
+}

@@ -1,0 +1,115 @@
+%% Figure: end-to-end pipeline architecture.
+%% Requires tikz with libraries arrows.meta, positioning, calc.
+%% Colours aivancityNavy / aivancityGold / aivancityLight / aivancityGray /
+%% draftRed are defined in main.tex.
+\begin{tikzpicture}[
+  font=\footnotesize,
+  every node/.append style={execute at begin node={%
+    \hyphenpenalty=10000\exhyphenpenalty=10000\relax}},
+  stage/.style={
+    draw=aivancityNavy, line width=0.6pt, rounded corners=2pt,
+    fill=white, align=center, inner sep=4pt, text width=8.4cm
+  },
+  input/.style={
+    stage, fill=aivancityLight
+  },
+  outcome/.style={
+    draw=aivancityGold, line width=0.9pt, rounded corners=2pt,
+    fill=white, align=center, inner sep=4pt, text width=2.62cm
+  },
+  aside/.style={
+    draw=aivancityGray, line width=0.5pt, dashed, rounded corners=2pt,
+    fill=white, align=left, inner sep=4pt, text width=3.2cm,
+    text=aivancityGray, font=\footnotesize
+  },
+  flow/.style={-{Latex[length=4pt,width=4pt]}, draw=aivancityNavy, line width=0.7pt},
+  bus/.style={draw=aivancityNavy, line width=0.7pt},
+  side/.style={-{Latex[length=4pt,width=4pt]}, draw=aivancityGray, line width=0.5pt, dashed},
+]
+
+%% --------------------------------------------------------------- inputs ---
+\node[input, text width=7.6cm] (corpus) at (0,0)
+  {\textbf{Source corpus}\\[1pt]
+   Reg.\ (EU) No 376/2014, with its implementing and delegated acts and the Guidance Material\\[1pt]
+   $\rightarrow$ 109 legal parents, 1{,}535 retrieval children};
+
+\node[input, text width=3.9cm, anchor=west] (question) at ($(corpus.east)+(5mm,0)$)
+  {\textbf{Question}\\[1pt] frozen benchmark, 98 records};
+
+\node[stage, text width=7.6cm, below=7mm of corpus] (index)
+  {\textbf{Index}\\[1pt] child \texttt{retrieval\_text}, the hierarchy-enriched form};
+
+%% ------------------------------------------------------------ retrieval ---
+\coordinate (rowA) at ($(index.south)+(0,-11mm)$);
+\node[stage, text width=3.9cm, anchor=north east] (dense) at ($(rowA)+(-3mm,0)$)
+  {\textbf{Dense retrieval}\\[1pt] hosted embeddings, cosine};
+\node[stage, text width=3.9cm, anchor=north west] (bm25) at ($(rowA)+(3mm,0)$)
+  {\textbf{Lexical retrieval}\\[1pt] BM25, $k_1 = 1.5$, $b = 0.75$};
+
+\node[stage, anchor=north] (rrf) at ($(dense.south)!0.5!(bm25.south)+(0,-7mm)$)
+  {\textbf{Rank fusion} --- equal-weight RRF ($c\,{=}\,60$), no tuned parameter\\[1pt]
+   $\rightarrow$ top-20 candidate pool};
+
+\node[stage, anchor=north] (rerank) at ($(rrf.south)+(0,-7mm)$)
+  {\textbf{Cross-encoder reranking} --- local MiniLM, no hosted call\\[1pt]
+   reorders the pool; recall at depth 20 is unchanged by construction};
+
+%% -------------------------------------------------------------- context ---
+\node[stage, anchor=north] (context) at ($(rerank.south)+(0,-7mm)$)
+  {\textbf{Context assembly} --- no gold label is consulted\\[2pt]
+   \emph{compact}: 5 children, $\leq 1{,}200$ words \quad$\cdot$\quad
+   \emph{enriched}: same 5 anchors $+$ siblings at radius 1, same budget\\[2pt]
+   13-field block whitelist; a block carries the child's \texttt{text}, never its \texttt{retrieval\_text}};
+
+%% ----------------------------------------------------------- generation ---
+\node[stage, anchor=north] (gen) at ($(context.south)+(0,-7mm)$)
+  {\textbf{Evidence-constrained generation}\\[2pt]
+   closed JSON schema --- claims, supports, abstention flag and reason --- with a
+   twelve-rule prompt contract; the model writes source ids, never citations};
+
+%% --------------------------------------------------------- verification ---
+\node[stage, anchor=north] (verify) at ($(gen.south)+(0,-7mm)$)
+  {\textbf{Structural verification} --- deterministic, no gold label\\[2pt]
+   schema validity \quad$\cdot$\quad every source id present in the assembled context
+   \quad$\cdot$\quad every quote contiguous in the evidence it cites};
+
+%% ------------------------------------------------------------- outcomes ---
+\coordinate (rowO) at ($(verify.south)+(0,-11mm)$);
+\node[outcome, anchor=north] (clarify) at (rowO)
+  {\textbf{Clarify or retry}\\[1pt] verification failed, readings compete};
+\node[outcome, anchor=north east] (accept) at ($(rowO)+(-2.85cm,0)$)
+  {\textbf{Answer released}\\[1pt] claims with resolved citations};
+\node[outcome, anchor=north west] (abstain) at ($(rowO)+(2.85cm,0)$)
+  {\textbf{Abstain}\\[1pt] referral to a human reviewer};
+
+%% ---------------------------------------------------------------- asides ---
+\node[aside, anchor=west] (resolve) at ($(gen.east)+(6mm,0)$)
+  {The application, not the model, resolves a source identifier to its canonical citation.};
+\node[aside, anchor=east] (eval) at ($(context.west)+(-6mm,0)$)
+  {Gold labels are read only when the run is scored, never inside the loop.};
+
+%% ----------------------------------------------------------------- edges ---
+\draw[flow] (corpus) -- (index);
+
+\coordinate (busL) at ($(dense.north)+(0,5mm)$);
+\coordinate (busR) at ($(bm25.north)+(0,5mm)$);
+\coordinate (busM) at ($(busL)!0.5!(busR)$);
+\draw[bus] (busL) -- (busR);
+\draw[bus] (index.south) -- (busM);
+\draw[bus] (question.south) |- (busM);
+\draw[flow] (busL) -- (dense.north);
+\draw[flow] (busR) -- (bm25.north);
+
+\draw[flow] (dense.south) -- ++(0,-3.5mm) -| (rrf.north);
+\draw[flow] (bm25.south) -- ++(0,-3.5mm) -| (rrf.north);
+\draw[flow] (rrf) -- (rerank);
+\draw[flow] (rerank) -- (context);
+\draw[flow] (context) -- (gen);
+\draw[flow] (gen) -- (verify);
+\draw[flow] (verify.south) -- ++(0,-5.5mm) -| (accept.north);
+\draw[flow] (verify.south) -- ++(0,-5.5mm) -| (clarify.north);
+\draw[flow] (verify.south) -- ++(0,-5.5mm) -| (abstain.north);
+\draw[side] (resolve.west) -- (gen.east);
+\draw[side] (eval.east) -- (context.west);
+
+\end{tikzpicture}

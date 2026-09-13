@@ -1,0 +1,5 @@
+artifact_id,role,version,relative_path,sha256,status
+easa_ear_or_xml,primary_corpus,2022-12,../Documents/03C2C2_2023-09-27_09.31.20_EAR-for-Occurrence-Reporting-Regulation-EU-No-376-2014.xml,716FBFA41E7D934A9B93E67C733232AB8A9DC7E889D12D724D7D0110D0BA235C,immutable_historical
+eu_376_2014_pdf,authoritative_regulation,2014,../Documents/CELEX_32014R0376_EN_TXT.pdf,99995A1A1B980FB7627599DA202D0A508B5F6A63A2A74FB093474C9F536D7BD7,immutable_historical
+easa_ear_or_pdf,reference_rendering,2022-12,../Documents/Easy_Access_Rules_for_Occurrence_Reporting__Regulation__EU__No_376-2014__-_Revision_from_December_2022__PDF_.pdf,BD9EDE8C248A5CC5C0B246717F4E3A24AA23FD10355C0D261021F7F17B13245A,immutable_historical
+

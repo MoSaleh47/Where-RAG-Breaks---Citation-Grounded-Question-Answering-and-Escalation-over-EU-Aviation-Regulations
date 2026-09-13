@@ -1,0 +1,46 @@
+{
+  "asset_id": "candidate_retrieval_comparison_v1",
+  "created_at_utc": "2026-07-23T10:07:06.857074+00:00",
+  "cutoffs": [
+    1,
+    3,
+    5,
+    10,
+    20
+  ],
+  "inputs": {
+    "bm25": {
+      "path": "C:\\Users\\sefir\\OneDrive - aivancity\\PGE 5\\PFE\\aviation_rag_research\\experiments\\BM25_local_candidate_v1\\retrieval_metrics.json",
+      "sha256": "308D4BE2A1474C5561B68F6ECA959B8FCE45680F414498DF9FD7DE30266C41B5"
+    },
+    "dense_large": {
+      "path": "C:\\Users\\sefir\\OneDrive - aivancity\\PGE 5\\PFE\\aviation_rag_research\\experiments\\E2_dense_3large_candidate_v1\\retrieval_metrics.json",
+      "sha256": "6167F8643BF85FD5BF9011CFD97EC8CDA6A1C85C90AFB57C0F4748B03F11BC2E"
+    },
+    "dense_small": {
+      "path": "C:\\Users\\sefir\\OneDrive - aivancity\\PGE 5\\PFE\\aviation_rag_research\\experiments\\E1_dense_3small_candidate_v1\\retrieval_metrics.json",
+      "sha256": "63EE187F72470496047A719F0A7CBAFA784EED69E6B1266394FF80AD7B16D4C1"
+    },
+    "hybrid": {
+      "path": "C:\\Users\\sefir\\OneDrive - aivancity\\PGE 5\\PFE\\aviation_rag_research\\experiments\\E3_hybrid_rrf_candidate_v1\\retrieval_metrics.json",
+      "sha256": "CAE8515455519A50293A90E9CBD9DB0E2BF7B6A5727024E1D1D8241902F5FA41"
+    },
+    "reranker": {
+      "path": "C:\\Users\\sefir\\OneDrive - aivancity\\PGE 5\\PFE\\aviation_rag_research\\experiments\\E4_cross_encoder_rerank_candidate_v1\\retrieval_metrics.json",
+      "sha256": "1F87E76764D0A13D9D2011D03B7AFD75BBEFF9DA364988E89B0CBE4CC735D525"
+    }
+  },
+  "metric": "any_gold_child_recall",
+  "outputs": {
+    "csv_sha256": "02EE454189ACF735EC4F532C947C065A8CE31B12CF4460F423F6CBB9EBC19E96",
+    "png_sha256": "0F3FDECCC6E6BDAF112C53E497A92D13C80B373BE901D019B0ADDB0D430714D1",
+    "svg_sha256": "AE60CCE143330B75C2293E6B53A1B17713536DFA2E82743D1CE700BFF77310DF"
+  },
+  "software": {
+    "matplotlib": "3.10.5",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+  },
+  "status": "candidate_independent_review_pending",
+  "test_question_count": 57
+}

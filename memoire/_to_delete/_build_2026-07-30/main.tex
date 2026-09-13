@@ -1,0 +1,263 @@
+%% Project-specific aivancity PFE mémoire
+%% Build: latexmk -pdf -interaction=nonstopmode main.tex
+\documentclass[12pt,a4paper,twoside,openright]{report}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[
+  a4paper,
+  top=2.5cm,
+  bottom=2.5cm,
+  inner=3cm,
+  outer=2.5cm,
+  headheight=25pt
+]{geometry}
+
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage[table]{xcolor}
+\definecolor{aivancityNavy}{HTML}{1C2B52}
+\definecolor{aivancityGold}{HTML}{B5922A}
+\definecolor{aivancityLight}{HTML}{F4F6FA}
+\definecolor{aivancityGray}{HTML}{6B7280}
+\definecolor{draftRed}{HTML}{9B1C1C}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{mdframed}
+\usepackage{acronym}
+\usepackage{siunitx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tocloft}
+
+\captionsetup{
+  font=small,
+  labelfont={bf,color=aivancityNavy},
+  labelsep=endash,
+  format=hang,
+  justification=centering,
+  skip=6pt
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\small\textit{\leftmark}}
+\fancyhead[RO]{\small\textit{\rightmark}}
+\fancyhead[RE,LO]{\small\textcolor{aivancityGray}{aivancity -- Final Year Project PGE5}}
+\fancyfoot[C]{\small\textcolor{aivancityGray}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{aivancityGold}\leaders\hrule height \headrulewidth\hfill}}
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\color{aivancityNavy}}
+  {\chaptertitlename\ \thechapter}{16pt}
+  {\Huge}
+  [\vspace{2pt}\color{aivancityGold}\rule{\linewidth}{2pt}]
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{aivancityNavy}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{aivancityNavy}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{aivancityGold}}
+  {\thesubsubsection}{1em}{}
+
+\renewcommand{\cftchapfont}{\bfseries\color{aivancityNavy}}
+\renewcommand{\cftsecfont}{\color{aivancityNavy}}
+\renewcommand{\cftsubsecfont}{\small\color{aivancityGray}}
+\setlength{\cftbeforechapskip}{6pt}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
+\newmdenv[
+  linecolor=aivancityGold,
+  linewidth=1pt,
+  topline=true,
+  bottomline=false,
+  rightline=false,
+  leftline=false,
+  backgroundcolor=aivancityLight,
+  fontcolor=aivancityNavy,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt
+]{infobox}
+
+\newmdenv[
+  linecolor=draftRed,
+  linewidth=1pt,
+  backgroundcolor=red!4,
+  fontcolor=draftRed,
+  innerleftmargin=10pt,
+  innerrightmargin=10pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt
+]{draftbox}
+
+\newif\ifshowdrafts
+\showdraftsfalse % set to \showdraftstrue to print the draft notes on the page
+\newcommand{\draftnote}[1]{\ifshowdrafts\begin{draftbox}\small\textbf{Draft note:} #1\end{draftbox}\fi}
+\newcommand{\candidate}{\textsuperscript{\textcolor{draftRed}{candidate}}}
+\acrodef{AI}{Artificial Intelligence}
+\acrodef{API}{Application Programming Interface}
+\acrodef{BM25}{Best Matching 25}
+\acrodef{EASA}{European Union Aviation Safety Agency}
+\acrodef{EU}{European Union}
+\acrodef{GM}{Guidance Material}
+\acrodef{GPU}{Graphics Processing Unit}
+\acrodef{LLM}{Large Language Model}
+\acrodef{LoRA}{Low-Rank Adaptation}
+\acrodef{MRR}{Mean Reciprocal Rank}
+\acrodef{nDCG}{normalised Discounted Cumulative Gain}
+\acrodef{NLP}{Natural Language Processing}
+\acrodef{PFE}{Projet de Fin d'\'{E}tudes}
+\acrodef{PGE}{Programme Grande \'{E}cole}
+\acrodef{QA}{Question Answering}
+\acrodef{RAG}{Retrieval-Augmented Generation}
+\acrodef{RRF}{Reciprocal-Rank Fusion}
+
+\usepackage[
+  backend=biber,
+  style=ieee,
+  sorting=none,
+  maxnames=6,
+  minnames=1,
+  giveninits=true
+]{biblatex}
+\addbibresource{references.bib}
+
+\input{metadata}
+
+\usepackage[
+  colorlinks=true,
+  linkcolor=aivancityNavy,
+  citecolor=aivancityGold,
+  urlcolor=aivancityNavy,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  pdfauthor={\studentname},
+  pdftitle={\pfetitle},
+  pdfsubject={Final Year Project -- AI and Data Science}
+]{hyperref}
+
+\begin{document}
+\onehalfspacing
+
+\begin{titlepage}
+\hypersetup{pageanchor=false}
+  \newgeometry{top=2cm,bottom=2cm,left=2.5cm,right=2.5cm}
+  \thispagestyle{empty}
+
+  \begin{center}
+    \includegraphics[width=0.55\textwidth]{logo-aivancity-latex.png}
+  \end{center}
+
+  \vspace{4pt}
+  {\noindent\color{aivancityGold}\rule{\textwidth}{1.5pt}}
+  \vspace{-4pt}
+
+  \begin{mdframed}[
+    backgroundcolor=aivancityNavy,
+    linewidth=0pt,
+    innerleftmargin=12pt,
+    innerrightmargin=12pt,
+    innertopmargin=8pt,
+    innerbottommargin=8pt
+  ]
+    \centering
+    \textbf{\large\color{white}Grande Ecole Programme -- PGE5}\\[4pt]
+    \textit{\normalsize\color{aivancityGold}Specialisation: Artificial Intelligence \& Data Science}
+  \end{mdframed}
+
+  \vspace{1.8cm}
+  {\color{aivancityGray}\small\scshape Final Year Project Report (PFE)}
+
+  \vspace{0.5cm}
+  {\color{aivancityNavy}\huge\bfseries \pfetitle\par}
+
+  \vspace{0.4cm}
+  {\color{aivancityGold}\large\itshape \pfesubtitle\par}
+
+  \vspace{1.5cm}
+  \begin{mdframed}[
+    backgroundcolor=aivancityLight,
+    linewidth=0pt,
+    innerleftmargin=16pt,
+    innerrightmargin=16pt,
+    innertopmargin=14pt,
+    innerbottommargin=14pt
+  ]
+    \begin{tabular}{@{}ll@{}}
+      \textbf{\color{aivancityNavy}Student:} & \studentname \\[6pt]
+      \textbf{\color{aivancityNavy}Host Company:} & \companyname \\[6pt]
+      \textbf{\color{aivancityNavy}Industry Supervisor:} & \companysupervisor \\[6pt]
+      \textbf{\color{aivancityNavy}Academic Supervisor:} & \academicsupervisor \\[6pt]
+      \textbf{\color{aivancityNavy}Academic Year:} & \academicyear
+    \end{tabular}
+  \end{mdframed}
+
+  \vfill
+  \begin{center}
+    {\color{aivancityGray}\itshape Defence date: \defensedate}\\[8pt]
+    {\small\color{draftRed}\draftstatus}
+  \end{center}
+  \restoregeometry
+\end{titlepage}
+
+\hypersetup{pageanchor=true}
+\pagenumbering{Roman}
+\input{frontmatter/acknowledgements}
+\cleardoublepage
+\input{frontmatter/abstract}
+\cleardoublepage
+\input{frontmatter/resume_fr}
+\cleardoublepage
+
+{
+  \hypersetup{linkcolor=aivancityNavy}
+  \tableofcontents
+}
+\cleardoublepage
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
+\cleardoublepage
+\listoftables
+\addcontentsline{toc}{chapter}{\listtablename}
+\cleardoublepage
+\input{frontmatter/acronyms}
+
+\cleardoublepage
+\pagenumbering{arabic}
+\include{chapters/01_introduction}
+\include{chapters/02_state_of_art}
+\include{chapters/03_project_context}
+\include{chapters/04_methodology}
+\include{chapters/05_results}
+\include{chapters/06_conclusion}
+
+\printbibliography[heading=bibintoc,title={Bibliography}]
+
+\appendix
+\include{appendices/A_reproducibility}
+\include{appendices/B_ai_disclosure}
+\include{appendices/C_review_protocol}
+
+\end{document}
+

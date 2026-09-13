@@ -1,0 +1,452 @@
+{
+  "captured_at_utc": "2026-08-15T17:27:49.367631+00:00",
+  "embedding_runs": [
+    {
+      "cache": "E1_parent_child_v1/text-embedding-3-large_children.json",
+      "count": 1535,
+      "created_at_utc": "2026-07-20T09:34:22.705494+00:00",
+      "input_tokens": 171186,
+      "model": "text-embedding-3-large"
+    },
+    {
+      "cache": "E1_parent_child_v1/text-embedding-3-large_legacy100_queries.json",
+      "count": 99,
+      "created_at_utc": "2026-07-20T09:34:28.163328+00:00",
+      "input_tokens": 1635,
+      "model": "text-embedding-3-large"
+    },
+    {
+      "cache": "E1_parent_child_v1/text-embedding-3-small_children.json",
+      "count": 1535,
+      "created_at_utc": "2026-07-20T09:32:13.286365+00:00",
+      "input_tokens": 171186,
+      "model": "text-embedding-3-small"
+    },
+    {
+      "cache": "E1_parent_child_v1/text-embedding-3-small_legacy100_queries.json",
+      "count": 99,
+      "created_at_utc": "2026-07-20T09:32:16.176815+00:00",
+      "input_tokens": 1635,
+      "model": "text-embedding-3-small"
+    },
+    {
+      "cache": "reviewed_benchmark_v1/text-embedding-3-large_children.json",
+      "count": 1535,
+      "created_at_utc": "2026-07-20T09:34:22.705494+00:00",
+      "input_tokens": 171186,
+      "model": "text-embedding-3-large"
+    },
+    {
+      "cache": "reviewed_benchmark_v1/text-embedding-3-large_legacy100_queries.json",
+      "count": 98,
+      "created_at_utc": "2026-08-08T20:10:09.071894+00:00",
+      "input_tokens": 1736,
+      "model": "text-embedding-3-large"
+    },
+    {
+      "cache": "reviewed_benchmark_v1/text-embedding-3-small_children.json",
+      "count": 1535,
+      "created_at_utc": "2026-07-20T09:32:13.286365+00:00",
+      "input_tokens": 171186,
+      "model": "text-embedding-3-small"
+    },
+    {
+      "cache": "reviewed_benchmark_v1/text-embedding-3-small_legacy100_queries.json",
+      "count": 98,
+      "created_at_utc": "2026-08-08T20:10:04.430870+00:00",
+      "input_tokens": 1736,
+      "model": "text-embedding-3-small"
+    }
+  ],
+  "experiment_runs": [
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-18T21:15:29.639261+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "BM25_local_candidate_v1",
+      "experiment_id": "BM25_local_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-08T20:09:58.122541+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "BM25_local_reviewed_v1",
+      "experiment_id": "BM25_local_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-20T09:32:16.538741+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E1_dense_3small_candidate_v1",
+      "experiment_id": "E1_dense_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "numpy": "2.2.6",
+        "openai": "2.24.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-08T20:10:04.504482+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E1_dense_3small_reviewed_v1",
+      "experiment_id": "E1_dense_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "numpy": "2.2.6",
+        "openai": "2.53.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-20T09:34:28.480876+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E2_dense_3large_candidate_v1",
+      "experiment_id": "E1_dense_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "numpy": "2.2.6",
+        "openai": "2.24.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-08T20:10:09.145379+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E2_dense_3large_reviewed_v1",
+      "experiment_id": "E1_dense_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "numpy": "2.2.6",
+        "openai": "2.53.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-20T09:40:09.876308+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E3_hybrid_rrf_candidate_v1",
+      "experiment_id": "E3_hybrid_rrf_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-08T20:10:09.598672+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E3_hybrid_rrf_reviewed_v1",
+      "experiment_id": "E3_hybrid_rrf_candidate",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-22T07:44:48.608456+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E4_cross_encoder_rerank_candidate_v1",
+      "experiment_id": "E4_cross_encoder_rerank_candidate",
+      "models": [
+        "cross-encoder/ms-marco-MiniLM-L6-v2"
+      ],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-08T20:10:25.549443+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E4_cross_encoder_rerank_reviewed_v1",
+      "experiment_id": "E4_cross_encoder_rerank_candidate",
+      "models": [
+        "cross-encoder/ms-marco-MiniLM-L6-v2"
+      ],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_evaluation_independent_human_review_pending"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-23T09:35:13.500241+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E5_context_top5_candidate_v1",
+      "experiment_id": "E5_candidate_context_assembly",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_contexts_no_generation_performed"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-07-23T09:35:13.506182+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E5_context_top5_neighbors_candidate_v1",
+      "experiment_id": "E5_candidate_context_assembly",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "candidate_contexts_no_generation_performed"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-09T16:00:12.183492+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E5_context_top5_neighbors_reviewed_v1",
+      "experiment_id": "E5_candidate_context_assembly",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+        "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]"
+      },
+      "status": "candidate_contexts_no_generation_performed"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-09T16:00:09.703103+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": null,
+      "experiment": "E5_context_top5_reviewed_v1",
+      "experiment_id": "E5_candidate_context_assembly",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+        "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]"
+      },
+      "status": "candidate_contexts_no_generation_performed"
+    },
+    {
+      "api_calls": 3,
+      "cache_hits": 0,
+      "completed_at_utc": "2026-08-09T16:20:45.384065+00:00",
+      "completion_tokens": 870,
+      "declared_model_calls": null,
+      "experiment": "E5_generation_smoke",
+      "experiment_id": "E5_generation_smoke",
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "prompt_tokens": 4766,
+      "software": {
+        "openai": "2.53.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "generated_on_frozen_reviewed_benchmark"
+    },
+    {
+      "api_calls": 0,
+      "cache_hits": 42,
+      "completed_at_utc": "2026-08-09T17:16:31.762838+00:00",
+      "completion_tokens": 14318,
+      "declared_model_calls": null,
+      "experiment": "E5_generation_top5_dev_v1",
+      "experiment_id": "E5_generation_top5_dev_v1",
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "prompt_tokens": 65763,
+      "software": {
+        "openai": "2.53.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "generated_on_frozen_reviewed_benchmark"
+    },
+    {
+      "api_calls": 42,
+      "cache_hits": 0,
+      "completed_at_utc": "2026-08-09T17:19:24.929543+00:00",
+      "completion_tokens": 13747,
+      "declared_model_calls": null,
+      "experiment": "E5_generation_top5_dev_v2",
+      "experiment_id": "E5_generation_top5_dev_v2",
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "prompt_tokens": 70089,
+      "software": {
+        "openai": "2.53.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.16 | packaged by Anaconda, Inc. | (main, Dec 11 2024, 16:19:12) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "generated_on_frozen_reviewed_benchmark"
+    },
+    {
+      "api_calls": 56,
+      "cache_hits": 0,
+      "completed_at_utc": "2026-08-12T20:24:51.822694+00:00",
+      "completion_tokens": 16462,
+      "declared_model_calls": null,
+      "experiment": "E5_generation_top5_test_v2",
+      "experiment_id": "E5_generation_top5_test_v2",
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "prompt_tokens": 90638,
+      "software": {
+        "openai": "2.24.0",
+        "platform": "Windows-10-10.0.26200-SP0",
+        "python": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]"
+      },
+      "status": "generated_on_frozen_reviewed_benchmark"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-09T17:43:52.625367+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": 0,
+      "experiment": "escalation_dev_v1",
+      "experiment_id": "escalation_dev_v1",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+        "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]"
+      },
+      "status": "development_only_uncalibrated"
+    },
+    {
+      "api_calls": null,
+      "cache_hits": null,
+      "completed_at_utc": "2026-08-08T20:34:11.222099+00:00",
+      "completion_tokens": null,
+      "declared_model_calls": 0,
+      "experiment": "legacy_baselines_reviewed_v1",
+      "experiment_id": "legacy_baselines_reviewed_v1",
+      "models": [],
+      "prompt_tokens": null,
+      "software": {
+        "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+        "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]"
+      },
+      "status": "rescored_on_frozen_reviewed_benchmark"
+    }
+  ],
+  "git": {
+    "branch": null,
+    "commit": null,
+    "dirty": false
+  },
+  "hardware": {
+    "cpu_count": 16,
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "machine": "AMD64",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "python_build": "main Dec 11 2024 16:19:12",
+    "python_executable": "C:\\Users\\sefir\\anaconda3\\envs\\tf_project2\\python.exe",
+    "python_implementation": "CPython",
+    "python_version": "3.10.16",
+    "torch_cuda_available": true,
+    "torch_version": "2.7.1+cu118"
+  },
+  "packages": {
+    "accelerate": "1.14.0",
+    "bitsandbytes": "0.49.2",
+    "matplotlib": "3.10.0",
+    "numpy": "2.2.6",
+    "openai": "2.53.0",
+    "peft": "0.12.0",
+    "pytest": null,
+    "python-dotenv": "1.0.1",
+    "safetensors": "0.5.2",
+    "scikit-learn": "1.6.0",
+    "sentence-transformers": null,
+    "torch": "2.7.1+cu118",
+    "transformers": "5.12.1"
+  },
+  "pricing": {
+    "note": "Unit prices are supplied by the author from the provider's published rates on the stated date. The authoritative figure is the provider's billing record, not this estimate.",
+    "prices_dated": null,
+    "unit_prices_usd_per_million_tokens": null
+  },
+  "totals": {
+    "api_calls": 101,
+    "completion_tokens": 45397,
+    "embedding_input_tokens": 691486,
+    "estimated_cost_usd": null,
+    "prompt_tokens": 231256
+  }
+}

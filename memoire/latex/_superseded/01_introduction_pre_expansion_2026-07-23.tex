@@ -1,0 +1,61 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background and Motivation}
+
+European aviation safety depends on a layered body of regulations, annexes, guidance material, and acceptable means of compliance. A person answering a regulatory question must identify not only a plausible rule but also the applicable instrument, article, paragraph, version, and surrounding conditions. This requirement makes aviation-regulation question answering fundamentally different from open-domain conversational assistance. Fluency is insufficient: a useful answer must be supported by authoritative text and traceable to a precise citation.
+
+\acp{LLM} create an opportunity to make this material easier to query, but they also introduce a reliability problem. A model can produce a confident explanation even when it has retrieved the wrong provision or when the cited source does not entail the answer. \ac{RAG} reduces this risk by placing retrieved evidence in the generation context, yet RAG is not a single intervention. Its performance depends on source parsing, chunk boundaries, retrieval, ranking, context construction, generation, citation handling, and verification. A final accuracy score can hide which component failed.
+
+The historical project compared three approaches: few-shot prompting, a retrieval-grounded system, and a model adapted with \ac{LoRA}. That comparison remains an informative baseline, but a leaderboard alone does not explain why an answer fails or what a deployed system should do next. The research contribution is therefore reframed around failure diagnosis and controlled escalation.
+
+\section{Problem Statement}
+
+The initial corpus represented the source material through comparatively flat chunks. Some chunks were longer than 30,000 characters, while the generator received only their first 1,500 characters. Consequently, a retrieval evaluation could count a source as found even when the actual supporting paragraph never reached the generator. The historical benchmark also contained synthetic questions, partial citations, and source-label defects. Treating every observed error as an intrinsic limitation of RAG would therefore confound system failure with data and evaluation failure.
+
+This work first repairs those confounders. It then evaluates a sequence of increasingly complex interventions: hierarchy-aware corpus construction, lexical and dense retrieval, rank fusion, cross-encoder reranking, controlled context expansion, evidence-constrained generation, verification, clarification, and abstention.
+
+\begin{infobox}
+\textbf{Primary research question.}
+Where and why does retrieval-augmented generation fail in citation-bearing aviation-regulation question answering, and which observable conditions justify escalating from standard RAG to more advanced retrieval, verification, multi-step reasoning, or human review?
+\end{infobox}
+
+The primary question is decomposed into six operational questions:
+
+\begin{enumerate}
+  \item How much error originates in corpus parsing, retrieval, ranking, context construction, generation, or citation verification?
+  \item Does a hierarchy-aware parent--child representation improve evidence retrieval and exact citation traceability?
+  \item Does a larger dense embedding model provide a meaningful gain over the smaller baseline under an identical corpus and query set?
+  \item Does hybrid lexical and dense retrieval recover terminology-heavy and semantically paraphrased questions more reliably than either channel alone?
+  \item When does cross-encoder reranking or local context expansion recover evidence already present in a broader candidate set?
+  \item Under which conditions should the system clarify, abstain, or refer the question to a qualified human rather than apply another automated step?
+\end{enumerate}
+
+\section{Objectives and Contributions}
+
+The project pursues five measurable objectives.
+
+First, it establishes a reproducible evidence corpus in which every retrievable child is linked to a coherent legal parent, a source document, a hierarchy, and a canonical citation. Second, it audits the legacy benchmark instead of silently treating synthetic source labels as ground truth. Third, it compares retrieval interventions through controlled ablations that keep the corpus, questions, and split policy fixed. Fourth, it separates evidence retrieval from answer generation and citation verification. Fifth, it converts the resulting failure taxonomy into a switching policy based on observable runtime signals rather than unavailable gold labels.
+
+The principal technical and methodological contributions are:
+
+\begin{itemize}
+  \item a deterministic parent--child representation of the stored aviation-regulation sources;
+  \item exact lineage from historical question identifiers to parent and child evidence units;
+  \item parent-grouped development and test partitions that prevent source leakage;
+  \item a controlled comparison of two dense embedding models, local BM25, \ac{RRF}, and a local cross-encoder reranker;
+  \item structured generation using application-resolved citations and verbatim evidence quotes;
+  \item a distinction between ranking failures, candidate-generation failures, ambiguous questions, incomplete benchmark labels, unsupported generation, and evidence conflict;
+  \item a cost-aware escalation ladder that reserves agentic or multi-step retrieval for validated residual cases.
+\end{itemize}
+
+\section{Scope}
+
+The empirical source material is restricted to the aviation-regulation documents stored in the project workspace. The present benchmark focuses on English regulatory evidence. French-to-English retrieval, bilingual answer generation, and a bilingual corpus remain possible extensions but are not mixed into the current evaluation without an explicit protocol.
+
+The study evaluates research prototypes, not a certified legal decision system. The generated answers cannot replace competent legal or aviation-safety review. Where evidence is absent, ambiguous, or conflicting, abstention and human referral are intended outcomes rather than system failures.
+
+\section{Report Structure}
+
+Chapter~\ref{chap:sota} reviews retrieval-augmented generation, lexical and dense retrieval, reranking, grounded generation, legal question answering, and selective escalation. Chapter~\ref{chap:context} presents the professional context, mission scope, data, and constraints. Chapter~\ref{chap:method} describes the corpus redesign, benchmark audit, retrieval experiments, generation contract, verification, and reproducibility controls. Chapter~\ref{chap:results} reports the historical audit and current candidate retrieval results before presenting the planned end-to-end evaluation. Chapter~\ref{chap:conclusion} answers the research question to the extent supported by the final reviewed evidence and identifies the remaining limitations and future work.
+

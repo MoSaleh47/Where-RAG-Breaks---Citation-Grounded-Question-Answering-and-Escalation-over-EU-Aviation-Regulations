@@ -1,0 +1,60 @@
+\chapter{State of the Art}
+\label{chap:sota}
+
+\draftnote{This chapter has a stable thematic structure, but the bibliography must be expanded to at least 20 references, including the required journal, conference, and book counts. Every claim will be checked against primary sources before the final draft.}
+
+\section{Language Models and RAG}
+
+Transformer architectures made it possible to model long-range dependencies through attention rather than recurrence~\cite{vaswani2017attention}. Bidirectional pre-training subsequently improved language understanding and transfer across many \ac{NLP} tasks~\cite{devlin2019bert}. Despite these gains, a parametric model does not guarantee that a generated statement reflects a current or authoritative external source.
+
+\ac{RAG} combines a retriever with a generator so that output can be conditioned on an external evidence collection. Lewis et al.\ jointly modelled retrieval and sequence generation for knowledge-intensive tasks~\cite{lewis2020rag}, while REALM integrated retrieval into language-model pre-training~\cite{guu2020realm}. These systems show that external memory can improve factual access, but the term RAG covers several separable decisions: corpus construction, retrieval model, ranking depth, context selection, generation prompt, and verification policy.
+
+In a high-stakes regulatory setting, the objective is stricter than general factual usefulness. The selected evidence must identify the governing legal unit, and each material claim must be entailed by that evidence. The system must also recognise when the question is ambiguous or when no retrieved source supports a safe answer.
+
+\section{Sparse, Dense, and Hybrid Retrieval}
+
+Sparse retrieval represents queries and documents through lexical statistics. BM25 remains a strong baseline because it rewards exact term overlap while normalising for document length~\cite{robertson2009bm25}. This is valuable in regulations, where article numbers, acronyms, defined terms, and formulaic expressions carry substantial meaning.
+
+Dense retrieval maps queries and passages to learned vectors. Dense Passage Retrieval demonstrated that independently encoded questions and passages can support efficient open-domain retrieval~\cite{karpukhin2020dpr}. Sentence-BERT similarly showed how siamese encoders make semantic similarity search computationally practical~\cite{reimers2019sentencebert}. Dense representations can recover paraphrases that share little surface vocabulary, but they may underweight exact identifiers or repeated legal wording.
+
+Hybrid retrieval treats these signals as complementary. Reciprocal-rank fusion combines ranked lists without requiring their raw scores to be calibrated~\cite{cormack2009rrf}. For a document $d$ retrieved by systems $i$, the fused score is
+
+\begin{equation}
+  \operatorname{RRF}(d) = \sum_i \frac{1}{c + \operatorname{rank}_i(d)},
+  \label{eq:rrf}
+\end{equation}
+
+where $c$ is a fixed rank constant. The method is attractive for controlled experiments because it has a small and interpretable parameter surface.
+
+\section{Hierarchy and Evidence Granularity}
+
+Retrieval units create a trade-off. Large chunks preserve context but can mix several rules and exceed generation budgets. Small chunks isolate evidence but may omit headings, definitions, conditions, or table headers needed for interpretation. A parent--child design addresses this tension by retrieving atomic children while retaining links to coherent legal parents.
+
+This project treats hierarchy as explicit metadata rather than a reason to promote every child from a long parent. Parent-aware expansion is applied only after retrieval and within a bounded context budget. This distinction matters because hierarchy can improve interpretability without necessarily improving relevance ranking.
+
+\section{Cross-Encoder Reranking}
+
+Bi-encoder retrieval is efficient because document vectors can be cached, but the query and passage interact only through a similarity function. A cross-encoder instead processes the query and candidate passage jointly. BERT-based passage reranking demonstrated substantial gains from this direct interaction~\cite{nogueira2019reranking}. The higher computational cost is manageable when it is restricted to a small candidate pool.
+
+Reranking and candidate generation solve different problems. A reranker can move a relevant passage from rank 18 to rank 3, but it cannot recover a passage absent from the candidate pool. This distinction is central to the switching policy developed in this work.
+
+\section{Benchmarking Retrieval Systems}
+
+Retrieval evaluation commonly reports recall at a fixed depth, reciprocal rank, and normalised discounted cumulative gain. The BEIR benchmark emphasised that retrieval models can behave differently across tasks and domains~\cite{thakur2021beir}. For legal evidence, evaluation must additionally account for alternative but equivalent support. A benchmark that records only one child identifier may incorrectly penalise a system that retrieved another legally sufficient passage.
+
+Source-grouped splits are also important. If questions grounded in the same article appear in development and test, the evaluation overstates generalisation. The present work therefore groups questions by legal parent before assigning partitions.
+
+\section{Grounded Generation, Verification, and Abstention}
+
+Evidence-conditioned prompting alone does not guarantee grounded output. A generator can ignore supplied passages, merge incompatible conditions, or fabricate a plausible citation. Structural safeguards can reduce this risk: the generator returns source identifiers rather than free-form citation strings, supporting quotes must occur verbatim in the supplied evidence, and the application resolves identifiers to canonical citations.
+
+Structural checks do not establish semantic entailment. Claim support must still be assessed against the cited evidence, and material omissions must be considered separately. Selective answering adds a further control: the system may abstain when the evidence is weak or inconsistent. Performance is then analysed through coverage and risk rather than accuracy alone.
+
+\section{Agentic and Multi-Step Retrieval}
+
+Multi-step retrieval can decompose a question, follow cross-references, or issue a revised query after inspecting initial evidence. These capabilities are useful when a validated residual genuinely requires several sources. They also introduce latency, cost, and additional failure modes. Applying an agent to every question would therefore obscure whether a simpler retriever, reranker, clarification request, or abstention rule was sufficient.
+
+\section{Positioning of This Work}
+
+The contribution is not a new foundation model. It is a controlled, evidence-first study of where a regulatory RAG pipeline fails and how to respond. The work combines hierarchy-aware corpus construction, hybrid retrieval, local reranking, explicit evidence contracts, benchmark auditing, and selective escalation in one reproducible protocol. Its evaluation separates data defects from retrieval, ranking, generation, and verification failures so that each intervention is justified by a diagnosed failure mode.
+

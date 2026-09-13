@@ -1,0 +1,197 @@
+project: aviation-rag-research
+protocol_version: 2
+last_updated: "2026-07-25"
+research_phase: retrieval_and_context_complete_generation_blocked
+
+deterministic_seeds:
+  parent_group_split: aviation-rag-legacy100-v1
+  independent_review_sample: aviation-rag-independent-review-v1
+  note: String seeds are consumed by deterministic SHA-256 assignment; no random_seed integer is used.
+
+evaluation_views:
+  legacy_100:
+    purpose: continuity_only
+    source: ../Documents/qa_pairs_final.json
+    status: historical
+  candidate_99:
+    purpose: architecture_development_and_candidate_reporting
+    source: data/evaluation/legacy100_ai_audited_v1/legacy100_ai_audited.jsonl
+    split_manifest: data/evaluation/legacy100_candidate_splits_v1/split_manifest.csv
+    status: ai_assisted_candidate_not_final_gold
+    record_counts:
+      development: 42
+      test: 57
+    source_group_leakage_count: 0
+  reviewed_gold:
+    purpose: final_claims
+    source: null
+    status: blocked_until_multi_reviewer_validation_and_freeze
+
+benchmark_validity_gate:
+  protocol: review_kit/REVIEW_PROTOCOL_D023.md
+  decisions: [D023, D024]
+  collection: bilingual_multi_reviewer_form
+  target_reviewers: 3
+  minimum_raters_per_record: 2
+  required_rows: 33
+  repository_rows_decided: 0
+  external_form_responses: not_synchronized_to_repository
+  queue: data/evaluation/independent_review_v1/review_queue.csv
+  requirements: data/evaluation/independent_review_v1/review_requirements.json
+  freeze_script: scripts/freeze_reviewed_benchmark.py
+  status: collection_active_repository_queue_unfilled
+
+selected_candidate_pipeline:
+  chunking: parent_child_v1
+  dense_model: text-embedding-3-large
+  lexical_retriever: BM25
+  fusion:
+    method: equal_weight_reciprocal_rank_fusion
+    rrf_constant: 60
+    candidate_depth: 20
+  reranker: cross-encoder/ms-marco-MiniLM-L6-v2
+  context_depth: 5
+  context_variants:
+    - compact_top5
+    - top5_with_neighbors
+  generator: null
+  generation_status: not_run
+
+supporting_runs:
+  BM25:
+    status: completed_candidate_review_pending
+    completed_at_utc: "2026-07-18T21:15:29.639261+00:00"
+    artifact: experiments/BM25_local_candidate_v1
+    parameters:
+      k1: 1.5
+      b: 0.75
+      maximum_rank: 20
+
+experiments:
+  E0:
+    status: historical_complete
+    changes: none
+    chunking: flat_legacy
+    embedding_model: text-embedding-3-small
+    retrieval: dense
+    generator: gpt-4o-mini
+    claim_scope: continuity_only
+
+  E1:
+    status: completed_candidate_review_pending
+    completed_at_utc: "2026-07-20T09:32:16.538741+00:00"
+    changes: chunking_only_relative_to_E0
+    chunking: parent_child_v1
+    corpus_artifact: data/processed/E1_parent_child_v1
+    run_artifact: experiments/E1_dense_3small_candidate_v1
+    embedding_model: text-embedding-3-small
+    embedding_dimensions: 1536
+    retrieval: dense_cosine
+    generator: null
+
+  E2:
+    status: completed_candidate_review_pending
+    completed_at_utc: "2026-07-20T09:34:28.480876+00:00"
+    changes: embedding_only_relative_to_E1
+    chunking: parent_child_v1
+    run_artifact: experiments/E2_dense_3large_candidate_v1
+    embedding_model: text-embedding-3-large
+    embedding_dimensions: 3072
+    retrieval: dense_cosine
+    generator: null
+    selection_decision: D014
+
+  E3:
+    status: completed_candidate_review_pending
+    completed_at_utc: "2026-07-20T09:40:09.876308+00:00"
+    changes: add_lexical_channel_and_rank_fusion
+    chunking: parent_child_v1
+    run_artifact: experiments/E3_hybrid_rrf_candidate_v1
+    embedding_model: text-embedding-3-large
+    retrieval: bm25_plus_dense_equal_weight_rrf
+    candidate_depth: 20
+    generator: null
+    selection_decision: D015
+
+  E4:
+    status: completed_candidate_review_pending
+    completed_at_utc: "2026-07-22T07:44:48.608456+00:00"
+    changes: reranker_only_relative_to_E3
+    chunking: parent_child_v1
+    run_artifact: experiments/E4_cross_encoder_rerank_candidate_v1
+    candidate_generator: bm25_plus_text_embedding_3_large_rrf
+    candidate_depth: 20
+    reranker: cross-encoder/ms-marco-MiniLM-L6-v2
+    reranker_commit: c5ee24cb16019beea0893ab7796b1df96625c6b8
+    generator: null
+    selection_decision: D018
+
+  E5:
+    status: context_assembly_complete_generation_blocked
+    completed_context_at_utc: "2026-07-23T09:35:13.506182+00:00"
+    changes: context_variants_then_generation_verification_and_abstention
+    retrieval: E4
+    context_artifacts:
+      compact_top5: experiments/E5_context_top5_candidate_v1
+      top5_with_neighbors: experiments/E5_context_top5_neighbors_candidate_v1
+    generation_config: configs/generation_evaluation_v1.yaml
+    generator: null
+    final_test_generation_authorized: false
+    blockers:
+      - reviewed_gold_benchmark_not_frozen
+      - generation_model_not_selected
+      - hosted_generation_not_authorized
+
+  E6:
+    status: optional_not_started
+    changes: constrained_multistep_retrieval
+    activation_gate: run_only_for_validated_residual_failures_not_solved_by_E5
+    generator: null
+    decision: D005
+
+legacy_thresholds:
+  citation_match_min: 0.5
+  rouge_l_min: 0.15
+  warning: continuity_proxy_only_not_legal_correctness
+
+implemented_retrieval_metrics:
+  cutoffs: [1, 3, 5, 10, 20]
+  keys:
+    - any_gold_child_recall
+    - mean_evidence_recall
+    - parent_recall
+    - mrr
+    - ndcg
+    - n
+  views:
+    - development
+    - test
+    - all
+
+planned_end_to_end_metrics:
+  structural:
+    - valid_schema_rate
+    - allowed_source_only_rate
+    - quote_verification_rate
+    - canonical_citation_accuracy
+  answer_quality:
+    - claim_support_rate
+    - answer_completeness
+    - exact_legal_answer_accuracy
+  selective_answering:
+    - coverage
+    - risk_at_coverage
+    - appropriate_abstention_rate
+  operations:
+    - latency_seconds
+    - input_tokens
+    - output_tokens
+    - estimated_cost
+
+reporting_constraints:
+  candidate_watermark_required: true
+  report_development_before_test: true
+  preserve_all_predictions: true
+  preserve_api_request_ids: true
+  disclose_ai_assisted_benchmark_curation: true
+  final_claims_require_reviewed_gold: true

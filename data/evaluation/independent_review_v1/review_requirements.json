@@ -1,0 +1,48 @@
+{
+  "expected_review_row_count": 33,
+  "inputs": {
+    "audited_qa_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "split_manifest_sha256": "BAC26354A58C970C80FB320606767D1EDC9435306449CBF1D6ED91794B4B0150"
+  },
+  "required_qa_ids": [
+    "QA_0003",
+    "QA_0011",
+    "QA_0040",
+    "QA_0047",
+    "QA_0058",
+    "QA_0062",
+    "QA_0063",
+    "QA_0071",
+    "QA_0080",
+    "QA_0081",
+    "QA_0083",
+    "QA_0097",
+    "QA_0163",
+    "QA_0176",
+    "QA_0183",
+    "QA_0193",
+    "QA_0213",
+    "QA_0229",
+    "QA_0235",
+    "QA_0248",
+    "QA_0258",
+    "QA_0263",
+    "QA_0265",
+    "QA_0272",
+    "QA_0277",
+    "QA_0278",
+    "QA_0279",
+    "QA_0287",
+    "QA_0289",
+    "QA_0290",
+    "QA_0292",
+    "QA_0293",
+    "QA_0294"
+  ],
+  "selection": {
+    "sample_per_stratum": 2,
+    "seed": "aviation-rag-independent-review-v1"
+  },
+  "version": "independent_review_requirements_v1"
+}

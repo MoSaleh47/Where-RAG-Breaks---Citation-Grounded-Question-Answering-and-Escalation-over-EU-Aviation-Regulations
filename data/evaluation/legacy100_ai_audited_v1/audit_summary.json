@@ -1,0 +1,22 @@
+{
+  "decision_counts": {
+    "ai_provisional_supported": 78,
+    "ai_rewritten_supported": 21,
+    "excluded_invalid": 1
+  },
+  "independent_human_review_complete": false,
+  "input_count": 100,
+  "inputs": {
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "legacy_results_sha256": "0060AF178B37A8BBA26199761AC7622E47B5A6B14FA70E6EBFE5C05FFA21DC0A",
+    "overrides_sha256": "6322609C0792EF8DDEA935BE5E972215A294097412D3C160B455073249CDC520",
+    "qa_parent_map_sha256": "71E74FE14942C7E9A2123F6812CE4516906B6479804B5A58E7DB3910904DD6AD",
+    "qa_sha256": "7AC64199747BB9AAFB222ADF4D91D04235DF439F0EF99CA17AF5DF30C7990E90"
+  },
+  "outputs": {
+    "audited_jsonl_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+    "exception_csv_sha256": "300FF735A1FB76421D7B9F210A9A7B80AD9E4A22B65FA13B4E6CF250C516265C"
+  },
+  "retained_count": 99,
+  "status": "ai_assisted_candidate_not_final_gold"
+}

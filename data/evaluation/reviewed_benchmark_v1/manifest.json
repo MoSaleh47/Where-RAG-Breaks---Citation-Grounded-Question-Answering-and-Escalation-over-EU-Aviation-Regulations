@@ -1,0 +1,25 @@
+{
+  "completed_at_utc": "2026-08-08T19:24:34.685766+00:00",
+  "experiment_id": "reviewed_benchmark_freeze_v1",
+  "inputs": {
+    "audited_qa_sha256": "1426FB72625548022C9379523AB91C9D605C3E3798D96787D0BC3A7292489C28",
+    "children_sha256": "7860E9C1870CC752F357A7E174E027A1DC01BA297ACB4D82DC1BB48E9E7DF745",
+    "independent_review_csv_sha256": "648F0964CCCC5E46E65799F1D9581C82F062E10CCCE8FEAEBE2B6D1FAA881977",
+    "review_requirements_sha256": "A903E67362528EB11957B9C0B96CFCD6D9B7E436BBC2CED0226493A3A33D2AC2"
+  },
+  "outputs": {
+    "freeze_summary_sha256": "E9D0079B1FC9B7D5DA368A65BC9BFFDD50695EE8C6CFAC07ED9293A965476CAC",
+    "review_decisions_copy_sha256": "648F0964CCCC5E46E65799F1D9581C82F062E10CCCE8FEAEBE2B6D1FAA881977",
+    "reviewed_benchmark_sha256": "387EF00E7E88A7265BE9CA25B0E9317B266CF4FC65B2542C662888462E09FC58",
+    "split_manifest_sha256": "8E0C06135232AD1D0ECABD24F3DA9670D07A46B86558744E3AB7F2EF3B1E96CA"
+  },
+  "parameters": {
+    "development_fraction": 0.4,
+    "split_seed": "aviation-rag-v1"
+  },
+  "software": {
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12 (main, Jun 22 2026, 18:55:27) [GCC 11.4.0]"
+  },
+  "status": "frozen_reviewed_exceptions_and_stratified_sample"
+}

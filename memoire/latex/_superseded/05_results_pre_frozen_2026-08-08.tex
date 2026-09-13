@@ -1,0 +1,149 @@
+\chapter{Results and Analysis}
+\label{chap:results}
+
+\begin{draftbox}
+\small\textbf{Validity status.}
+Every percentage in Sections~\ref{sec:historical-audit}--\ref{sec:residuals} is a candidate result based on the AI-assisted benchmark before completion of the 33-row independent review. These values support architecture development and the 29 July supervisor discussion, but they must be regenerated before final accuracy or ceiling claims.
+\end{draftbox}
+
+\section{Historical Evaluation Audit}
+\label{sec:historical-audit}
+
+The historical evaluation mixed several notions of success. A loose proxy credited partial citation overlap and content similarity, while a stricter audit required the expected citation and sufficient answer content. Under these views, the historical RAG system obtained 63/100 under the loose proxy but 43/100 under the stricter citation-plus-content criterion. The designated historical source chunk appeared for 82/100 questions.
+
+The 82\% chunk-presence result is not end-to-end answer accuracy. It also does not prove that the supporting text reached the generator because the first 1,500 characters of a much longer chunk could omit the relevant passage. The historical scores are therefore retained as baseline evidence rather than interpreted as a clean RAG ceiling.
+
+\section{Dense Embedding Comparison}
+
+Both embedding models use identical E1 children, questions, and grouped partitions. Table~\ref{tab:dense-dev} reports the development criterion used for model selection.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Development exact-child recall for the dense embedding comparison.}
+  \label{tab:dense-dev}
+  \begin{tabular}{lrr}
+    \toprule
+    \textbf{Dense model} & \textbf{Recall@5} & \textbf{Recall@10} \\
+    \midrule
+    \texttt{text-embedding-3-small} & 66.7\% & 76.2\% \\
+    \texttt{text-embedding-3-large} & \textbf{69.0\%} & \textbf{78.6\%} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The larger embedding model is selected because it improves development recall, evidence recall, and nDCG at the operational cutoffs. The gain is modest rather than transformative. On the candidate held-out partition it reaches 71.9\% recall@5 and 80.7\% recall@10, leaving a substantial retrieval gap.
+
+\section{Lexical and Hybrid Candidate Generation}
+
+BM25 performs strongly on exact legal terminology and structured references. Its candidate test recall exceeds dense retrieval at depths 5 and 10 but plateaus at depth 20. Table~\ref{tab:hybrid-test} shows that fusion benefits from the complementary channels.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Candidate test exact-child recall by retrieval depth. Independent review pending.}
+  \label{tab:hybrid-test}
+  \rowcolors{2}{aivancityLight}{white}
+  \begin{tabular}{lrrr}
+    \toprule
+    \textbf{Method} & \textbf{Recall@5} & \textbf{Recall@10} & \textbf{Recall@20} \\
+    \midrule
+    Dense large & 71.9\% & 80.7\% & 86.0\% \\
+    BM25 & 73.7\% & 84.2\% & 84.2\% \\
+    Hybrid RRF & \textbf{80.7\%} & \textbf{87.7\%} & \textbf{94.7\%} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+At depth 10, hybrid fusion recovers five dense failures while breaking one dense success. Relative to BM25, it recovers five failures and breaks three successes. Fusion improves aggregate candidate coverage but is not uniformly superior for every question.
+
+\section{Cross-Encoder Reranking}
+
+Figure~\ref{fig:candidate-retrieval} and Table~\ref{tab:rerank-test} compare the fused ranking with the local cross-encoder. The reranker moves acceptable evidence into a smaller generation budget while preserving the same top-20 pool.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.93\textwidth]{candidate_retrieval_comparison.png}
+  \caption[Candidate retrieval comparison]{Candidate held-out retrieval comparison for dense, BM25, hybrid, and cross-encoder stages. Independent benchmark review pending. Source: project experiment manifests.}
+  \label{fig:candidate-retrieval}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Candidate held-out exact-child recall before and after reranking.}
+  \label{tab:rerank-test}
+  \begin{tabular}{lrrrrr}
+    \toprule
+    \textbf{Method} & \textbf{@1} & \textbf{@3} & \textbf{@5} & \textbf{@10} & \textbf{@20} \\
+    \midrule
+    Hybrid RRF & 50.9\% & 75.4\% & 80.7\% & 87.7\% & 94.7\% \\
+    Hybrid + cross-encoder & \textbf{66.7\%} & \textbf{86.0\%} & \textbf{87.7\%} & \textbf{93.0\%} & 94.7\% \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+At depth 5, reranking recovers five hybrid misses and breaks one hybrid success, producing a net gain of four questions. At depth 10, it recovers four and breaks one, producing a net gain of three. The unchanged top-20 value confirms that reranking changes order but not candidate presence.
+
+\section{Negative Ablations}
+
+Two simpler transformations were rejected after development-only checks. Parent-mass boosting added accumulated scores from other children in the same parent. It consistently reduced recall because long or repeated guidance sections accumulated score without guaranteeing exact relevance.
+
+Unequal RRF weights also failed to improve the top-20 candidate objective. A BM25-heavy setting recovered one development question at depth 5 but reduced deeper recall. These results show that hierarchy awareness is not equivalent to indiscriminate parent promotion and that the cross-encoder gain comes from direct query-passage interaction.
+
+\section{Context Assembly}
+
+Table~\ref{tab:contexts} reports the two deterministic context variants prepared for generation.
+
+\begin{table}[htbp]
+  \centering
+  \caption{Candidate context-bundle statistics across 99 retained questions.}
+  \label{tab:contexts}
+  \begin{tabular}{lrrr}
+    \toprule
+    \textbf{Variant} & \textbf{Mean sources} & \textbf{Mean words} & \textbf{Maximum words} \\
+    \midrule
+    Compact reranked top-5 & 5.0 & 234 & 503 \\
+    Top-5 plus adjacent children & 11.4 & 473 & 1,090 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+The compact variant tests precise evidence selection. The adjacent-child variant tests whether local legal continuity improves completeness without returning to blind parent-level truncation. Both carry source identifiers, hierarchy, citations, document type, and version.
+
+\section{Residual Failure Analysis}
+\label{sec:residuals}
+
+Three candidate test questions remain outside the hybrid top-20 pool.
+
+\begin{description}
+  \item[QA\_0063 -- ambiguity.] The question asks generally for \enquote{what exceptions} the regulation notes, while several genuine exception provisions compete and the selected answer expects one Article 20 interpretation.
+  \item[QA\_0080 -- incomplete acceptable evidence.] Equivalent governing wording appears in another annex child, so exact-child scoring may classify a substantively correct retrieval as a miss.
+  \item[QA\_0176 -- query-to-evidence alignment.] Broad language about handling occurrence information overlaps many sources, while the intended GM 3.1 passage is framed as a safety-benefit discussion.
+\end{description}
+
+The residual set therefore mixes ambiguity, benchmark incompleteness, and genuine retrieval failure. Calling all three an intrinsic RAG ceiling would be methodologically incorrect.
+
+\section{Switching-Point Interpretation}
+
+The current results support the following conditional escalation logic:
+
+\begin{enumerate}
+  \item retrieve a broad top-20 pool through lexical and dense fusion;
+  \item apply the cross-encoder when evidence may be present but poorly ordered;
+  \item add adjacent children when a selected local rule lacks necessary continuity;
+  \item clarify the question when several legitimate provisions compete;
+  \item reformulate or expand retrieval when lexical and dense channels disagree and no credible evidence appears;
+  \item abstain or request human review when evidence remains absent, ambiguous, or conflicting;
+  \item reserve agentic retrieval for validated multi-source or cross-reference residuals.
+\end{enumerate}
+
+These stages are experimentally motivated, but runtime thresholds still require calibration without consulting gold labels.
+
+\section{Generation and Verification Results}
+
+\draftnote{Blocked until the benchmark review is frozen and a generator protocol is authorised. This section will compare compact and adjacent context variants, and, if approved, a stronger-model escalation on difficult cases only.}
+
+The final table will report valid-schema rate, allowed-source-only rate, quote verification, canonical citation accuracy, claim support, answer completeness, exact legal-answer accuracy, coverage, risk at coverage, appropriate abstention, latency, token use, and cost. All predictions and request identifiers will be preserved.
+
+\section{Threats to Validity}
+
+The candidate benchmark is synthetic and may reflect the style of its generating model. Its evidence corrections are AI-assisted pending independent review. Equivalent legal passages can make a single gold identifier incomplete. The sample contains relatively few multi-document and cross-reference questions, limiting agentic-RAG conclusions. Finally, candidate test results have already been inspected; all additional tuning must remain development-only or use a separately frozen confirmation set.
+
